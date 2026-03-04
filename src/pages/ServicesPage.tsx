@@ -15,7 +15,7 @@ const ServicesPage = () => {
         titleAccent="Layanan"
         subtitle="Layanan Kami"
       />
-      <ServicesSection />
+      <ServicesSection hideHeader />
       <Footer />
       <FloatingWhatsApp />
     </div>

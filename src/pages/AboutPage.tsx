@@ -15,7 +15,7 @@ const AboutPage = () => {
         titleAccent="Gallop Madinah"
         subtitle="Tentang Kami"
       />
-      <WhySection />
+      <WhySection hideHeader />
       <Footer />
       <FloatingWhatsApp />
     </div>

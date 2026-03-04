@@ -20,16 +20,18 @@ const addOns = [
   { label: "GMC Experience", price: "800" },
 ];
 
-const PricelistSection = () => {
+const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="pricelist" className="section-padding bg-card">
       <div className="container mx-auto px-5 md:px-4">
-        <div className="text-center mb-10 md:mb-20">
-          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Investment</p>
-          <h2 className="font-display text-2xl md:text-5xl text-foreground">
-            Price <span className="text-gold">List</span>
-          </h2>
-        </div>
+        {!hideHeader && (
+          <div className="text-center mb-10 md:mb-20">
+            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Investment</p>
+            <h2 className="font-display text-2xl md:text-5xl text-foreground">
+              Price <span className="text-gold">List</span>
+            </h2>
+          </div>
+        )}
 
         {/* Personal Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 max-w-5xl mx-auto mb-8 md:mb-14">
