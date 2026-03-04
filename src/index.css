@@ -28,54 +28,54 @@
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 0 0% 95%;
+    --background: 150 30% 17%;
+    --foreground: 45 10% 90%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
+    --card: 150 30% 14%;
+    --card-foreground: 45 10% 90%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 150 30% 14%;
+    --popover-foreground: 45 10% 90%;
 
-    --primary: 35 85% 55%;
-    --primary-foreground: 0 0% 5%;
+    --primary: 0 0% 8%;
+    --primary-foreground: 45 10% 90%;
 
-    --secondary: 0 0% 13%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 150 30% 17%;
+    --secondary-foreground: 45 10% 90%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 150 25% 22%;
+    --muted-foreground: 45 10% 60%;
 
-    --accent: 35 85% 55%;
+    --accent: 40 52% 51%;
     --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 35 85% 55%;
+    --border: 150 20% 24%;
+    --input: 150 20% 24%;
+    --ring: 40 52% 51%;
 
     --radius: 0.5rem;
 
-    --gold: 35 85% 55%;
-    --gold-highlight: 35 90% 62%;
-    --deep-green: 0 0% 7%;
-    --deeper-green: 0 0% 5%;
-    --cream: 0 0% 10%;
-    --warm-white: 0 0% 9%;
+    --gold: 40 52% 51%;
+    --gold-highlight: 40 55% 58%;
+    --deep-green: 150 30% 17%;
+    --deeper-green: 150 30% 14%;
+    --cream: 150 25% 20%;
+    --warm-white: 150 25% 18%;
 
     --font-display: 'Akira Expanded', system-ui, sans-serif;
     --font-body: 'Creato Display', system-ui, sans-serif;
 
-    --sidebar-background: 0 0% 7%;
-    --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 35 85% 55%;
+    --sidebar-background: 150 30% 17%;
+    --sidebar-foreground: 45 10% 90%;
+    --sidebar-primary: 40 52% 51%;
     --sidebar-primary-foreground: 0 0% 5%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 35 85% 55%;
+    --sidebar-accent: 150 25% 22%;
+    --sidebar-accent-foreground: 45 10% 90%;
+    --sidebar-border: 150 20% 24%;
+    --sidebar-ring: 40 52% 51%;
   }
 }
 
