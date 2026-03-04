@@ -32,7 +32,7 @@ const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => 
       <div className="section-padding">
       <div className="container mx-auto px-5 md:px-8 max-w-6xl">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3">
           {experiences.map((item, i) => (
             <div key={i} className="bg-background border border-border p-4 md:p-5 flex items-center gap-4 hover:border-gold/30 transition-all duration-500 group">
               <div className="w-10 h-10 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center flex-shrink-0 group-hover:border-gold/40 transition-colors duration-500">
