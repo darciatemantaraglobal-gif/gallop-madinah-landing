@@ -40,12 +40,12 @@ const PricelistSection = () => {
                   <User className="w-4 h-4 text-gold" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="font-display text-sm text-foreground">{item.label}</h3>
+                  <h3 className="font-body font-bold text-sm text-foreground normal-case tracking-normal">{item.label}</h3>
                   <p className="text-muted-foreground font-body text-[10px]">{item.desc}</p>
                 </div>
               </div>
               <div className="flex items-baseline gap-1 mb-5">
-                <span className="font-display text-2xl md:text-3xl text-foreground">{item.price}</span>
+                <span className="font-body font-bold text-2xl md:text-3xl text-foreground normal-case tracking-normal">{item.price}</span>
                 <span className="text-muted-foreground font-body text-xs">SAR</span>
               </div>
               <a
@@ -72,9 +72,9 @@ const PricelistSection = () => {
             {groupPackages.map((item, i) => (
               <div key={`g-${i}`} className="bg-background border border-gold/20 p-5 md:p-6 hover:border-gold/40 transition-all duration-500 group">
                 <p className="text-muted-foreground font-body text-[10px] mb-1">{item.desc}</p>
-                <h3 className="font-display text-sm text-foreground mb-3">{item.label}</h3>
+                <h3 className="font-body font-bold text-sm text-foreground mb-3 normal-case tracking-normal">{item.label}</h3>
                 <div className="flex items-baseline gap-1 mb-5">
-                  <span className="font-display text-2xl md:text-3xl text-foreground">{item.price}</span>
+                  <span className="font-body font-bold text-2xl md:text-3xl text-foreground normal-case tracking-normal">{item.price}</span>
                   <span className="text-muted-foreground font-body text-xs">SAR / pax</span>
                 </div>
                 <a
@@ -99,7 +99,7 @@ const PricelistSection = () => {
               <div key={i} className="bg-background border border-border p-4 md:p-5 flex items-center justify-between hover:border-gold/30 transition-all duration-500">
                 <span className="text-foreground/80 font-body text-xs tracking-wide">{item.label}</span>
                 <div className="flex items-baseline gap-1">
-                  <span className="font-display text-xl md:text-2xl text-gold">{item.price}</span>
+                  <span className="font-body font-bold text-xl md:text-2xl text-gold normal-case tracking-normal">{item.price}</span>
                   <span className="text-muted-foreground font-body text-[10px]">SAR</span>
                 </div>
               </div>
@@ -122,7 +122,7 @@ const PricelistSection = () => {
             </div>
             <div className="p-5 md:p-10">
               <div className="flex items-baseline gap-2 mb-6 md:mb-8">
-                <span className="font-display text-3xl md:text-4xl text-gold">5.500</span>
+                <span className="font-body font-bold text-3xl md:text-4xl text-gold normal-case tracking-normal">5.500</span>
                 <span className="text-muted-foreground font-body text-xs">SAR — untuk 30 orang</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mb-8 md:mb-10">

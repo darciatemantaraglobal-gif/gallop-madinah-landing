@@ -42,7 +42,7 @@ const WhySection = () => {
               <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 border border-border rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">
                 <item.icon className="w-5 h-5 md:w-6 md:h-6 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-xs md:text-sm text-foreground mb-2 md:mb-3">{item.title}</h3>
+              <h3 className="font-body font-bold text-xs md:text-sm text-foreground mb-2 md:mb-3 normal-case tracking-normal">{item.title}</h3>
               <p className="text-muted-foreground font-body text-[10px] md:text-xs leading-relaxed">{item.desc}</p>
             </div>
           ))}
