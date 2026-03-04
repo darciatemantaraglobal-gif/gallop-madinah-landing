@@ -29,8 +29,8 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-5 flex items-center justify-between">
-        <a href="#" className="font-display text-3xl font-bold tracking-wide" style={{ color: scrolled ? 'hsl(var(--foreground))' : 'white' }}>
+      <div className="container mx-auto px-5 md:px-4 py-4 md:py-5 flex items-center justify-between">
+        <a href="#" className="font-display text-2xl md:text-3xl font-bold tracking-wide" style={{ color: scrolled ? 'hsl(var(--foreground))' : 'white' }}>
           GALLOP <span className="text-gold">MADINAH</span>
         </a>
         <div className="hidden md:flex items-center gap-10">
@@ -61,7 +61,7 @@ const Navbar = () => {
             className="md:hidden"
             style={{ color: scrolled ? 'hsl(var(--foreground))' : 'white' }}
           >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -69,13 +69,13 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-card/98 backdrop-blur-md border-t border-border">
-          <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+          <div className="container mx-auto px-5 py-5 flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="font-body text-xs tracking-[0.25em] uppercase text-foreground hover:text-gold transition-colors py-2"
+                className="font-body text-[11px] tracking-[0.2em] uppercase text-foreground hover:text-gold transition-colors py-2"
               >
                 {link.label}
               </a>
@@ -84,7 +84,7 @@ const Navbar = () => {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 text-xs font-body tracking-[0.15em] uppercase mt-2"
+              className="inline-flex items-center justify-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 text-[10px] font-body tracking-[0.15em] uppercase mt-2"
             >
               <Phone className="w-3.5 h-3.5" />
               Book Now

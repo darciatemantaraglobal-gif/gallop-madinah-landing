@@ -5,7 +5,7 @@ const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%
 
 const ParallaxCTA = () => {
   return (
-    <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img
           src={gallery3}
@@ -15,20 +15,20 @@ const ParallaxCTA = () => {
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
-      <div className="relative z-10 text-center px-4">
-        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 leading-tight">
+      <div className="relative z-10 text-center px-5 md:px-4">
+        <h2 className="font-display text-3xl md:text-6xl lg:text-7xl font-light text-white mb-4 md:mb-6 leading-tight">
           Ride In <span className="italic font-medium">Style</span>
         </h2>
-        <p className="font-body text-xs tracking-[0.3em] uppercase text-white/60 mb-10">
+        <p className="font-body text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase text-white/60 mb-8 md:mb-10">
           Giving you the wings you need
         </p>
         <a
           href={WHATSAPP_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 bg-gold text-primary-foreground px-10 py-4 font-body text-xs tracking-[0.2em] uppercase hover:bg-gold-highlight transition-all duration-300"
+          className="inline-flex items-center gap-2 md:gap-3 bg-gold text-primary-foreground px-7 md:px-10 py-3.5 md:py-4 font-body text-[10px] md:text-xs tracking-[0.15em] md:tracking-[0.2em] uppercase hover:bg-gold-highlight transition-all duration-300"
         >
-          <Phone className="w-4 h-4" />
+          <Phone className="w-3.5 h-3.5 md:w-4 md:h-4" />
           Start Today
         </a>
       </div>
