@@ -1,12 +1,12 @@
 import horsePortrait from "@/assets/horse-portrait.jpg";
 import gallery1 from "@/assets/gallery-1.jpg";
-import { MapPin, Clock, Moon, Camera, Coffee } from "lucide-react";
+import { MapPin, Clock, Moon, Coffee } from "lucide-react";
 
 const experiences = [
   { icon: MapPin, text: "Trek Padang Pasir", desc: "Menyusuri jalur gurun sepanjang 8–10 km yang menakjubkan" },
   { icon: Clock, text: "Durasi ±1,5–2 Jam", desc: "Waktu yang cukup untuk menikmati setiap momen perjalanan" },
   { icon: Moon, text: "Suasana Islami", desc: "Nuansa zaman Nabi yang membawa ketenangan spiritual" },
-  { icon: Camera, text: "Dokumentasi Profesional", desc: "Foto dan video estetik sebagai kenangan berharga" },
+  
   { icon: Coffee, text: "Area Istirahat Arab", desc: "Nikmati kopi dan hidangan khas Arab di tengah gurun" },
 ];
 
