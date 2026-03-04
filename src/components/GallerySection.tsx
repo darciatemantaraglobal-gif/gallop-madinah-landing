@@ -6,6 +6,7 @@ import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
+import galleryBg from "@/assets/gallery-bg.jpg";
 
 const images = [
   { src: gallery1, alt: "Berkuda di padang pasir dengan latar pegunungan", span: "col-span-2 row-span-2" },
@@ -43,8 +44,12 @@ const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   }, []);
 
   return (
-    <section id="gallery" className="section-padding bg-background">
-      <div className="container mx-auto px-5 md:px-8 max-w-6xl">
+    <section id="gallery" className="section-padding relative">
+      <div className="absolute inset-0">
+        <img src={galleryBg} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-background/85" />
+      </div>
+      <div className="container mx-auto px-5 md:px-8 max-w-6xl relative z-10">
         {!hideHeader && (
           <div className="text-center mb-12 md:mb-20">
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Captured Moments</p>
