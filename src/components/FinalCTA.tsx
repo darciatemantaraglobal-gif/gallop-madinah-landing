@@ -15,7 +15,6 @@ const FinalCTA = () => {
         <div className="absolute inset-0 bg-black/65" />
       </div>
       <div className="relative z-10 text-center px-5 md:px-4">
-        <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Siap Memulai?</p>
         <h2 className="font-display text-2xl md:text-5xl lg:text-6xl text-white mb-3 md:mb-5 leading-tight">
           Come As A Guest, <span className="text-gold">Leave As A Friend</span>
         </h2>
