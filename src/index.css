@@ -28,54 +28,54 @@
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
+    --background: 0 0% 5%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 10%;
+    --card: 153 32% 16%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 10%;
+    --popover: 153 32% 16%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 35 85% 55%;
+    --primary: 41 52% 51%;
     --primary-foreground: 0 0% 5%;
 
-    --secondary: 0 0% 13%;
+    --secondary: 153 32% 12%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 15%;
+    --muted: 153 25% 14%;
     --muted-foreground: 0 0% 55%;
 
-    --accent: 35 85% 55%;
+    --accent: 41 52% 51%;
     --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 35 85% 55%;
+    --border: 153 25% 20%;
+    --input: 153 25% 20%;
+    --ring: 41 52% 51%;
 
     --radius: 0.5rem;
 
-    --gold: 35 85% 55%;
-    --gold-highlight: 35 90% 62%;
-    --deep-green: 0 0% 7%;
-    --deeper-green: 0 0% 5%;
-    --cream: 0 0% 10%;
-    --warm-white: 0 0% 9%;
+    --gold: 41 52% 51%;
+    --gold-highlight: 41 58% 58%;
+    --deep-green: 153 32% 16%;
+    --deeper-green: 153 35% 12%;
+    --cream: 153 25% 14%;
+    --warm-white: 153 20% 11%;
 
     --font-display: 'Akira Expanded', system-ui, sans-serif;
     --font-body: 'Creato Display', system-ui, sans-serif;
 
-    --sidebar-background: 0 0% 7%;
+    --sidebar-background: 0 0% 5%;
     --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 35 85% 55%;
+    --sidebar-primary: 41 52% 51%;
     --sidebar-primary-foreground: 0 0% 5%;
-    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent: 153 25% 14%;
     --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 35 85% 55%;
+    --sidebar-border: 153 25% 20%;
+    --sidebar-ring: 41 52% 51%;
   }
 }
 
