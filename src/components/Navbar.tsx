@@ -1,6 +1,6 @@
 import { Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo-landscape.png";
 
 const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
@@ -8,8 +8,6 @@ const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -17,28 +15,6 @@ const Navbar = () => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Track active section on scroll
-  useEffect(() => {
-    const sectionIds = ["why", "experience", "services", "prices", "gallery"];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [location.pathname]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -50,27 +26,14 @@ const Navbar = () => {
   }, [mobileOpen]);
 
   const navLinks = [
-    { href: "why", label: "About" },
-    { href: "experience", label: "Experience" },
-    { href: "services", label: "Services" },
-    { href: "prices", label: "Prices" },
-    { href: "gallery", label: "Gallery" },
+    { href: "/about", label: "About" },
+    { href: "/experience", label: "Experience" },
+    { href: "/services", label: "Services" },
+    { href: "/prices", label: "Prices" },
+    { href: "/gallery", label: "Gallery" },
   ];
 
-  const scrollToSection = (sectionId: string) => {
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        el?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    } else {
-      const el = document.getElementById(sectionId);
-      el?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const isActive = (href: string) => activeSection === href;
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <>
@@ -87,10 +50,11 @@ const Navbar = () => {
         <div className="relative z-10 h-full flex flex-col justify-center px-8">
           <div className="space-y-1">
             {navLinks.map((link, i) => (
-              <button
+              <Link
                 key={link.href}
-                onClick={() => { setMobileOpen(false); scrollToSection(link.href); }}
-                className={`block font-display text-2xl py-3 transition-all duration-500 text-left ${
+                to={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={`block font-display text-2xl py-3 transition-all duration-500 ${
                   isActive(link.href) ? "text-gold" : "text-foreground/90 hover:text-gold"
                 } ${
                   mobileOpen
@@ -100,7 +64,7 @@ const Navbar = () => {
                 style={{ transitionDelay: mobileOpen ? `${i * 80 + 150}ms` : "0ms" }}
               >
                 {link.label}
-              </button>
+              </Link>
             ))}
           </div>
 
@@ -135,25 +99,25 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-5 md:px-4 py-4 md:py-5 flex items-center justify-between">
-          <button
-            onClick={() => { if (location.pathname !== "/") navigate("/"); else window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            className="flex items-center cursor-pointer"
+          <Link
+            to="/"
+            className="flex items-center"
           >
             <img src={logo} alt="Gallop Madinah" className="h-8 md:h-10 w-auto" />
-          </button>
+          </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
-              <button
+              <Link
                 key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className={`font-body text-xs tracking-[0.25em] uppercase transition-colors duration-300 cursor-pointer ${
+                to={link.href}
+                className={`font-body text-xs tracking-[0.25em] uppercase transition-colors duration-300 ${
                   isActive(link.href) ? "text-gold" : "text-muted-foreground hover:text-gold"
                 }`}
               >
                 {link.label}
-              </button>
+              </Link>
             ))}
           </div>
 
