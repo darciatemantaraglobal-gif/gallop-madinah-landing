@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Creato Display';
+  src: url('/fonts/CreatoDisplay-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Creato Display';
+  src: url('/fonts/CreatoDisplay-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -43,8 +57,8 @@
     --cream: 40 20% 96%;
     --warm-white: 40 30% 98%;
 
-    --font-display: 'Cormorant Garamond', Georgia, serif;
-    --font-body: 'Josefin Sans', system-ui, sans-serif;
+    --font-display: 'Creato Display', system-ui, sans-serif;
+    --font-body: 'Creato Display', system-ui, sans-serif;
 
     --sidebar-background: 160 43% 12%;
     --sidebar-foreground: 0 0% 96%;
@@ -65,10 +79,12 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    font-weight: 500;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
+    font-weight: 700;
   }
 }
 
