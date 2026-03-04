@@ -1,8 +1,7 @@
 import { Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logoColor from "@/assets/logo-landscape.png";
-import logoWhite from "@/assets/logo-landscape-white.png";
+import logo from "@/assets/logo-landscape.png";
 
 const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
 
@@ -104,7 +103,7 @@ const Navbar = () => {
             to="/"
             className="flex items-center"
           >
-            <img src={scrolled && !mobileOpen ? logoColor : logoWhite} alt="Gallop Madinah" className="h-8 md:h-10 w-auto" />
+            <img src={logo} alt="Gallop Madinah" className="h-8 md:h-10 w-auto" />
           </Link>
 
           {/* Desktop nav */}
