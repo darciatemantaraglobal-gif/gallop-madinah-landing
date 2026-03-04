@@ -1,5 +1,5 @@
 import { Phone, Tent, Users, User, ChevronRight } from "lucide-react";
-import galleryImg2 from "@/assets/gallery-2.jpg";
+import arabianCampImg from "@/assets/arabian-camp.jpg";
 
 const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
 
@@ -111,7 +111,7 @@ const PricelistSection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="bg-background border border-gold/20 overflow-hidden">
             <div className="relative h-36 md:h-72">
-              <img src={galleryImg2} alt="Arabian Camp Experience" className="w-full h-full object-cover" />
+              <img src={arabianCampImg} alt="Arabian Camp Experience" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
               <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 flex items-center gap-2 md:gap-3">
                 <Tent className="w-4 h-4 md:w-6 md:h-6 text-gold" strokeWidth={1.2} />
