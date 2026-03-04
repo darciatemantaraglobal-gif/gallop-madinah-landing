@@ -15,7 +15,7 @@ const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => 
     <section id="experience" className="bg-card">
       {!hideHeader && (
         <div className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden">
-          <img src={horsePortrait} alt="Kuda di padang pasir Madinah" className="w-full h-full object-cover" loading="lazy" />
+          <img src={horsePortrait} alt="Kuda di padang pasir Madinah" className="w-full h-full object-cover scale-125" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 px-5 md:px-8 pb-10 md:pb-16 max-w-6xl mx-auto">
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
