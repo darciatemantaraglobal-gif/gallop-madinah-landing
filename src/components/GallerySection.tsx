@@ -8,7 +8,7 @@ import gallery6 from "@/assets/gallery-6.jpg";
 const images = [
   { src: gallery1, alt: "Berkuda di padang pasir dengan latar pegunungan", span: "col-span-2 row-span-2" },
   { src: gallery2, alt: "Pengendara kuda dengan senyuman", span: "" },
-  { src: gallery3, alt: "Galloping di pasir gurun", span: "" },
+  { src: gallery3, alt: "Penunggang kuda hitam di gurun", span: "" },
   { src: gallery4, alt: "Dua penunggang kuda berlari di gurun", span: "row-span-2" },
   { src: gallery5, alt: "Berkuda melintasi padang pasir", span: "" },
   { src: gallery6, alt: "Penunggang kuda berbaju putih di gurun", span: "" },
