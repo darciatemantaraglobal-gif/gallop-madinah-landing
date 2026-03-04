@@ -27,6 +27,16 @@ const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => 
           Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
         </p>
 
+        {/* Photos */}
+        <div className="grid grid-cols-2 gap-2 mb-8 md:mb-10">
+          <div className="overflow-hidden">
+            <img src={horsePortrait} alt="Kuda di padang pasir Madinah" className="w-full h-48 md:h-64 object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          </div>
+          <div className="overflow-hidden">
+            <img src={gallery1} alt="Berkuda di padang pasir" className="w-full h-48 md:h-64 object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          </div>
+        </div>
+
         <div className="space-y-3">
           {experiences.map((item, i) => (
             <div key={i} className="bg-background border border-border p-4 md:p-5 flex items-center gap-4 hover:border-gold/30 transition-all duration-500 group">
