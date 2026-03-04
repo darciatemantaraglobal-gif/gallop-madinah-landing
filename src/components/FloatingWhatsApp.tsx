@@ -11,9 +11,9 @@ const FloatingChat = () => {
       className="fixed bottom-6 right-6 z-40 group"
       aria-label="Chat with us"
     >
-      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-gold flex items-center justify-center shadow-[0_4px_24px_hsl(var(--gold)/0.4)] hover:shadow-[0_6px_32px_hsl(var(--gold)/0.55)] hover:scale-105 transition-all duration-300">
-        <span className="absolute inset-0 rounded-full bg-gold animate-ping opacity-20" />
-        <MessageCircle className="w-7 h-7 md:w-8 md:h-8 text-primary-foreground relative z-10" />
+      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_4px_24px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_32px_rgba(37,211,102,0.55)] hover:scale-105 transition-all duration-300">
+        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20" />
+        <MessageCircle className="w-7 h-7 md:w-8 md:h-8 text-white relative z-10" />
       </div>
     </a>
   );
