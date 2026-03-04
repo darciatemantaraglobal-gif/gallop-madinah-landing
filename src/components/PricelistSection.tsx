@@ -1,5 +1,5 @@
 import { Phone, Tent, Users, User, ChevronRight } from "lucide-react";
-import arabianCampImg from "@/assets/arabian-camp.jpg";
+import arabianCampImg from "@/assets/arabian-camp.png";
 
 const WHATSAPP_LINK = "https://wa.me/628118880818?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
 
