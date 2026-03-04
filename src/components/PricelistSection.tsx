@@ -34,30 +34,30 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         )}
 
         {/* Personal Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 max-w-5xl mx-auto mb-8 md:mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4 max-w-5xl mx-auto mb-6 md:mb-10">
           {personalPackages.map((item, i) => (
-            <div key={`p-${i}`} className="bg-background border border-border p-4 md:p-6 hover:border-gold/30 transition-all duration-500 group">
-              <div className="flex items-center gap-3 mb-3 md:mb-4">
-                <div className="w-8 h-8 md:w-9 md:h-9 border border-border rounded-full flex items-center justify-center group-hover:border-gold/40 transition-colors">
-                  <User className="w-3.5 h-3.5 md:w-4 md:h-4 text-gold" strokeWidth={1.5} />
+            <div key={`p-${i}`} className="bg-background border border-border p-3 md:p-4 hover:border-gold/30 transition-all duration-500 group">
+              <div className="flex items-center justify-between mb-2 md:mb-3">
+                <div className="flex items-center gap-2.5">
+                  <User className="w-3.5 h-3.5 text-gold" strokeWidth={1.5} />
+                  <div>
+                    <h3 className="font-body font-bold text-sm text-foreground normal-case tracking-normal">{item.label}</h3>
+                    <p className="text-muted-foreground font-body text-[11px]">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-body font-bold text-sm md:text-base text-foreground normal-case tracking-normal">{item.label}</h3>
-                  <p className="text-muted-foreground font-body text-xs">{item.desc}</p>
+                <div className="flex items-baseline gap-1">
+                  <span className="font-body font-bold text-lg md:text-2xl text-foreground normal-case tracking-normal">{item.price}</span>
+                  <span className="text-muted-foreground font-body text-[10px] md:text-xs">SAR</span>
                 </div>
-              </div>
-              <div className="flex items-baseline gap-1 mb-3 md:mb-5">
-                <span className="font-body font-bold text-xl md:text-3xl text-foreground normal-case tracking-normal">{item.price}</span>
-                <span className="text-muted-foreground font-body text-xs md:text-sm">SAR</span>
               </div>
               <a
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-4 py-2 md:px-4 md:py-2.5 font-body text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-3 py-1.5 md:px-4 md:py-2 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
               >
                 Book Now
-                <ChevronRight className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                <ChevronRight className="w-3 h-3" />
               </a>
             </div>
           ))}
@@ -70,23 +70,27 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
             <h3 className="font-display text-lg md:text-xl text-foreground">Group <span className="text-gold">Packages</span></h3>
             <span className="ml-1 bg-gold text-primary-foreground px-2 py-0.5 font-body text-[10px] tracking-[0.15em] uppercase">Best Value</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4">
             {groupPackages.map((item, i) => (
-              <div key={`g-${i}`} className="bg-background border border-gold/20 p-4 md:p-6 hover:border-gold/40 transition-all duration-500 group">
-                <p className="text-muted-foreground font-body text-xs mb-0.5">{item.desc}</p>
-                <h3 className="font-body font-bold text-sm md:text-base text-foreground mb-2 md:mb-3 normal-case tracking-normal">{item.label}</h3>
-                <div className="flex items-baseline gap-1 mb-3 md:mb-5">
-                  <span className="font-body font-bold text-xl md:text-3xl text-foreground normal-case tracking-normal">{item.price}</span>
-                  <span className="text-muted-foreground font-body text-xs md:text-sm">SAR / pax</span>
+              <div key={`g-${i}`} className="bg-background border border-gold/20 p-3 md:p-4 hover:border-gold/40 transition-all duration-500 group">
+                <div className="flex items-center justify-between mb-2 md:mb-3">
+                  <div>
+                    <p className="text-muted-foreground font-body text-[11px] mb-0.5">{item.desc}</p>
+                    <h3 className="font-body font-bold text-sm text-foreground normal-case tracking-normal">{item.label}</h3>
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="font-body font-bold text-lg md:text-2xl text-foreground normal-case tracking-normal">{item.price}</span>
+                    <span className="text-muted-foreground font-body text-[10px] md:text-xs">SAR/pax</span>
+                  </div>
                 </div>
                 <a
                   href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-4 py-2 md:px-4 md:py-2.5 font-body text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+                  className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-3 py-1.5 md:px-4 md:py-2 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
                 >
                   Book Now
-                  <ChevronRight className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                  <ChevronRight className="w-3 h-3" />
                 </a>
               </div>
             ))}
