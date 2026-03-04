@@ -22,7 +22,7 @@ const addOns = [
 
 const PricelistSection = () => {
   return (
-    <section id="pricelist" className="section-padding" style={{ backgroundColor: '#1E3B2E' }}>
+    <section id="pricelist" className="section-padding bg-card">
       <div className="container mx-auto px-5 md:px-4">
         <div className="text-center mb-12 md:mb-20">
           <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Investment</p>
