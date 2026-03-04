@@ -1,5 +1,5 @@
 import heroImage from "@/assets/hero-desert.jpg";
-import gallopTitle from "@/assets/gallop-title.png";
+import gallopTitle from "@/assets/gallop-title-2.png";
 import { Phone, ChevronDown } from "lucide-react";
 
 const WHATSAPP_LINK = "https://wa.me/628118880818?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
@@ -14,7 +14,7 @@ const HeroSection = () => {
           alt="Berkuda di padang pasir Madinah saat golden hour"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#193B2C]/[0.88]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#112919]/[0.88] to-[#193B2C]/[0.88]" />
       </div>
 
       {/* Centered Content */}
