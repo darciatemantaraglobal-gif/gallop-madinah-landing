@@ -3,8 +3,10 @@ import ExperienceSection from "@/components/ExperienceSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import horsePortrait from "@/assets/horse-portrait.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ExperiencePage = () => {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -14,9 +16,9 @@ const ExperiencePage = () => {
         </div>
       </div>
       <div className="py-6 md:py-10 container mx-auto px-5 md:px-4 max-w-3xl">
-        <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
+        <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">{t("exp.subtitle")}</p>
         <h2 className="font-display text-3xl md:text-5xl text-foreground leading-tight">
-          Desert <span className="text-gold">Horse Riding</span>
+          {t("exp.title1")} <span className="text-gold">{t("exp.title2")}</span>
         </h2>
       </div>
       <ExperienceSection hideHeader />

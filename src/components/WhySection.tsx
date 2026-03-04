@@ -1,47 +1,34 @@
 import { Award, Shield, Heart, Users } from "lucide-react";
-
-const reasons = [
-  {
-    icon: Award,
-    title: "Pelopor di Madinah",
-    desc: "Layanan berkuda profesional pertama di Madinah dengan standar internasional.",
-  },
-  {
-    icon: Shield,
-    title: "Coach Berpengalaman",
-    desc: "Didampingi coach bersertifikat yang siap membimbing di setiap langkah.",
-  },
-  {
-    icon: Heart,
-    title: "Kuda Arabian Pribadi",
-    desc: "Kuda Arabian terlatih milik pribadi yang jinak dan terawat sempurna.",
-  },
-  {
-    icon: Users,
-    title: "Aman untuk Keluarga",
-    desc: "Program yang aman dan nyaman untuk pemula, anak-anak, dan keluarga.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const WhySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
+  const { t } = useLanguage();
+
+  const reasons = [
+    { icon: Award, title: t("why.r1.title"), desc: t("why.r1.desc") },
+    { icon: Shield, title: t("why.r2.title"), desc: t("why.r2.desc") },
+    { icon: Heart, title: t("why.r3.title"), desc: t("why.r3.desc") },
+    { icon: Users, title: t("why.r4.title"), desc: t("why.r4.desc") },
+  ];
+
   return (
     <section id="why" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-8 max-w-6xl">
         {!hideHeader && (
           <div className="text-center mb-10 md:mb-16">
-            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Tentang Kami</p>
+            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">{t("why.subtitle")}</p>
             <h2 className="font-display text-2xl md:text-5xl text-foreground mb-5 md:mb-8">
-              Why <span className="text-gold">Gallop Madinah</span>
+              {t("why.title1")} <span className="text-gold">{t("why.title2")}</span>
             </h2>
             <p className="text-muted-foreground font-body text-sm md:text-base tracking-wide max-w-2xl mx-auto leading-relaxed">
-              Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan. Kami percaya setiap momen berharga layak dikenang.
+              {t("why.desc")}
             </p>
           </div>
         )}
         {hideHeader && (
           <div className="text-center mb-10 md:mb-16">
             <p className="text-muted-foreground font-body text-sm md:text-base tracking-wide max-w-2xl mx-auto leading-relaxed">
-              Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan. Kami percaya setiap momen berharga layak dikenang.
+              {t("why.desc")}
             </p>
           </div>
         )}
