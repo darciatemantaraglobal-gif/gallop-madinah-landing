@@ -35,19 +35,19 @@ const ExperienceSection = () => {
 
           {/* Content */}
           <div className="lg:pl-8">
-            <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
+            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
             <h2 className="font-display text-2xl md:text-4xl text-foreground mb-2 leading-tight">
               Desert <span className="text-gold">Horse Riding</span>
             </h2>
             <div className="w-12 h-[1px] bg-gold/40 mb-6 md:mb-8" />
-            <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed mb-8 md:mb-12 max-w-md">
+            <p className="text-muted-foreground font-body text-sm md:text-base leading-relaxed mb-8 md:mb-12 max-w-md">
               Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
             </p>
             <div className="space-y-4 md:space-y-5">
               {experiences.map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold flex-shrink-0" strokeWidth={1.5} />
-                  <p className="text-foreground/80 font-body text-xs md:text-sm tracking-wide">{item.text}</p>
+                  <p className="text-foreground/80 font-body text-sm md:text-base tracking-wide">{item.text}</p>
                 </div>
               ))}
             </div>
