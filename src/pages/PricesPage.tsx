@@ -1,15 +1,21 @@
 import Navbar from "@/components/Navbar";
+import PageHero from "@/components/PageHero";
 import PricelistSection from "@/components/PricelistSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import heroImg from "@/assets/arabian-camp.jpg";
 
 const PricesPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="pt-20 md:pt-24">
-        <PricelistSection />
-      </div>
+      <PageHero
+        image={heroImg}
+        title="Price"
+        titleAccent="List"
+        subtitle="Investment"
+      />
+      <PricelistSection />
       <Footer />
       <FloatingWhatsApp />
     </div>
