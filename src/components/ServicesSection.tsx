@@ -10,21 +10,23 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-24 bg-deeper-green">
+    <section id="services" className="section-padding bg-secondary text-secondary-foreground">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <p className="text-gold font-body text-sm tracking-[0.3em] uppercase mb-4">Layanan Kami</p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground">Our Services</h2>
+        <div className="text-center mb-20">
+          <p className="text-gold font-body text-xs tracking-[0.4em] uppercase mb-4">What We Offer</p>
+          <h2 className="font-display text-4xl md:text-6xl font-light text-secondary-foreground">
+            Our <span className="italic font-medium">Services</span>
+          </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px max-w-5xl mx-auto bg-white/10">
           {services.map((item, i) => (
             <div
               key={i}
-              className="p-8 rounded-2xl border border-border bg-card/30 hover:border-gold/40 transition-all duration-300 group"
+              className="p-10 bg-secondary hover:bg-white/5 transition-all duration-500 group text-center"
             >
-              <item.icon className="w-8 h-8 text-gold mb-5 group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="font-display text-lg font-semibold text-foreground mb-2">{item.title}</h3>
-              <p className="text-muted-foreground font-body text-sm leading-relaxed">{item.desc}</p>
+              <item.icon className="w-10 h-10 text-gold mx-auto mb-6 group-hover:scale-110 transition-transform duration-500" strokeWidth={1.2} />
+              <h3 className="font-display text-xl font-medium text-secondary-foreground mb-3">{item.title}</h3>
+              <p className="text-white/50 font-body text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

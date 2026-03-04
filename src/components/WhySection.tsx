@@ -25,24 +25,23 @@ const reasons = [
 
 const WhySection = () => {
   return (
-    <section id="why" className="py-24 bg-deeper-green">
+    <section id="why" className="section-padding bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <p className="text-gold font-body text-sm tracking-[0.3em] uppercase mb-4">Mengapa Kami</p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground">
-            Why Gallop Madinah
+        <div className="text-center mb-20">
+          <h2 className="font-display text-4xl md:text-6xl font-light text-foreground mb-6">
+            Why <span className="italic font-medium">Gallop Madinah</span>
           </h2>
+          <p className="text-muted-foreground font-body text-sm tracking-wide max-w-xl mx-auto leading-relaxed">
+            Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan.
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {reasons.map((item, i) => (
-            <div
-              key={i}
-              className="text-center p-8 rounded-2xl bg-card/50 border border-border hover:border-gold/30 transition-all duration-300 group"
-            >
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full gradient-gold flex items-center justify-center group-hover:shadow-gold transition-all duration-300">
-                <item.icon className="w-7 h-7 text-primary-foreground" />
+            <div key={i} className="text-center group">
+              <div className="w-20 h-20 mx-auto mb-8 rounded-full border-2 border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500">
+                <item.icon className="w-8 h-8 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-xl font-semibold text-foreground mb-3">{item.title}</h3>
+              <h3 className="font-display text-2xl font-medium text-foreground mb-3">{item.title}</h3>
               <p className="text-muted-foreground font-body text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}

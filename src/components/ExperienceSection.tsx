@@ -1,4 +1,5 @@
 import horsePortrait from "@/assets/horse-portrait.jpg";
+import gallery1 from "@/assets/gallery-1.jpg";
 import { MapPin, Clock, Moon, Camera, Coffee } from "lucide-react";
 
 const experiences = [
@@ -11,37 +12,43 @@ const experiences = [
 
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="py-24 bg-background">
+    <section id="experience" className="section-padding bg-warm-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          {/* Images */}
           <div className="relative">
-            <img
-              src={horsePortrait}
-              alt="Kuda Arabian di padang pasir"
-              className="rounded-2xl w-full object-cover aspect-square shadow-2xl"
-            />
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 gradient-gold rounded-2xl flex items-center justify-center shadow-gold">
-              <div className="text-center text-primary-foreground">
-                <p className="font-display text-3xl font-bold">8+</p>
-                <p className="font-body text-xs">KM Trek</p>
-              </div>
+            <div className="relative z-10">
+              <img
+                src={horsePortrait}
+                alt="Kuda Arabian di padang pasir"
+                className="w-full object-cover aspect-[3/4]"
+              />
             </div>
+            <div className="absolute -bottom-8 -right-8 w-48 h-64 z-20 hidden lg:block">
+              <img
+                src={gallery1}
+                alt="Berkuda di gurun"
+                className="w-full h-full object-cover border-4 border-background shadow-xl"
+              />
+            </div>
+            <div className="absolute top-8 -left-4 w-24 h-24 border-2 border-gold/30 z-0" />
           </div>
-          <div>
-            <p className="text-gold font-body text-sm tracking-[0.3em] uppercase mb-4">Pengalaman</p>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-6">
-              The Desert Experience
+
+          {/* Content */}
+          <div className="lg:pl-8">
+            <p className="text-gold font-body text-xs tracking-[0.4em] uppercase mb-4">The Experience</p>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-2 leading-tight">
+              Desert <span className="italic font-medium">Horse Riding</span>
             </h2>
-            <p className="text-muted-foreground font-body text-lg leading-relaxed mb-10">
-              Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi.
+            <div className="w-16 h-[1px] bg-gold mb-8" />
+            <p className="text-muted-foreground font-body text-sm leading-relaxed mb-12 max-w-md">
+              Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
             </p>
-            <div className="space-y-5">
+            <div className="space-y-6">
               {experiences.map((item, i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                    <item.icon className="w-5 h-5 text-gold" />
-                  </div>
-                  <p className="text-foreground font-body">{item.text}</p>
+                <div key={i} className="flex items-center gap-5">
+                  <item.icon className="w-5 h-5 text-gold flex-shrink-0" strokeWidth={1.5} />
+                  <p className="text-foreground font-body text-sm tracking-wide">{item.text}</p>
                 </div>
               ))}
             </div>
