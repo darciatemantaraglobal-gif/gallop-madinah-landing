@@ -19,17 +19,17 @@ const ServicesSection = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 max-w-5xl mx-auto">
           {services.map((item, i) => (
             <div
               key={i}
-              className="bg-card border border-border p-5 md:p-7 group hover:border-gold/30 transition-all duration-500"
+              className="bg-card border border-border p-3.5 md:p-7 group hover:border-gold/30 transition-all duration-500"
             >
-              <div className="w-10 h-10 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center mb-4 md:mb-5 group-hover:border-gold/40 transition-colors duration-500">
-                <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
+              <div className="w-8 h-8 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center mb-3 md:mb-5 group-hover:border-gold/40 transition-colors duration-500">
+                <item.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="font-body font-bold text-xs md:text-sm text-foreground mb-2 normal-case tracking-normal">{item.title}</h3>
-              <p className="text-muted-foreground font-body text-[10px] md:text-xs leading-relaxed">{item.desc}</p>
+              <h3 className="font-body font-bold text-[11px] md:text-sm text-foreground mb-1.5 md:mb-2 normal-case tracking-normal">{item.title}</h3>
+              <p className="text-muted-foreground font-body text-[9px] md:text-xs leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
