@@ -14,7 +14,7 @@ const HeroSection = () => {
           alt="Berkuda di padang pasir Madinah saat golden hour"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#193B2C]/95" />
+        <div className="absolute inset-0 bg-[#193B2C]/[0.88]" />
       </div>
 
       {/* Centered Content */}
