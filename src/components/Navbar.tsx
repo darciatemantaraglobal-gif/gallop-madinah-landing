@@ -79,11 +79,13 @@ const Navbar = () => {
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden relative z-[60] w-10 h-10 flex items-center justify-center"
+              className="md:hidden relative z-[60] w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300"
               style={{ color: mobileOpen ? 'white' : scrolled ? 'hsl(var(--foreground))' : 'white' }}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <span className={`transition-transform duration-300 ${mobileOpen ? 'rotate-90' : 'rotate-0'}`}>
+                {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </span>
             </button>
           </div>
         </div>
