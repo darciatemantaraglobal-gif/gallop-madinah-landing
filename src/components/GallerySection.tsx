@@ -19,7 +19,7 @@ const GallerySection = () => {
     <section id="gallery" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
         <div className="text-center mb-12 md:mb-20">
-          <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.35em] uppercase mb-4 md:mb-5">Captured Moments</p>
+          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Captured Moments</p>
           <h2 className="font-display text-2xl md:text-5xl text-foreground">
             Our <span className="text-gold">Gallery</span>
           </h2>

@@ -72,7 +72,7 @@ const Navbar = () => {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 border border-gold/60 text-gold px-8 py-3 font-body text-[10px] tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+              className="inline-flex items-center gap-3 border border-gold/60 text-gold px-8 py-3 font-body text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
             >
               <Phone className="w-4 h-4" />
               Booking
@@ -105,7 +105,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-body text-[10px] tracking-[0.25em] uppercase transition-colors duration-300 hover:text-gold text-muted-foreground"
+                className="font-body text-xs tracking-[0.25em] uppercase transition-colors duration-300 hover:text-gold text-muted-foreground"
               >
                 {link.label}
               </a>
@@ -117,7 +117,7 @@ const Navbar = () => {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 border border-gold/50 text-gold px-5 py-2.5 text-[10px] font-body tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+              className="hidden md:inline-flex items-center gap-2 border border-gold/50 text-gold px-5 py-2.5 text-xs font-body tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
             >
               <Phone className="w-3.5 h-3.5" />
               Booking

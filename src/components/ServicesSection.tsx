@@ -13,7 +13,7 @@ const ServicesSection = () => {
     <section id="services" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
         <div className="text-center mb-10 md:mb-16">
-          <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.35em] uppercase mb-4 md:mb-5">Layanan Kami</p>
+          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Layanan Kami</p>
           <h2 className="font-display text-2xl md:text-5xl text-foreground">
             Paket <span className="text-gold">Layanan</span>
           </h2>
@@ -23,13 +23,13 @@ const ServicesSection = () => {
           {services.map((item, i) => (
             <div
               key={i}
-              className="bg-card border border-border p-3.5 md:p-7 group hover:border-gold/30 transition-all duration-500"
+              className="bg-card border border-border p-4 md:p-7 group hover:border-gold/30 transition-all duration-500"
             >
-              <div className="w-8 h-8 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center mb-3 md:mb-5 group-hover:border-gold/40 transition-colors duration-500">
-                <item.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
+              <div className="w-9 h-9 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center mb-3 md:mb-5 group-hover:border-gold/40 transition-colors duration-500">
+                <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="font-body font-bold text-[11px] md:text-sm text-foreground mb-1.5 md:mb-2 normal-case tracking-normal">{item.title}</h3>
-              <p className="text-muted-foreground font-body text-[9px] md:text-xs leading-relaxed">{item.desc}</p>
+              <h3 className="font-body font-bold text-sm md:text-base text-foreground mb-1.5 md:mb-2 normal-case tracking-normal">{item.title}</h3>
+              <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

@@ -28,11 +28,11 @@ const WhySection = () => {
     <section id="why" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
         <div className="text-center mb-10 md:mb-16">
-          <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.35em] uppercase mb-4 md:mb-5">Tentang Kami</p>
+          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Tentang Kami</p>
           <h2 className="font-display text-2xl md:text-5xl text-foreground mb-5 md:mb-8">
             Why <span className="text-gold">Gallop Madinah</span>
           </h2>
-          <p className="text-muted-foreground font-body text-xs md:text-sm tracking-wide max-w-2xl mx-auto leading-relaxed">
+          <p className="text-muted-foreground font-body text-sm md:text-base tracking-wide max-w-2xl mx-auto leading-relaxed">
             Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan. Kami percaya setiap momen berharga layak dikenang.
           </p>
         </div>
@@ -42,8 +42,8 @@ const WhySection = () => {
               <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 border border-border rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">
                 <item.icon className="w-5 h-5 md:w-6 md:h-6 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="font-body font-bold text-xs md:text-sm text-foreground mb-2 md:mb-3 normal-case tracking-normal">{item.title}</h3>
-              <p className="text-muted-foreground font-body text-[10px] md:text-xs leading-relaxed">{item.desc}</p>
+              <h3 className="font-body font-bold text-sm md:text-base text-foreground mb-2 md:mb-3 normal-case tracking-normal">{item.title}</h3>
+              <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
