@@ -6,32 +6,34 @@ import gallery6 from "@/assets/gallery-6.jpg";
 import horsePortrait from "@/assets/horse-portrait.jpg";
 
 const images = [
-  { src: gallery1, alt: "Berkuda melintasi padang pasir" },
-  { src: gallery3, alt: "Siluet berkuda saat sunset" },
-  { src: gallery4, alt: "Kuda galloping di gurun" },
-  { src: horsePortrait, alt: "Kuda Arabian close up" },
-  { src: gallery5, alt: "Kuda di oasis" },
-  { src: gallery6, alt: "Keluarga berkuda" },
+  { src: gallery1, alt: "Berkuda melintasi padang pasir", span: "col-span-2 row-span-2" },
+  { src: gallery3, alt: "Siluet berkuda saat sunset", span: "" },
+  { src: gallery4, alt: "Kuda galloping di gurun", span: "" },
+  { src: horsePortrait, alt: "Kuda Arabian close up", span: "row-span-2" },
+  { src: gallery5, alt: "Kuda di oasis", span: "" },
+  { src: gallery6, alt: "Keluarga berkuda", span: "" },
 ];
 
 const GallerySection = () => {
   return (
-    <section id="gallery" className="py-24 bg-deeper-green">
+    <section id="gallery" className="section-padding bg-warm-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <p className="text-gold font-body text-sm tracking-[0.3em] uppercase mb-4">Momen Berharga</p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground">Gallery</h2>
+        <div className="text-center mb-20">
+          <p className="text-gold font-body text-xs tracking-[0.4em] uppercase mb-4">Captured Moments</p>
+          <h2 className="font-display text-4xl md:text-6xl font-light text-foreground">
+            Our <span className="italic font-medium">Gallery</span>
+          </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
           {images.map((img, i) => (
-            <div key={i} className="group relative overflow-hidden rounded-xl aspect-[4/3]">
+            <div key={i} className={`group relative overflow-hidden ${img.span}`}>
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-background/0 group-hover:bg-background/30 transition-all duration-300" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
             </div>
           ))}
         </div>
