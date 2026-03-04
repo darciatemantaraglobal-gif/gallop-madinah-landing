@@ -47,7 +47,7 @@ const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
     <section id="gallery" className="section-padding relative">
       <div className="absolute inset-0">
         <img src={galleryBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-background/85" />
+        <div className="absolute inset-0 bg-background/0" />
       </div>
       <div className="container mx-auto px-5 md:px-8 max-w-6xl relative z-10">
         {!hideHeader && (
