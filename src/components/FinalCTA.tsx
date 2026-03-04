@@ -1,5 +1,5 @@
 import { Phone } from "lucide-react";
-import gallery5 from "@/assets/gallery-5.jpg";
+import ctaBg from "@/assets/cta-background.jpg";
 
 const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
 
@@ -8,7 +8,7 @@ const FinalCTA = () => {
     <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src={gallery5}
+          src={ctaBg}
           alt="Desert horse riding experience"
           className="w-full h-full object-cover"
         />
