@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react";
 import logoWhite from "@/assets/logo-landscape-white.png";
 import logo from "@/assets/logo-landscape.png";
 
@@ -14,6 +15,16 @@ const Footer = () => {
           <p className="text-muted-foreground font-body text-xs md:text-sm tracking-[0.2em] uppercase mb-5 md:mb-6">
             Premium Desert Horse Riding · Madinah, Saudi Arabia
           </p>
+          <a
+            href="https://instagram.com/gallopmadinah"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors mb-5 md:mb-6"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-5 h-5" />
+            <span className="font-body text-xs tracking-wider">@gallopmadinah</span>
+          </a>
           <p className="text-muted-foreground/50 font-body text-[10px] md:text-xs tracking-wider uppercase">
             © 2026 Gallop Madinah. All rights reserved.
           </p>

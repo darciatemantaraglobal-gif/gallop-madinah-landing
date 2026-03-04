@@ -1,7 +1,7 @@
 import { Phone, Tent, Users, User, ChevronRight } from "lucide-react";
 import arabianCampImg from "@/assets/arabian-camp.jpg";
 
-const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
+const WHATSAPP_LINK = "https://wa.me/628118880818?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
 
 const personalPackages = [
   { label: "Single", price: "1.300", desc: "1 orang rider" },
