@@ -26,7 +26,7 @@ const reasons = [
 const WhySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="why" className="section-padding bg-background">
-      <div className="container mx-auto px-5 md:px-4">
+      <div className="container mx-auto px-5 md:px-8 max-w-6xl">
         {!hideHeader && (
           <div className="text-center mb-10 md:mb-16">
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Tentang Kami</p>
@@ -45,7 +45,7 @@ const WhySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
             </p>
           </div>
         )}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 max-w-6xl mx-auto">
           {reasons.map((item, i) => (
             <div key={i} className="text-center group">
               <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 border border-border rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">

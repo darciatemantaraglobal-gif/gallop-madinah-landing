@@ -23,7 +23,7 @@ const addOns = [
 const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="pricelist" className="section-padding bg-card">
-      <div className="container mx-auto px-5 md:px-4">
+      <div className="container mx-auto px-5 md:px-8 max-w-6xl">
         {!hideHeader && (
           <div className="text-center mb-10 md:mb-20">
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Investment</p>
@@ -34,7 +34,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         )}
 
         {/* Personal Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4 max-w-5xl mx-auto mb-6 md:mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4 max-w-6xl mx-auto mb-6 md:mb-10">
           {personalPackages.map((item, i) => (
             <div key={`p-${i}`} className="bg-background border border-border p-3 md:p-4 hover:border-gold/30 transition-all duration-500 group">
               <div className="flex items-center justify-between mb-2 md:mb-3">
@@ -64,7 +64,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         </div>
 
         {/* Group Cards */}
-        <div className="max-w-5xl mx-auto mb-8 md:mb-14">
+        <div className="max-w-6xl mx-auto mb-8 md:mb-14">
           <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 md:mb-6 justify-center">
             <Users className="w-4 h-4 text-gold" strokeWidth={1.5} />
             <h3 className="font-display text-lg md:text-xl text-foreground">Group <span className="text-gold">Packages</span></h3>
@@ -98,7 +98,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         </div>
 
         {/* Add-Ons */}
-        <div className="max-w-5xl mx-auto mb-10 md:mb-16">
+        <div className="max-w-6xl mx-auto mb-10 md:mb-16">
           <h3 className="font-display text-lg md:text-xl text-foreground mb-4 md:mb-5 text-center">Add-Ons</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
             {addOns.map((item, i) => (
@@ -114,7 +114,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         </div>
 
         {/* Special Package Card */}
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="bg-background border border-gold/20 overflow-hidden">
             <div className="relative h-36 md:h-72">
               <img src={arabianCampImg} alt="Arabian Camp Experience" className="w-full h-full object-cover" />

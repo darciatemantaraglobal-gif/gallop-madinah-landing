@@ -5,7 +5,7 @@ import logo from "@/assets/logo-landscape.png";
 const Footer = () => {
   return (
     <footer className="py-10 md:py-16 bg-card border-t border-border">
-      <div className="container mx-auto px-5 md:px-4">
+      <div className="container mx-auto px-5 md:px-8 max-w-6xl">
         <div className="text-center">
           <a href="/" className="inline-block mb-2">
             <img src={logoWhite} alt="Gallop Madinah" className="h-8 md:h-10 mx-auto dark:block hidden" />
