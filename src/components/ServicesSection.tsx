@@ -6,6 +6,7 @@ const services = [
   { icon: UserCheck, title: "Private Coaching", desc: "Bimbingan personal dari coach berpengalaman" },
   { icon: Camera, title: "Dokumentasi Profesional", desc: "Foto dan video estetik sebagai kenangan berharga" },
   { icon: UtensilsCrossed, title: "Snack & Drinks", desc: "Hidangan ringan dan minuman khas Arab tersedia" },
+  { icon: Waypoints, title: "Trek 8–10 KM", desc: "Menyusuri jalur gurun sepanjang 8–10 km yang menakjubkan" },
 ];
 
 const ServicesSection = () => {
