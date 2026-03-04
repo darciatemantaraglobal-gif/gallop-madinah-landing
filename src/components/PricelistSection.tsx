@@ -65,10 +65,10 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
 
         {/* Group Cards */}
         <div className="max-w-5xl mx-auto mb-8 md:mb-14">
-          <div className="flex items-center gap-2.5 md:gap-3 mb-4 md:mb-6 justify-center">
+          <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 md:mb-6 justify-center">
             <Users className="w-4 h-4 text-gold" strokeWidth={1.5} />
             <h3 className="font-display text-lg md:text-xl text-foreground">Group <span className="text-gold">Packages</span></h3>
-            <span className="ml-1 bg-gold text-primary-foreground px-2 py-0.5 font-body text-[10px] tracking-[0.15em] uppercase">Best Value</span>
+            <span className="ml-1 border border-gold/60 text-gold px-3 py-0.5 font-body text-[9px] md:text-[10px] tracking-[0.2em] uppercase">Best Value</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4">
             {groupPackages.map((item, i) => (
