@@ -15,7 +15,7 @@ const GalleryPage = () => {
         titleAccent="Gallery"
         subtitle="Captured Moments"
       />
-      <GallerySection />
+      <GallerySection hideHeader />
       <Footer />
       <FloatingWhatsApp />
     </div>

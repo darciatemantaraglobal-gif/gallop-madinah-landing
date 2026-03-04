@@ -10,7 +10,7 @@ const experiences = [
   { icon: Coffee, text: "Area Istirahat Arab", desc: "Nikmati kopi dan hidangan khas Arab di tengah gurun" },
 ];
 
-const ExperienceSection = () => {
+const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="experience" className="section-padding bg-card">
       <div className="container mx-auto px-5 md:px-4">
@@ -35,11 +35,15 @@ const ExperienceSection = () => {
 
           {/* Content */}
           <div className="lg:pl-8">
-            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
-            <h2 className="font-display text-2xl md:text-4xl text-foreground mb-2 leading-tight">
-              Desert <span className="text-gold">Horse Riding</span>
-            </h2>
-            <div className="w-12 h-[1px] bg-gold/40 mb-6 md:mb-8" />
+            {!hideHeader && (
+              <>
+                <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
+                <h2 className="font-display text-2xl md:text-4xl text-foreground mb-2 leading-tight">
+                  Desert <span className="text-gold">Horse Riding</span>
+                </h2>
+                <div className="w-12 h-[1px] bg-gold/40 mb-6 md:mb-8" />
+              </>
+            )}
             <p className="text-muted-foreground font-body text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-md">
               Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
             </p>

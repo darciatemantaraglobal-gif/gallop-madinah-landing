@@ -15,7 +15,7 @@ const ExperiencePage = () => {
         titleAccent="Horse Riding"
         subtitle="The Experience"
       />
-      <ExperienceSection />
+      <ExperienceSection hideHeader />
       <Footer />
       <FloatingWhatsApp />
     </div>

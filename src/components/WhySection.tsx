@@ -23,19 +23,28 @@ const reasons = [
   },
 ];
 
-const WhySection = () => {
+const WhySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="why" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
-        <div className="text-center mb-10 md:mb-16">
-          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Tentang Kami</p>
-          <h2 className="font-display text-2xl md:text-5xl text-foreground mb-5 md:mb-8">
-            Why <span className="text-gold">Gallop Madinah</span>
-          </h2>
-          <p className="text-muted-foreground font-body text-sm md:text-base tracking-wide max-w-2xl mx-auto leading-relaxed">
-            Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan. Kami percaya setiap momen berharga layak dikenang.
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Tentang Kami</p>
+            <h2 className="font-display text-2xl md:text-5xl text-foreground mb-5 md:mb-8">
+              Why <span className="text-gold">Gallop Madinah</span>
+            </h2>
+            <p className="text-muted-foreground font-body text-sm md:text-base tracking-wide max-w-2xl mx-auto leading-relaxed">
+              Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan. Kami percaya setiap momen berharga layak dikenang.
+            </p>
+          </div>
+        )}
+        {hideHeader && (
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-muted-foreground font-body text-sm md:text-base tracking-wide max-w-2xl mx-auto leading-relaxed">
+              Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan. Kami percaya setiap momen berharga layak dikenang.
+            </p>
+          </div>
+        )}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 max-w-5xl mx-auto">
           {reasons.map((item, i) => (
             <div key={i} className="text-center group">

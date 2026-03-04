@@ -9,16 +9,18 @@ const services = [
   { icon: Waypoints, title: "Trek 8–10 KM", desc: "Menyusuri jalur gurun sepanjang 8–10 km yang menakjubkan" },
 ];
 
-const ServicesSection = () => {
+const ServicesSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="services" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
-        <div className="text-center mb-10 md:mb-16">
-          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Layanan Kami</p>
-          <h2 className="font-display text-2xl md:text-5xl text-foreground">
-            Paket <span className="text-gold">Layanan</span>
-          </h2>
-        </div>
+        {!hideHeader && (
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Layanan Kami</p>
+            <h2 className="font-display text-2xl md:text-5xl text-foreground">
+              Paket <span className="text-gold">Layanan</span>
+            </h2>
+          </div>
+        )}
 
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 max-w-5xl mx-auto">
           {services.map((item, i) => (

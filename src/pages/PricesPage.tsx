@@ -15,7 +15,7 @@ const PricesPage = () => {
         titleAccent="List"
         subtitle="Investment"
       />
-      <PricelistSection />
+      <PricelistSection hideHeader />
       <Footer />
       <FloatingWhatsApp />
     </div>

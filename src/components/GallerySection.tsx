@@ -14,16 +14,18 @@ const images = [
   { src: gallery6, alt: "Penunggang kuda berbaju putih di gurun", span: "" },
 ];
 
-const GallerySection = () => {
+const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="gallery" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
-        <div className="text-center mb-12 md:mb-20">
-          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Captured Moments</p>
-          <h2 className="font-display text-2xl md:text-5xl text-foreground">
-            Our <span className="text-gold">Gallery</span>
-          </h2>
-        </div>
+        {!hideHeader && (
+          <div className="text-center mb-12 md:mb-20">
+            <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Captured Moments</p>
+            <h2 className="font-display text-2xl md:text-5xl text-foreground">
+              Our <span className="text-gold">Gallery</span>
+            </h2>
+          </div>
+        )}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2">
           {images.map((img, i) => (
             <div key={i} className={`group relative overflow-hidden ${img.span}`}>
