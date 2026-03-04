@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { X } from "lucide-react";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -15,6 +17,8 @@ const images = [
 ];
 
 const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
+  const [selected, setSelected] = useState<number | null>(null);
+
   return (
     <section id="gallery" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
@@ -28,7 +32,11 @@ const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         )}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2">
           {images.map((img, i) => (
-            <div key={i} className={`group relative overflow-hidden ${img.span}`}>
+            <div
+              key={i}
+              className={`group relative overflow-hidden cursor-pointer ${img.span}`}
+              onClick={() => setSelected(i)}
+            >
               <img
                 src={img.src}
                 alt={img.alt}
@@ -40,6 +48,28 @@ const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      {selected !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setSelected(null)}
+        >
+          <button
+            onClick={() => setSelected(null)}
+            className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-10"
+            aria-label="Close"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={images[selected].src}
+            alt={images[selected].alt}
+            className="max-w-full max-h-[90vh] object-contain animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 };
