@@ -12,23 +12,25 @@ const experiences = [
 
 const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
-    <section id="experience" className="section-padding bg-card">
-      <div className="container mx-auto px-5 md:px-8 max-w-3xl lg:max-w-4xl">
-        {!hideHeader && (
-          <>
-            <div className="w-full h-56 md:h-[400px] overflow-hidden rounded mb-6 md:mb-10">
-              <img src={horsePortrait} alt="Kuda di padang pasir Madinah" className="w-full h-full object-cover" loading="lazy" />
-            </div>
+    <section id="experience" className="bg-card">
+      {!hideHeader && (
+        <div className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden">
+          <img src={horsePortrait} alt="Kuda di padang pasir Madinah" className="w-full h-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 px-5 md:px-8 pb-10 md:pb-16 max-w-3xl lg:max-w-4xl mx-auto">
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
-            <h2 className="font-display text-2xl md:text-4xl text-foreground mb-2 leading-tight">
+            <h2 className="font-display text-3xl md:text-5xl text-foreground mb-3 leading-tight">
               Desert <span className="text-gold">Horse Riding</span>
             </h2>
-            <div className="w-12 h-[1px] bg-gold/40 mb-6 md:mb-8" />
-          </>
-        )}
-        <p className="text-muted-foreground font-body text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-md md:max-w-lg">
-          Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
-        </p>
+            <div className="w-12 h-[1px] bg-gold/40 mb-4 md:mb-6" />
+            <p className="text-muted-foreground font-body text-sm md:text-base leading-relaxed max-w-md md:max-w-lg">
+              Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi.
+            </p>
+          </div>
+        </div>
+      )}
+      <div className="section-padding">
+      <div className="container mx-auto px-5 md:px-8 max-w-3xl lg:max-w-4xl">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {experiences.map((item, i) => (
@@ -43,6 +45,7 @@ const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => 
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );
