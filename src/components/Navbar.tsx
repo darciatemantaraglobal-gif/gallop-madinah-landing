@@ -2,13 +2,13 @@ import { Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo-landscape.png";
-
-const WHATSAPP_LINK = "https://wa.me/628118880818?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { lang, setLang, t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -26,13 +26,15 @@ const Navbar = () => {
   }, [mobileOpen]);
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/experience", label: "Experience" },
-    { href: "/services", label: "Services" },
-    { href: "/prices", label: "Prices" },
-    { href: "/gallery", label: "Gallery" },
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/experience", label: t("nav.experience") },
+    { href: "/services", label: t("nav.services") },
+    { href: "/prices", label: t("nav.prices") },
+    { href: "/gallery", label: t("nav.gallery") },
   ];
+
+  const WHATSAPP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.general"))}`;
 
   const isActive = (href: string) => location.pathname === href;
 
@@ -83,7 +85,7 @@ const Navbar = () => {
               className="inline-flex items-center gap-3 border border-gold/60 text-gold px-8 py-3 font-body text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
             >
               <Phone className="w-4 h-4" />
-              Booking
+              {t("nav.booking")}
             </a>
           </div>
         </div>
@@ -100,10 +102,7 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-5 md:px-8 max-w-6xl py-4 md:py-5 flex items-center justify-between">
-          <Link
-            to="/"
-            className="flex items-center"
-          >
+          <Link to="/" className="flex items-center">
             <img src={logo} alt="Gallop Madinah" className="h-8 md:h-10 w-auto" />
           </Link>
 
@@ -123,6 +122,17 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLang(lang === "id" ? "en" : "id")}
+              className="flex items-center gap-1.5 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase text-muted-foreground hover:text-gold transition-colors duration-300"
+              aria-label="Toggle language"
+            >
+              <span className={lang === "id" ? "text-gold font-bold" : ""}>ID</span>
+              <span className="text-border">/</span>
+              <span className={lang === "en" ? "text-gold font-bold" : ""}>EN</span>
+            </button>
+
             <a
               href={WHATSAPP_LINK}
               target="_blank"
@@ -130,7 +140,7 @@ const Navbar = () => {
               className="hidden md:inline-flex items-center gap-2 border border-gold/50 text-gold px-5 py-2.5 text-xs font-body tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
             >
               <Phone className="w-3.5 h-3.5" />
-              Booking
+              {t("nav.booking")}
             </a>
 
             {/* Mobile toggle */}
