@@ -17,14 +17,14 @@ const images = [
 const GallerySection = () => {
   return (
     <section id="gallery" className="section-padding bg-warm-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-20">
-          <p className="text-gold font-body text-xs tracking-[0.4em] uppercase mb-4">Captured Moments</p>
-          <h2 className="font-display text-4xl md:text-6xl font-light text-foreground">
+      <div className="container mx-auto px-5 md:px-4">
+        <div className="text-center mb-12 md:mb-20">
+          <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.4em] uppercase mb-3 md:mb-4">Captured Moments</p>
+          <h2 className="font-display text-3xl md:text-6xl font-light text-foreground">
             Our <span className="italic font-medium">Gallery</span>
           </h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 md:gap-3">
           {images.map((img, i) => (
             <div key={i} className={`group relative overflow-hidden ${img.span}`}>
               <img

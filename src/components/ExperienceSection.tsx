@@ -13,15 +13,15 @@ const experiences = [
 const ExperienceSection = () => {
   return (
     <section id="experience" className="section-padding bg-warm-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <div className="container mx-auto px-5 md:px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-center">
           {/* Images */}
           <div className="relative">
             <div className="relative z-10">
               <img
                 src={horsePortrait}
                 alt="Kuda Arabian di padang pasir"
-                className="w-full object-cover aspect-[3/4]"
+                className="w-full object-cover aspect-[3/4] max-h-[60vh] md:max-h-none"
               />
             </div>
             <div className="absolute -bottom-8 -right-8 w-48 h-64 z-20 hidden lg:block">
@@ -31,24 +31,24 @@ const ExperienceSection = () => {
                 className="w-full h-full object-cover border-4 border-background shadow-xl"
               />
             </div>
-            <div className="absolute top-8 -left-4 w-24 h-24 border-2 border-gold/30 z-0" />
+            <div className="absolute top-8 -left-4 w-16 h-16 md:w-24 md:h-24 border-2 border-gold/30 z-0" />
           </div>
 
           {/* Content */}
           <div className="lg:pl-8">
-            <p className="text-gold font-body text-xs tracking-[0.4em] uppercase mb-4">The Experience</p>
-            <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-2 leading-tight">
+            <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.4em] uppercase mb-3 md:mb-4">The Experience</p>
+            <h2 className="font-display text-3xl md:text-5xl font-light text-foreground mb-2 leading-tight">
               Desert <span className="italic font-medium">Horse Riding</span>
             </h2>
-            <div className="w-16 h-[1px] bg-gold mb-8" />
-            <p className="text-muted-foreground font-body text-sm leading-relaxed mb-12 max-w-md">
+            <div className="w-12 md:w-16 h-[1px] bg-gold mb-6 md:mb-8" />
+            <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed mb-8 md:mb-12 max-w-md">
               Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
             </p>
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {experiences.map((item, i) => (
-                <div key={i} className="flex items-center gap-5">
-                  <item.icon className="w-5 h-5 text-gold flex-shrink-0" strokeWidth={1.5} />
-                  <p className="text-foreground font-body text-sm tracking-wide">{item.text}</p>
+                <div key={i} className="flex items-center gap-4 md:gap-5">
+                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold flex-shrink-0" strokeWidth={1.5} />
+                  <p className="text-foreground font-body text-xs md:text-sm tracking-wide">{item.text}</p>
                 </div>
               ))}
             </div>
