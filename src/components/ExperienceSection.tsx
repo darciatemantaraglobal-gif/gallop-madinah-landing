@@ -44,14 +44,16 @@ const ExperienceSection = () => {
               Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
             </p>
 
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+            <div className="space-y-3">
               {experiences.map((item, i) => (
-                <div key={i} className="text-center group">
-                  <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 border border-border rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">
-                    <item.icon className="w-5 h-5 md:w-6 md:h-6 text-gold" strokeWidth={1.5} />
+                <div key={i} className="bg-background border border-border p-4 md:p-5 flex items-center gap-4 hover:border-gold/30 transition-all duration-500 group">
+                  <div className="w-10 h-10 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center flex-shrink-0 group-hover:border-gold/40 transition-colors duration-500">
+                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-body font-bold text-sm md:text-base text-foreground mb-2 md:mb-3 normal-case tracking-normal">{item.text}</h3>
-                  <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed">{item.desc}</p>
+                  <div className="text-left">
+                    <h3 className="font-body font-bold text-sm md:text-base text-foreground normal-case tracking-normal">{item.text}</h3>
+                    <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
