@@ -1,17 +1,17 @@
 import gallery1 from "@/assets/gallery-1.jpg";
+import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
 import gallery4 from "@/assets/gallery-4.jpg";
 import gallery5 from "@/assets/gallery-5.jpg";
 import gallery6 from "@/assets/gallery-6.jpg";
-import horsePortrait from "@/assets/horse-portrait.jpg";
 
 const images = [
-  { src: gallery1, alt: "Berkuda melintasi padang pasir", span: "col-span-2 row-span-2" },
-  { src: gallery3, alt: "Siluet berkuda saat sunset", span: "" },
-  { src: gallery4, alt: "Kuda galloping di gurun", span: "" },
-  { src: horsePortrait, alt: "Kuda Arabian close up", span: "row-span-2" },
-  { src: gallery5, alt: "Kuda di oasis", span: "" },
-  { src: gallery6, alt: "Keluarga berkuda", span: "" },
+  { src: gallery1, alt: "Berkuda di padang pasir dengan latar pegunungan", span: "col-span-2 row-span-2" },
+  { src: gallery2, alt: "Pengendara kuda dengan senyuman", span: "" },
+  { src: gallery3, alt: "Galloping di pasir gurun", span: "" },
+  { src: gallery4, alt: "Dua penunggang kuda berlari di gurun", span: "row-span-2" },
+  { src: gallery5, alt: "Berkuda melintasi padang pasir", span: "" },
+  { src: gallery6, alt: "Penunggang kuda berbaju putih di gurun", span: "" },
 ];
 
 const GallerySection = () => {
