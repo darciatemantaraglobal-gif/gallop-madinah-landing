@@ -53,7 +53,7 @@ const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         {!hideHeader && (
           <div className="text-center mb-12 md:mb-20">
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Captured Moments</p>
-            <h2 className="font-display text-2xl md:text-5xl text-foreground">
+            <h2 className="font-display text-2xl md:text-5xl text-white">
               Our <span className="text-gold">Gallery</span>
             </h2>
           </div>
