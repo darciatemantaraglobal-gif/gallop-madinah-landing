@@ -16,17 +16,11 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-5 md:px-4 pb-20 md:pb-32 animate-fade-in-up">
-        <p className="font-body text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase text-white/70 mb-4 md:mb-6">
-          Premium Desert Horse Riding · Madinah
-        </p>
-        <h1 className="font-display text-3xl md:text-7xl lg:text-8xl font-light text-white leading-[1.05] md:leading-[0.95] mb-5 md:mb-8 max-w-4xl">
+        <h1 className="font-display text-3xl md:text-7xl lg:text-8xl font-light text-white leading-[1.05] md:leading-[0.95] mb-8 md:mb-10 max-w-4xl">
           Rasakan Pengalaman
           <br />
           <span className="font-semibold italic">Berkuda di Madinah</span>
         </h1>
-        <p className="text-white/60 text-xs md:text-base font-body max-w-sm md:max-w-lg mb-8 md:mb-10 leading-relaxed tracking-wide">
-          Premium desert horse riding dengan coach profesional dan kuda Arabian terlatih. Nuansa Islami yang tak terlupakan.
-        </p>
         <a
           href={WHATSAPP_LINK}
           target="_blank"
