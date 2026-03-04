@@ -1,4 +1,5 @@
 import heroImage from "@/assets/hero-desert.jpg";
+import gallopTitle from "@/assets/gallop-title.png";
 import { Phone, ChevronDown } from "lucide-react";
 
 const WHATSAPP_LINK = "https://wa.me/628118880818?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
@@ -18,17 +19,11 @@ const HeroSection = () => {
 
       {/* Centered Content */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 md:px-4">
-        <p className="font-body text-xs md:text-sm tracking-[0.35em] uppercase text-white/70 mb-6 md:mb-8">
-          Madinah · Saudi Arabia
-        </p>
-
-        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-[1.1] md:leading-[1.05] mb-3 md:mb-4 max-w-4xl text-shadow-hero">
-          Gallop <span className="text-gold">Madinah</span>
-        </h1>
-
-        <p className="text-white/60 font-body text-sm md:text-base tracking-[0.15em] italic mb-8 md:mb-10">
-          Premium Desert Horse Riding
-        </p>
+        <img
+          src={gallopTitle}
+          alt="Gallop Madinah"
+          className="w-48 md:w-72 lg:w-80 mb-8 md:mb-10"
+        />
 
         <a
           href={WHATSAPP_LINK}
