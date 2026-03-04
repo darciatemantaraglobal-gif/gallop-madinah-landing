@@ -26,6 +26,7 @@ const Navbar = () => {
   }, [mobileOpen]);
 
   const navLinks = [
+    { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/experience", label: "Experience" },
     { href: "/services", label: "Services" },
