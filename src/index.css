@@ -37,7 +37,7 @@
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 35 85% 55%;
+    --primary: 43 50% 45%;
     --primary-foreground: 0 0% 5%;
 
     --secondary: 0 0% 13%;
@@ -45,6 +45,8 @@
 
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 55%;
+
+    --accent: 43 50% 45%;
 
     --accent: 35 85% 55%;
     --accent-foreground: 0 0% 5%;
@@ -54,12 +56,12 @@
 
     --border: 0 0% 18%;
     --input: 0 0% 18%;
-    --ring: 35 85% 55%;
+    --ring: 43 50% 45%;
 
     --radius: 0.5rem;
 
-    --gold: 35 85% 55%;
-    --gold-highlight: 35 90% 62%;
+    --gold: 43 50% 45%;
+    --gold-highlight: 43 55% 52%;
     --deep-green: 0 0% 7%;
     --deeper-green: 0 0% 5%;
     --cream: 0 0% 10%;
@@ -70,12 +72,12 @@
 
     --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 35 85% 55%;
+    --sidebar-primary: 43 50% 45%;
     --sidebar-primary-foreground: 0 0% 5%;
     --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 96%;
     --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 35 85% 55%;
+    --sidebar-ring: 43 50% 45%;
   }
 }
 
