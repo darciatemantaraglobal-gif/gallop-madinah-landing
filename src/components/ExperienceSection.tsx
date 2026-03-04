@@ -13,10 +13,10 @@ const experiences = [
 const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="experience" className="section-padding bg-card">
-      <div className="container mx-auto px-5 md:px-4 max-w-3xl">
+      <div className="container mx-auto px-5 md:px-8 max-w-3xl lg:max-w-4xl">
         {!hideHeader && (
           <>
-            <div className="w-full h-56 md:h-80 overflow-hidden rounded mb-6 md:mb-8">
+            <div className="w-full h-56 md:h-[400px] overflow-hidden rounded mb-6 md:mb-10">
               <img src={horsePortrait} alt="Kuda di padang pasir Madinah" className="w-full h-full object-cover" loading="lazy" />
             </div>
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-4">The Experience</p>
@@ -26,14 +26,11 @@ const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => 
             <div className="w-12 h-[1px] bg-gold/40 mb-6 md:mb-8" />
           </>
         )}
-        <p className="text-muted-foreground font-body text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-md">
+        <p className="text-muted-foreground font-body text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-md md:max-w-lg">
           Nikmati perjalanan berkuda melintasi padang pasir Madinah dengan suasana yang membawa Anda merasakan nuansa zaman Nabi. Pengalaman tak terlupakan untuk semua level pengendara.
         </p>
 
-
-
-
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {experiences.map((item, i) => (
             <div key={i} className="bg-background border border-border p-4 md:p-5 flex items-center gap-4 hover:border-gold/30 transition-all duration-500 group">
               <div className="w-10 h-10 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center flex-shrink-0 group-hover:border-gold/40 transition-colors duration-500">
