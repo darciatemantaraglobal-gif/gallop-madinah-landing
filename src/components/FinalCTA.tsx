@@ -17,10 +17,10 @@ const FinalCTA = () => {
       <div className="relative z-10 text-center px-5 md:px-4">
         <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Siap Memulai?</p>
         <h2 className="font-display text-2xl md:text-5xl lg:text-6xl text-white mb-3 md:mb-5 leading-tight">
-          Abadikan Momen <span className="text-gold">Berharga</span> Anda
+          Come As A Guest, <span className="text-gold">Leave As A Friend</span>
         </h2>
-        <p className="text-white/50 font-body text-sm md:text-base tracking-wide max-w-lg mx-auto mb-8 md:mb-10 leading-relaxed">
-          Hubungi kami sekarang untuk reservasi pengalaman berkuda di Madinah. Slot terbatas setiap hari.
+        <p className="text-white/60 font-body text-sm md:text-lg tracking-wide max-w-xl mx-auto mb-8 md:mb-10 leading-relaxed italic">
+          Let's make your Arabian Experience unforgettable
         </p>
         <a
           href={WHATSAPP_LINK}
