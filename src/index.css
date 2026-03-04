@@ -28,54 +28,54 @@
 
 @layer base {
   :root {
-    --background: 40 20% 96%;
-    --foreground: 160 43% 12%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 160 43% 12%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 160 43% 12%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 42 52% 54%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 35 85% 55%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 160 43% 15%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 40 15% 90%;
-    --muted-foreground: 160 20% 40%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 42 52% 54%;
-    --accent-foreground: 160 43% 10%;
+    --accent: 35 85% 55%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 15% 85%;
-    --input: 40 15% 85%;
-    --ring: 42 52% 54%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 35 85% 55%;
 
     --radius: 0.5rem;
 
-    --gold: 42 52% 54%;
-    --gold-highlight: 42 58% 60%;
-    --deep-green: 160 43% 15%;
-    --deeper-green: 160 48% 12%;
-    --cream: 40 20% 96%;
-    --warm-white: 40 30% 98%;
+    --gold: 35 85% 55%;
+    --gold-highlight: 35 90% 62%;
+    --deep-green: 0 0% 7%;
+    --deeper-green: 0 0% 5%;
+    --cream: 0 0% 10%;
+    --warm-white: 0 0% 9%;
 
     --font-display: 'Akira Expanded', system-ui, sans-serif;
     --font-body: 'Creato Display', system-ui, sans-serif;
 
-    --sidebar-background: 160 43% 12%;
+    --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 42 52% 54%;
-    --sidebar-primary-foreground: 160 43% 10%;
-    --sidebar-accent: 160 30% 22%;
+    --sidebar-primary: 35 85% 55%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 160 30% 25%;
-    --sidebar-ring: 42 52% 54%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 35 85% 55%;
   }
 }
 
@@ -92,7 +92,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 }
 
@@ -129,6 +131,10 @@
     border-color: hsl(var(--gold));
   }
 
+  .bg-gold {
+    background-color: hsl(var(--gold));
+  }
+
   .shadow-gold {
     box-shadow: 0 4px 30px -5px hsl(var(--gold) / 0.3);
   }
@@ -138,6 +144,6 @@
   }
 
   .section-padding {
-    @apply py-16 md:py-28 lg:py-36;
+    @apply py-20 md:py-32 lg:py-40;
   }
 }

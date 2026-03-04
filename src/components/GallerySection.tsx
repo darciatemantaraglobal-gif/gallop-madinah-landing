@@ -16,15 +16,15 @@ const images = [
 
 const GallerySection = () => {
   return (
-    <section id="gallery" className="section-padding bg-warm-white">
+    <section id="gallery" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
         <div className="text-center mb-12 md:mb-20">
-          <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.4em] uppercase mb-3 md:mb-4">Captured Moments</p>
-          <h2 className="font-display text-3xl md:text-6xl font-light text-foreground">
-            Our <span className="italic font-medium">Gallery</span>
+          <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.35em] uppercase mb-4 md:mb-5">Captured Moments</p>
+          <h2 className="font-display text-2xl md:text-5xl text-foreground">
+            Our <span className="text-gold">Gallery</span>
           </h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 md:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2">
           {images.map((img, i) => (
             <div key={i} className={`group relative overflow-hidden ${img.span}`}>
               <img
@@ -33,7 +33,7 @@ const GallerySection = () => {
                 className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500" />
             </div>
           ))}
         </div>
