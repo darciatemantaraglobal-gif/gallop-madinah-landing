@@ -12,7 +12,7 @@ const services = [
 const ServicesSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   return (
     <section id="services" className="section-padding bg-background">
-      <div className="container mx-auto px-5 md:px-4">
+      <div className="container mx-auto px-5 md:px-8 max-w-6xl">
         {!hideHeader && (
           <div className="text-center mb-10 md:mb-16">
             <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-5">Layanan Kami</p>
@@ -22,7 +22,7 @@ const ServicesSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           </div>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 max-w-6xl mx-auto">
           {services.map((item, i) => (
             <div
               key={i}

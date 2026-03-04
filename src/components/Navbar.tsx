@@ -99,7 +99,7 @@ const Navbar = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-5 md:px-4 py-4 md:py-5 flex items-center justify-between">
+        <div className="container mx-auto px-5 md:px-8 max-w-6xl py-4 md:py-5 flex items-center justify-between">
           <Link
             to="/"
             className="flex items-center"
