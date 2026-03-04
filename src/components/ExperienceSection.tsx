@@ -34,12 +34,12 @@ const ExperienceSection = ({ hideHeader = false }: { hideHeader?: boolean }) => 
 
         <div className="grid grid-cols-2 gap-3">
           {experiences.map((item, i) => (
-            <div key={i} className="bg-background border border-border p-4 md:p-5 flex items-center gap-4 hover:border-gold/30 transition-all duration-500 group">
+            <div key={i} className="bg-background border border-border p-4 md:p-6 flex flex-col items-center text-center gap-3 hover:border-gold/30 transition-all duration-500 group">
               <div className="w-10 h-10 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center flex-shrink-0 group-hover:border-gold/40 transition-colors duration-500">
                 <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
               </div>
-              <div className="text-left">
-                <h3 className="font-body font-bold text-sm md:text-base text-foreground normal-case tracking-normal">{item.text}</h3>
+              <div>
+                <h3 className="font-body font-bold text-sm md:text-base text-foreground normal-case tracking-normal mb-1">{item.text}</h3>
                 <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed">{item.desc}</p>
               </div>
             </div>
