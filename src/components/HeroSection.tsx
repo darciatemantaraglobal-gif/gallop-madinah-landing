@@ -22,7 +22,7 @@ const HeroSection = () => {
         <img
           src={gallopTitle}
           alt="Gallop Madinah"
-          className="w-48 md:w-72 lg:w-80 mb-8 md:mb-10"
+          className="w-56 md:w-80 lg:w-[420px] xl:w-[480px] mb-8 md:mb-10"
         />
 
         <a
