@@ -15,16 +15,29 @@ const Footer = () => {
           <p className="text-muted-foreground font-body text-xs md:text-sm tracking-[0.2em] uppercase mb-5 md:mb-6">
             Premium Desert Horse Riding · Madinah, Saudi Arabia
           </p>
-          <a
-            href="https://instagram.com/gallopmadinah"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors mb-5 md:mb-6"
-            aria-label="Instagram"
-          >
-            <Instagram className="w-5 h-5" />
-            <span className="font-body text-xs tracking-wider">@gallopmadinah</span>
-          </a>
+          <div className="flex items-center justify-center gap-4 mb-5 md:mb-6">
+            <a
+              href="https://instagram.com/gallopmadinah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+              <span className="font-body text-xs tracking-wider">@gallopmadinah</span>
+            </a>
+            <span className="text-muted-foreground/30">|</span>
+            <a
+              href="https://tiktok.com/@gallopmadinah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors"
+              aria-label="TikTok"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.71a8.19 8.19 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.14z"/></svg>
+              <span className="font-body text-xs tracking-wider">@gallopmadinah</span>
+            </a>
+          </div>
           <p className="text-muted-foreground/50 font-body text-[10px] md:text-xs tracking-wider uppercase">
             © 2026 Gallop Madinah. All rights reserved.
           </p>
