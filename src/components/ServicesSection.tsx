@@ -28,7 +28,7 @@ const ServicesSection = () => {
               <div className="w-10 h-10 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center mb-4 md:mb-5 group-hover:border-gold/40 transition-colors duration-500">
                 <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-xs md:text-sm text-foreground mb-2">{item.title}</h3>
+              <h3 className="font-body font-bold text-xs md:text-sm text-foreground mb-2 normal-case tracking-normal">{item.title}</h3>
               <p className="text-muted-foreground font-body text-[10px] md:text-xs leading-relaxed">{item.desc}</p>
             </div>
           ))}
