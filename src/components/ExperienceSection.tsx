@@ -3,11 +3,11 @@ import gallery1 from "@/assets/gallery-1.jpg";
 import { MapPin, Clock, Moon, Camera, Coffee } from "lucide-react";
 
 const experiences = [
-  { icon: MapPin, text: "Trek padang pasir 8–10 km" },
-  { icon: Clock, text: "Durasi ±1,5–2 jam" },
-  { icon: Moon, text: "Suasana Islami ala zaman Nabi" },
-  { icon: Camera, text: "Dokumentasi estetik dan profesional" },
-  { icon: Coffee, text: "Area istirahat khas Arab" },
+  { icon: MapPin, text: "Trek Padang Pasir", desc: "Menyusuri jalur gurun sepanjang 8–10 km yang menakjubkan" },
+  { icon: Clock, text: "Durasi ±1,5–2 Jam", desc: "Waktu yang cukup untuk menikmati setiap momen perjalanan" },
+  { icon: Moon, text: "Suasana Islami", desc: "Nuansa zaman Nabi yang membawa ketenangan spiritual" },
+  { icon: Camera, text: "Dokumentasi Profesional", desc: "Foto dan video estetik sebagai kenangan berharga" },
+  { icon: Coffee, text: "Area Istirahat Arab", desc: "Nikmati kopi dan hidangan khas Arab di tengah gurun" },
 ];
 
 const ExperienceSection = () => {
@@ -50,7 +50,8 @@ const ExperienceSection = () => {
                   <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 border border-border rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">
                     <item.icon className="w-5 h-5 md:w-6 md:h-6 text-gold" strokeWidth={1.5} />
                   </div>
-                  <p className="text-foreground/80 font-body text-sm md:text-base leading-relaxed">{item.text}</p>
+                  <h3 className="font-body font-bold text-sm md:text-base text-foreground mb-2 md:mb-3 normal-case tracking-normal">{item.text}</h3>
+                  <p className="text-muted-foreground font-body text-xs md:text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
