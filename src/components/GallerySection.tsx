@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
@@ -18,6 +18,29 @@ const images = [
 
 const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const [selected, setSelected] = useState<number | null>(null);
+  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-index"));
+            setVisibleItems((prev) => new Set(prev).add(index));
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    itemRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="gallery" className="section-padding bg-background">
@@ -34,7 +57,14 @@ const GallerySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           {images.map((img, i) => (
             <div
               key={i}
-              className={`group relative overflow-hidden cursor-pointer ${img.span}`}
+              ref={(el) => (itemRefs.current[i] = el)}
+              data-index={i}
+              className={`group relative overflow-hidden cursor-pointer ${img.span} transition-all duration-700 ease-out ${
+                visibleItems.has(i)
+                  ? "opacity-100 translate-y-0 scale-100"
+                  : "opacity-0 translate-y-6 scale-95"
+              }`}
+              style={{ transitionDelay: `${i * 100}ms` }}
               onClick={() => setSelected(i)}
             >
               <img
