@@ -15,13 +15,6 @@ const HeroSection = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#112919]/[0.92] to-[#193B2C]/[0.92]" />
-        {/* Subtle geometric pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D4AF37' stroke-width='0.8'%3E%3C!-- Kawung motif --%3E%3Cellipse cx='30' cy='30' rx='12' ry='18' transform='rotate(45 30 30)'/%3E%3Cellipse cx='30' cy='30' rx='12' ry='18' transform='rotate(-45 30 30)'/%3E%3Ccircle cx='30' cy='30' r='5' fill='%23D4AF37' fill-opacity='0.3'/%3E%3Cellipse cx='90' cy='30' rx='12' ry='18' transform='rotate(45 90 30)'/%3E%3Cellipse cx='90' cy='30' rx='12' ry='18' transform='rotate(-45 90 30)'/%3E%3Ccircle cx='90' cy='30' r='5' fill='%23D4AF37' fill-opacity='0.3'/%3E%3Cellipse cx='30' cy='90' rx='12' ry='18' transform='rotate(45 30 90)'/%3E%3Cellipse cx='30' cy='90' rx='12' ry='18' transform='rotate(-45 30 90)'/%3E%3Ccircle cx='30' cy='90' r='5' fill='%23D4AF37' fill-opacity='0.3'/%3E%3Cellipse cx='90' cy='90' rx='12' ry='18' transform='rotate(45 90 90)'/%3E%3Cellipse cx='90' cy='90' rx='12' ry='18' transform='rotate(-45 90 90)'/%3E%3Ccircle cx='90' cy='90' r='5' fill='%23D4AF37' fill-opacity='0.3'/%3E%3C!-- Connector lines --%3E%3Cellipse cx='60' cy='60' rx='12' ry='18' transform='rotate(45 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='12' ry='18' transform='rotate(-45 60 60)'/%3E%3Ccircle cx='60' cy='60' r='5' fill='%23D4AF37' fill-opacity='0.3'/%3E%3Cellipse cx='0' cy='60' rx='12' ry='18' transform='rotate(45 0 60)'/%3E%3Cellipse cx='0' cy='60' rx='12' ry='18' transform='rotate(-45 0 60)'/%3E%3Cellipse cx='120' cy='60' rx='12' ry='18' transform='rotate(45 120 60)'/%3E%3Cellipse cx='120' cy='60' rx='12' ry='18' transform='rotate(-45 120 60)'/%3E%3Cellipse cx='60' cy='0' rx='12' ry='18' transform='rotate(45 60 0)'/%3E%3Cellipse cx='60' cy='0' rx='12' ry='18' transform='rotate(-45 60 0)'/%3E%3Cellipse cx='60' cy='120' rx='12' ry='18' transform='rotate(45 60 120)'/%3E%3Cellipse cx='60' cy='120' rx='12' ry='18' transform='rotate(-45 60 120)'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
       </div>
 
       {/* Centered Content */}
