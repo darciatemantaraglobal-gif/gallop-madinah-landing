@@ -1,7 +1,10 @@
 import { Phone, Tent, Users, User, ChevronRight } from "lucide-react";
 import arabianCampImg from "@/assets/arabian-camp.png";
 
-const WHATSAPP_LINK = "https://wa.me/628118880818?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
+const getWhatsAppLink = (packageName: string) =>
+  `https://wa.me/628118880818?text=${encodeURIComponent(`Halo Gallop Madinah, saya ingin booking paket *${packageName}*. Mohon info ketersediaan dan jadwalnya. Terima kasih 🙏`)}`;
+
+const WHATSAPP_CAMP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent("Halo Gallop Madinah, saya ingin booking *Arabian Camp Experience* untuk 30 orang. Mohon info ketersediaan dan jadwalnya. Terima kasih 🙏")}`;
 
 const personalPackages = [
   { label: "Single", price: "1.300", desc: "1 orang rider" },
@@ -51,7 +54,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                 </div>
               </div>
               <a
-                href={WHATSAPP_LINK}
+                href={getWhatsAppLink(`Personal ${item.label} - ${item.price} SAR`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-3 py-1.5 md:px-4 md:py-2 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
@@ -84,7 +87,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                   </div>
                 </div>
                 <a
-                  href={WHATSAPP_LINK}
+                  href={getWhatsAppLink(`Group ${item.label} - ${item.price} SAR/pax`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-3 py-1.5 md:px-4 md:py-2 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
@@ -149,7 +152,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                 ))}
               </div>
               <a
-                href={WHATSAPP_LINK}
+                href={WHATSAPP_CAMP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-gold/60 text-gold px-6 py-2.5 md:px-8 md:py-3 font-body text-[10px] md:text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
