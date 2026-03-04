@@ -1,6 +1,6 @@
 import horsePortrait from "@/assets/horse-portrait.jpg";
 import gallery1 from "@/assets/gallery-1.jpg";
-import { MapPin, Clock, Moon, Camera, Coffee } from "lucide-react";
+import { MapPin, Clock, Moon, Camera, Coffee, Waypoints, Car, UserCheck, UtensilsCrossed } from "lucide-react";
 
 const experiences = [
   { icon: MapPin, text: "Trek Padang Pasir", desc: "Menyusuri jalur gurun sepanjang 8–10 km yang menakjubkan" },
@@ -8,6 +8,13 @@ const experiences = [
   { icon: Moon, text: "Suasana Islami", desc: "Nuansa zaman Nabi yang membawa ketenangan spiritual" },
   { icon: Camera, text: "Dokumentasi Profesional", desc: "Foto dan video estetik sebagai kenangan berharga" },
   { icon: Coffee, text: "Area Istirahat Arab", desc: "Nikmati kopi dan hidangan khas Arab di tengah gurun" },
+];
+
+const services = [
+  { icon: Waypoints, title: "Kuda Arabian Terlatih", desc: "Kuda pilihan yang jinak dan tangguh untuk segala medan" },
+  { icon: Car, title: "Antar Jemput Hotel", desc: "Layanan penjemputan dari hotel Anda" },
+  { icon: UserCheck, title: "Private Coaching", desc: "Bimbingan personal dari coach berpengalaman" },
+  { icon: UtensilsCrossed, title: "Snack & Drinks", desc: "Hidangan ringan dan minuman khas Arab" },
 ];
 
 const ExperienceSection = () => {
@@ -57,6 +64,25 @@ const ExperienceSection = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Service Cards */}
+        <div className="mt-10 md:mt-16">
+          <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-4 md:mb-6 text-center">Layanan Kami</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {services.map((item, i) => (
+              <div
+                key={i}
+                className="bg-background border border-border p-3 md:p-5 group hover:border-gold/30 transition-all duration-500"
+              >
+                <div className="w-8 h-8 md:w-10 md:h-10 border border-border rounded-full flex items-center justify-center mb-2 md:mb-3 group-hover:border-gold/40 transition-colors duration-500">
+                  <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-gold" strokeWidth={1.5} />
+                </div>
+                <h3 className="font-body font-bold text-xs md:text-sm text-foreground mb-1 normal-case tracking-normal">{item.title}</h3>
+                <p className="text-muted-foreground font-body text-[10px] md:text-xs leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
