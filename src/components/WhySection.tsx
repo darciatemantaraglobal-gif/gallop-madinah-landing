@@ -27,22 +27,23 @@ const WhySection = () => {
   return (
     <section id="why" className="section-padding bg-background">
       <div className="container mx-auto px-5 md:px-4">
-        <div className="text-center mb-12 md:mb-20">
-          <h2 className="font-display text-3xl md:text-6xl font-light text-foreground mb-4 md:mb-6">
-            Why <span className="italic font-medium">Gallop Madinah</span>
+        <div className="text-center mb-10 md:mb-16">
+          <p className="text-gold font-body text-[10px] md:text-xs tracking-[0.35em] uppercase mb-4 md:mb-5">Tentang Kami</p>
+          <h2 className="font-display text-2xl md:text-5xl text-foreground mb-5 md:mb-8">
+            Why <span className="text-gold">Gallop Madinah</span>
           </h2>
-          <p className="text-muted-foreground font-body text-xs md:text-sm tracking-wide max-w-xl mx-auto leading-relaxed">
-            Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan.
+          <p className="text-muted-foreground font-body text-xs md:text-sm tracking-wide max-w-2xl mx-auto leading-relaxed">
+            Pelopor layanan berkuda profesional di Madinah dengan pengalaman premium yang aman dan berkesan. Kami percaya setiap momen berharga layak dikenang.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 max-w-5xl mx-auto">
           {reasons.map((item, i) => (
             <div key={i} className="text-center group">
-              <div className="w-14 h-14 md:w-20 md:h-20 mx-auto mb-4 md:mb-8 rounded-full border-2 border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500">
-                <item.icon className="w-6 h-6 md:w-8 md:h-8 text-gold" strokeWidth={1.5} />
+              <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 border border-border rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">
+                <item.icon className="w-5 h-5 md:w-6 md:h-6 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-base md:text-2xl font-medium text-foreground mb-2 md:mb-3">{item.title}</h3>
-              <p className="text-muted-foreground font-body text-[11px] md:text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="font-display text-xs md:text-sm text-foreground mb-2 md:mb-3">{item.title}</h3>
+              <p className="text-muted-foreground font-body text-[10px] md:text-xs leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
