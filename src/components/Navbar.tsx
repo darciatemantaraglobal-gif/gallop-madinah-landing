@@ -1,11 +1,14 @@
 import { Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo-landscape.png";
 
 const WHATSAPP_LINK = "https://wa.me/6281234567890?text=Halo%20Gallop%20Madinah%2C%20saya%20ingin%20booking%20berkuda";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -23,12 +26,14 @@ const Navbar = () => {
   }, [mobileOpen]);
 
   const navLinks = [
-    { href: "#why", label: "About" },
-    { href: "#experience", label: "Experience" },
-    { href: "#services", label: "Services" },
-    { href: "#pricelist", label: "Prices" },
-    { href: "#gallery", label: "Gallery" },
+    { href: "/about", label: "About" },
+    { href: "/experience", label: "Experience" },
+    { href: "/services", label: "Services" },
+    { href: "/prices", label: "Prices" },
+    { href: "/gallery", label: "Gallery" },
   ];
+
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <>
@@ -45,11 +50,13 @@ const Navbar = () => {
         <div className="relative z-10 h-full flex flex-col justify-center px-8">
           <div className="space-y-1">
             {navLinks.map((link, i) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`block font-display text-2xl text-foreground/90 hover:text-gold py-3 transition-all duration-500 ${
+                className={`block font-display text-2xl py-3 transition-all duration-500 ${
+                  isActive(link.href) ? "text-gold" : "text-foreground/90 hover:text-gold"
+                } ${
                   mobileOpen
                     ? "translate-x-0 opacity-100"
                     : "-translate-x-8 opacity-0"
@@ -57,7 +64,7 @@ const Navbar = () => {
                 style={{ transitionDelay: mobileOpen ? `${i * 80 + 150}ms` : "0ms" }}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -92,23 +99,25 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-5 md:px-4 py-4 md:py-5 flex items-center justify-between">
-          <a
-            href="#"
-            className="font-display text-lg md:text-xl tracking-wider text-foreground"
+          <Link
+            to="/"
+            className="flex items-center"
           >
-            Gallop <span className="text-gold">Madinah</span>
-          </a>
+            <img src={logo} alt="Gallop Madinah" className="h-8 md:h-10 w-auto" />
+          </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
-                className="font-body text-xs tracking-[0.25em] uppercase transition-colors duration-300 hover:text-gold text-muted-foreground"
+                to={link.href}
+                className={`font-body text-xs tracking-[0.25em] uppercase transition-colors duration-300 ${
+                  isActive(link.href) ? "text-gold" : "text-muted-foreground hover:text-gold"
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
