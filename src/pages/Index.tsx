@@ -7,6 +7,7 @@ import ServicesSection from "@/components/ServicesSection";
 import PricelistSection from "@/components/PricelistSection";
 import GallerySection from "@/components/GallerySection";
 import FinalCTA from "@/components/FinalCTA";
+import PartnersSection from "@/components/PartnersSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 

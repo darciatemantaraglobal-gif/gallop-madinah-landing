@@ -130,6 +130,9 @@ const translations: Record<string, Record<Lang, string>> = {
   },
   "cta.booking": { id: "Booking Now", en: "Book Now" },
 
+  // Partners
+  "partners.title": { id: "Documentation Partner", en: "Documentation Partner" },
+
   // Footer
   "footer.tagline": { id: "Premium Desert Horse Riding · Madinah, Saudi Arabia", en: "Premium Desert Horse Riding · Madinah, Saudi Arabia" },
   "footer.rights": { id: "© 2026 Gallop Madinah. All rights reserved.", en: "© 2026 Gallop Madinah. All rights reserved." },
