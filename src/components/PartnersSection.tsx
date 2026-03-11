@@ -22,11 +22,11 @@ const PartnersSection = () => {
         </p>
         <div className="flex items-center justify-center gap-8 md:gap-14 flex-wrap">
           {partners.map((partner) => (
-            <div key={partner.alt} className="flex items-center justify-center">
+            <div key={partner.alt} className="flex items-center justify-center w-[120px] h-[40px] md:w-[150px] md:h-[48px]">
               <img
                 src={partner.src}
                 alt={partner.alt}
-                className="h-8 md:h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className="max-w-full max-h-full w-auto h-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
               />
             </div>
           ))}
