@@ -2,6 +2,7 @@ import partnerValeoora from "@/assets/partner-valeoora.png";
 import partner1 from "@/assets/partner-1.png";
 import partner4 from "@/assets/partner-4.png";
 import partner5 from "@/assets/partner-5.png";
+import partner8 from "@/assets/partner-8.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const partners = [
@@ -9,6 +10,7 @@ const partners = [
   { src: partner1, alt: "Partner 1" },
   { src: partner4, alt: "Partner 4" },
   { src: partner5, alt: "Partner 5" },
+  { src: partner8, alt: "Umroh Moment" },
 ];
 
 const PartnersSection = () => {
