@@ -23,6 +23,7 @@ const Index = () => {
       <PricelistSection />
       <GallerySection />
       <FinalCTA />
+      <PartnersSection />
       <Footer />
       <FloatingWhatsApp />
     </div>
