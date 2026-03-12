@@ -24,7 +24,7 @@ const PartnersSection = () => {
         </p>
         <div className="flex items-center justify-center gap-8 md:gap-14 flex-wrap">
           {partners.map((partner) => (
-            <div key={partner.alt} className="flex items-center justify-center w-[120px] h-[40px] md:w-[150px] md:h-[48px]">
+            <div key={partner.alt} className={`flex items-center justify-center ${partner.alt === "Umroh Moment" ? "w-[140px] h-[46px] md:w-[170px] md:h-[54px]" : "w-[120px] h-[40px] md:w-[150px] md:h-[48px]"}`}>
               <img
                 src={partner.src}
                 alt={partner.alt}
