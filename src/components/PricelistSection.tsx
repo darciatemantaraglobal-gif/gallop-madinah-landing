@@ -1,4 +1,4 @@
-import { Phone, Tent, User, Users, Car, Camera, Coffee, MessageCircle, Check, X, Video } from "lucide-react";
+import { Phone, Tent, Users, Car, MessageCircle, Check, X, Video } from "lucide-react";
 import arabianCampImg from "@/assets/camp-cover.jpg";
 import camp1 from "@/assets/camp-1.jpg";
 import camp2 from "@/assets/camp-2.jpg";
@@ -37,10 +37,6 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const addOns = [
     { icon: Car, label: t("price.a.gmc"), price: "800" },
     { icon: Video, label: t("price.a.drone"), price: "600" },
-    { icon: Car, label: t("price.a.transport"), price: "250" },
-    { icon: Camera, label: t("price.a.photo"), price: "250" },
-    { icon: User, label: t("price.a.coach"), price: "200" },
-    { icon: Coffee, label: t("price.a.snack"), price: "50" },
   ];
 
   const campItems = [
@@ -169,12 +165,12 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         </div>
 
         {/* Additional Services */}
-        <div className="max-w-6xl mx-auto mb-10 md:mb-16">
+        <div className="max-w-3xl mx-auto mb-10 md:mb-16">
           <div className="text-center mb-4 md:mb-6">
             <h3 className="font-display text-lg md:text-xl text-foreground mb-1">{t("price.addons")}</h3>
             <p className="text-muted-foreground font-body text-xs md:text-sm">{t("price.addons.desc")}</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4">
             {addOns.map((item) => (
               <div key={item.label} className="bg-background border border-border p-4 md:p-5 flex items-center justify-between gap-3 hover:border-gold/30 transition-all duration-500">
                 <div className="flex items-center gap-2.5 min-w-0">
