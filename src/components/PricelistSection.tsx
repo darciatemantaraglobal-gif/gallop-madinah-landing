@@ -1,7 +1,15 @@
-import { Phone, Tent, User, ChevronRight, Car, Camera, Coffee, MessageCircle } from "lucide-react";
+import { Phone, Tent, User, Car, Camera, Coffee, MessageCircle, Check, X } from "lucide-react";
 import arabianCampImg from "@/assets/arabian-camp-cover.jpg";
 import HorseIcon from "@/components/icons/HorseIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+// Rows of the comparison table, in the order of the hand-drawn price list.
+// Label = price.f.<key>, small explanation = price.f.<key>.desc
+const ITEMS = ["horse", "helmet", "boots", "coach", "transport", "videographer", "drone"];
+// Item column flexes; package columns are fixed so ✓/✗ line up (narrow on phones).
+const GRID_COLS =
+  "grid-cols-[minmax(0,1fr)_58px_58px_66px] sm:grid-cols-[minmax(0,1fr)_96px_96px_104px] md:grid-cols-[minmax(0,1fr)_170px_170px_190px]";
+const FEATURED_CELL = "bg-forest/45";
 
 const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const { t } = useLanguage();
@@ -11,35 +19,14 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
 
   const WHATSAPP_CAMP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.camp.template"))}`;
 
+  // `features` lists which ITEMS each package includes (✓); the rest show ✗.
   const packages = [
-    {
-      letter: "A",
-      name: "Stable Experience",
-      price: "350",
-      desc: t("price.stable.desc"),
-      // Item keys: label = price.f.<key>, small explanation = price.f.<key>.desc
-      features: ["horse", "helmet"],
-      note: t("price.addable.stable"),
-      featured: false,
-    },
-    {
-      letter: "B",
-      name: "Gallop Experience",
-      price: "850",
-      desc: t("price.gallop.desc"),
-      features: ["horse", "helmet", "boots", "coach", "videographer"],
-      note: t("price.addable.gallop"),
-      featured: false,
-    },
-    {
-      letter: "C",
-      name: "Premium Experience",
-      price: "1.250",
-      desc: t("price.premium.desc"),
-      features: ["horse", "helmet", "boots", "coach", "transport", "videographer", "drone"],
-      note: "",
-      featured: true,
-    },
+    { letter: "A", short: "Stable", name: "Stable Experience", price: "350", featured: false,
+      features: ["horse", "helmet"] },
+    { letter: "B", short: "Gallop", name: "Gallop Experience", price: "850", featured: false,
+      features: ["horse", "helmet", "boots", "coach", "videographer"] },
+    { letter: "C", short: "Premium", name: "Premium Experience", price: "1.250", featured: true,
+      features: ["horse", "helmet", "boots", "coach", "transport", "videographer", "drone"] },
   ];
 
   const addOns = [
@@ -66,65 +53,84 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           </div>
         )}
 
-        {/* Experience Packages */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto mb-10 md:mb-16">
+        {/* Experience Packages: comparison table, laid out like the hand-drawn price list
+            (items down the left with a small explanation, packages across, ✓ / ✗ per cell) */}
+        <div className="max-w-5xl mx-auto mb-6 md:mb-8 border border-border bg-background">
+          <div className={`grid ${GRID_COLS}`} role="table" aria-label={`${t("price.title1")} ${t("price.title2")}`}>
+            {/* Header row: package name + price */}
+            <div className="px-3 md:px-6 py-4 md:py-6 flex items-end border-b border-border" role="columnheader">
+              <span className="text-muted-foreground font-body text-[11px] md:text-xs tracking-[0.25em] uppercase">{t("price.items")}</span>
+            </div>
+            {packages.map((pkg) => (
+              <div
+                key={pkg.letter}
+                role="columnheader"
+                className={`relative px-1 md:px-4 pt-6 pb-4 md:pt-8 md:pb-6 text-center border-b border-l border-border ${pkg.featured ? FEATURED_CELL : ""}`}
+              >
+                {pkg.featured && (
+                  <span className="absolute top-0 inset-x-0 bg-gold text-primary-foreground py-0.5 font-body text-[8px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] uppercase">
+                    {t("price.complete")}
+                  </span>
+                )}
+                <HorseIcon className="w-4 h-4 md:w-5 md:h-5 text-gold mx-auto mb-1.5" />
+                <h3 className="font-body font-bold md:font-display text-[11px] md:text-base text-foreground tracking-[0.08em] md:tracking-[0.05em] uppercase leading-tight mb-1.5 md:mb-2">
+                  <span className="md:hidden">{pkg.short}</span>
+                  <span className="hidden md:inline">{pkg.name}</span>
+                </h3>
+                <p className={`font-body font-bold text-base md:text-3xl normal-case tracking-normal leading-none ${pkg.featured ? "text-gold" : "text-foreground"}`}>
+                  {pkg.price}
+                </p>
+                <p className="text-muted-foreground font-body text-[10px] md:text-xs mt-1">SAR{" "}<span className="hidden md:inline">{t("price.perperson")}</span></p>
+              </div>
+            ))}
+
+            {/* Item rows */}
+            {ITEMS.map((item, r) => (
+              <div key={item} className="contents" role="row">
+                <div className={`px-3 md:px-6 py-3 md:py-4 ${r < ITEMS.length - 1 ? "border-b border-border" : ""}`} role="rowheader">
+                  <span className="block text-foreground/90 font-body text-sm leading-snug">{t(`price.f.${item}`)}</span>
+                  <span className="block text-muted-foreground font-note font-light text-[12px] md:text-[13px] leading-snug tracking-wide mt-0.5">
+                    {t(`price.f.${item}.desc`)}
+                  </span>
+                </div>
+                {packages.map((pkg) => {
+                  const included = pkg.features.includes(item);
+                  return (
+                    <div
+                      key={pkg.letter}
+                      role="cell"
+                      className={`flex items-center justify-center border-l border-border ${r < ITEMS.length - 1 ? "border-b" : ""} ${pkg.featured ? FEATURED_CELL : ""}`}
+                    >
+                      {included ? (
+                        <Check className="w-5 h-5 text-gold" strokeWidth={2.25} aria-label={t("price.included")} />
+                      ) : (
+                        <X className="w-4 h-4 text-muted-foreground/40" strokeWidth={1.5} aria-label={t("price.notincluded")} />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* One booking button per package */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-2.5 md:gap-4 mb-10 md:mb-16">
           {packages.map((pkg) => (
-            <div
+            <a
               key={pkg.letter}
-              className={`relative border p-5 md:p-6 flex flex-col transition-all duration-500 ${
+              href={getWhatsAppLink(`${pkg.name} - ${pkg.price} SAR/person`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`w-full flex items-center justify-center gap-2 border px-4 py-3.5 font-body text-xs tracking-[0.15em] uppercase transition-all duration-300 ${
                 pkg.featured
-                  ? "bg-gradient-to-b from-forest to-forest-deep/60 border-gold/60 hover:border-gold"
-                  : "bg-background border-border hover:border-forest-light/60"
+                  ? "border-gold bg-gold text-primary-foreground hover:bg-gold/90"
+                  : "border-gold/50 text-gold hover:bg-gold hover:text-primary-foreground"
               }`}
             >
-              {pkg.featured && (
-                <span className="absolute -top-2.5 right-5 bg-gold text-primary-foreground px-3 py-0.5 font-body text-[10px] tracking-[0.2em] uppercase">
-                  {t("price.complete")}
-                </span>
-              )}
-              <div className="flex items-center gap-2 mb-2 text-gold">
-                <HorseIcon className="w-5 h-5" />
-                <span className="font-body text-xs tracking-[0.3em] uppercase">{pkg.letter}</span>
-              </div>
-              <h3 className="font-display text-lg md:text-xl text-foreground mb-1">{pkg.name}</h3>
-              <p className="text-muted-foreground font-body text-[13px] md:text-xs mb-4">{pkg.desc}</p>
-              <div className="flex items-baseline gap-1.5 pb-4 mb-4 border-b border-border">
-                <span className={`font-body font-bold text-2xl md:text-3xl normal-case tracking-normal ${pkg.featured ? "text-gold" : "text-foreground"}`}>
-                  {pkg.price}
-                </span>
-                <span className="text-muted-foreground font-body text-xs">SAR {t("price.perperson")}</span>
-              </div>
-              <ul className="space-y-3 mb-5">
-                {pkg.features.map((f) => (
-                  <li key={f} className="flex gap-2.5">
-                    <span className="w-1.5 h-1.5 mt-[7px] rounded-full bg-gold flex-shrink-0" />
-                    <div>
-                      <span className="block text-foreground/90 font-body text-sm leading-snug">{t(`price.f.${f}`)}</span>
-                      <span className="block text-muted-foreground font-note font-light text-[12.5px] leading-snug tracking-wide mt-0.5">
-                        {t(`price.f.${f}.desc`)}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              {pkg.note && (
-                <p className="text-muted-foreground font-body text-xs leading-relaxed mb-5">{pkg.note}</p>
-              )}
-              <a
-                href={getWhatsAppLink(`${pkg.name} - ${pkg.price} SAR/person`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-auto w-full flex items-center justify-center gap-2 border px-4 py-3 md:py-2.5 font-body text-xs tracking-[0.15em] uppercase transition-all duration-300 ${
-                  pkg.featured
-                    ? "border-gold bg-gold text-primary-foreground hover:bg-gold/90"
-                    : "border-gold/50 text-gold hover:bg-gold hover:text-primary-foreground"
-                }`}
-              >
-                <MessageCircle className="w-3.5 h-3.5" />
-                {t("price.booknow")}
-                <ChevronRight className="w-3 h-3" />
-              </a>
-            </div>
+              <MessageCircle className="w-3.5 h-3.5" />
+              {t("price.book")} {pkg.short} · {pkg.price} SAR
+            </a>
           ))}
         </div>
 

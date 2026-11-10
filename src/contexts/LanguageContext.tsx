@@ -100,22 +100,11 @@ const translations: Record<string, Record<Lang, string>> = {
   "price.title1": { id: "Price", en: "Price" },
   "price.title2": { id: "List", en: "List" },
   "price.perperson": { id: "/ orang", en: "/ person" },
-  "price.booknow": { id: "Booking via WhatsApp", en: "Book on WhatsApp" },
+  "price.items": { id: "Fasilitas", en: "Includes" },
+  "price.included": { id: "Termasuk", en: "Included" },
+  "price.notincluded": { id: "Tidak termasuk", en: "Not included" },
+  "price.book": { id: "Booking", en: "Book" },
   "price.complete": { id: "Paling Lengkap", en: "Most Complete" },
-  "price.addable.stable": {
-    id: "Bisa ditambah coach, transportasi, foto & video, atau snack lewat Additional Services.",
-    en: "Add a coach, transportation, photo & video, or snacks via Additional Services.",
-  },
-  "price.addable.gallop": {
-    id: "Bisa ditambah transportasi atau snack lewat Additional Services.",
-    en: "Add transportation or snacks via Additional Services.",
-  },
-  "price.stable.desc": { id: "Pengalaman berkuda di area stable", en: "Riding experience at the stable" },
-  "price.gallop.desc": { id: "Trekking berkuda didampingi coach", en: "Horse trekking with a coach" },
-  "price.premium.desc": {
-    id: "Paling lengkap, termasuk transport, videografer & drone",
-    en: "Our most complete package, incl. transport, videographer & drone",
-  },
   "price.f.horse": { id: "1 kuda", en: "1 horse" },
   "price.f.horse.desc": {
     id: "Kuda Arabian terlatih, disesuaikan dengan kemampuan Anda",
