@@ -1,11 +1,14 @@
-import { Phone, Tent, User, Car, Camera, Coffee, MessageCircle, Check, X } from "lucide-react";
-import arabianCampImg from "@/assets/arabian-camp-cover.jpg";
+import { Phone, Tent, User, Users, Car, Camera, Coffee, MessageCircle, Check, X, Video } from "lucide-react";
+import arabianCampImg from "@/assets/camp-cover.jpg";
+import camp1 from "@/assets/camp-1.jpg";
+import camp2 from "@/assets/camp-2.jpg";
+import camp3 from "@/assets/camp-3.jpg";
 import HorseIcon from "@/components/icons/HorseIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Rows of the comparison table, in the order of the hand-drawn price list.
 // Label = price.f.<key>, small explanation = price.f.<key>.desc
-const ITEMS = ["horse", "helmet", "boots", "coach", "transport", "videographer", "drone"];
+const ITEMS = ["horse", "helmet", "boots", "coach", "rest", "transport", "videographer"];
 // Item column flexes; package columns are fixed so ✓/✗ line up (narrow on phones).
 const GRID_COLS =
   "grid-cols-[minmax(0,1fr)_58px_58px_66px] sm:grid-cols-[minmax(0,1fr)_96px_96px_104px] md:grid-cols-[minmax(0,1fr)_170px_170px_190px]";
@@ -21,15 +24,19 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
 
   // `features` lists which ITEMS each package includes (✓); the rest show ✗.
   const packages = [
-    { letter: "A", short: "Stable", name: "Stable Experience", price: "350", featured: false,
-      features: ["horse", "helmet"] },
+    { letter: "A", short: "Stable", name: "Stable Experience", price: "450", featured: false,
+      features: ["horse", "helmet", "boots", "coach", "rest"] },
     { letter: "B", short: "Gallop", name: "Gallop Experience", price: "850", featured: false,
-      features: ["horse", "helmet", "boots", "coach", "videographer"] },
+      features: ["horse", "helmet", "boots", "coach", "rest"] },
     { letter: "C", short: "Premium", name: "Premium Experience", price: "1.250", featured: true,
-      features: ["horse", "helmet", "boots", "coach", "transport", "videographer", "drone"] },
+      features: ["horse", "helmet", "boots", "coach", "rest", "transport", "videographer"] },
   ];
 
+  const groupTiers = [t("price.group.t1"), t("price.group.t2"), t("price.group.t3")];
+
   const addOns = [
+    { icon: Car, label: t("price.a.gmc"), price: "800" },
+    { icon: Video, label: t("price.a.drone"), price: "600" },
     { icon: Car, label: t("price.a.transport"), price: "250" },
     { icon: Camera, label: t("price.a.photo"), price: "250" },
     { icon: User, label: t("price.a.coach"), price: "200" },
@@ -134,13 +141,40 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           ))}
         </div>
 
+        {/* Group rates (amounts given on WhatsApp) */}
+        <div className="max-w-5xl mx-auto mb-10 md:mb-16 border border-gold/25 bg-background p-5 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <div className="md:flex-1">
+              <div className="flex items-center gap-2.5 mb-1.5">
+                <Users className="w-5 h-5 text-gold" strokeWidth={1.5} />
+                <h3 className="font-display text-lg md:text-xl text-foreground">{t("price.group.title")}</h3>
+              </div>
+              <p className="text-muted-foreground font-note font-light text-sm leading-snug">{t("price.group.desc")}</p>
+            </div>
+            <div className="grid grid-cols-3 gap-2 md:gap-3 md:w-[420px]">
+              {groupTiers.map((tier) => (
+                <a
+                  key={tier}
+                  href={getWhatsAppLink(`Group rate (${tier})`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-border hover:border-gold/60 px-2 py-3 text-center transition-colors duration-300"
+                >
+                  <span className="block font-body font-bold text-sm md:text-base text-foreground">{tier}</span>
+                  <span className="block text-gold font-body text-[10px] md:text-[11px] tracking-[0.12em] uppercase mt-1">{t("price.group.ask")}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Additional Services */}
         <div className="max-w-6xl mx-auto mb-10 md:mb-16">
           <div className="text-center mb-4 md:mb-6">
             <h3 className="font-display text-lg md:text-xl text-foreground mb-1">{t("price.addons")}</h3>
             <p className="text-muted-foreground font-body text-xs md:text-sm">{t("price.addons.desc")}</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-4">
             {addOns.map((item) => (
               <div key={item.label} className="bg-background border border-border p-4 md:p-5 flex items-center justify-between gap-3 hover:border-gold/30 transition-all duration-500">
                 <div className="flex items-center gap-2.5 min-w-0">
@@ -168,6 +202,12 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                   {t("price.arabian.title1")} <span className="text-gold">{t("price.arabian.title2")}</span>
                 </h3>
               </div>
+            </div>
+            {/* Real photos from the camp's istirahah lounge */}
+            <div className="grid grid-cols-3 gap-1 md:gap-1.5 px-1 md:px-1.5 pt-1 md:pt-1.5">
+              {[camp1, camp2, camp3].map((src, i) => (
+                <img key={i} src={src} alt={`Arabian Camp istirahah ${i + 1}`} loading="lazy" className="w-full aspect-square md:aspect-[4/3] object-cover" />
+              ))}
             </div>
             <div className="p-5 md:p-10">
               <div className="flex items-baseline gap-2 mb-4 md:mb-8">
