@@ -17,7 +17,9 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
       name: "Stable Experience",
       price: "350",
       desc: t("price.stable.desc"),
-      features: [t("price.f.horse"), t("price.f.stableride"), t("price.f.groom")],
+      // Item keys: label = price.f.<key>, small explanation = price.f.<key>.desc
+      features: ["horse", "helmet"],
+      note: t("price.addable.stable"),
       featured: false,
     },
     {
@@ -25,18 +27,17 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
       name: "Gallop Experience",
       price: "850",
       desc: t("price.gallop.desc"),
-      features: [t("price.f.horse"), t("price.f.coach"), t("price.f.trekking")],
+      features: ["horse", "helmet", "boots", "coach", "videographer"],
+      note: t("price.addable.gallop"),
       featured: false,
     },
     {
       letter: "C",
       name: "Premium Experience",
-      price: "1.300",
+      price: "1.250",
       desc: t("price.premium.desc"),
-      features: [
-        t("price.f.horse"), t("price.f.privatecoach"), t("price.f.transport"),
-        t("price.f.snack"), t("price.f.photo"), t("price.f.premiumtrek"),
-      ],
+      features: ["horse", "helmet", "boots", "coach", "transport", "videographer", "drone"],
+      note: "",
       featured: true,
     },
   ];
@@ -93,16 +94,21 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                 </span>
                 <span className="text-muted-foreground font-body text-xs">SAR {t("price.perperson")}</span>
               </div>
-              <ul className="space-y-2 mb-5">
+              <ul className="space-y-3 mb-5">
                 {pkg.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
-                    <span className="text-foreground/85 font-body text-sm">{f}</span>
+                  <li key={f} className="flex gap-2.5">
+                    <span className="w-1.5 h-1.5 mt-[7px] rounded-full bg-gold flex-shrink-0" />
+                    <div>
+                      <span className="block text-foreground/90 font-body text-sm leading-snug">{t(`price.f.${f}`)}</span>
+                      <span className="block text-muted-foreground font-note font-light text-[12.5px] leading-snug tracking-wide mt-0.5">
+                        {t(`price.f.${f}.desc`)}
+                      </span>
+                    </div>
                   </li>
                 ))}
               </ul>
-              {!pkg.featured && (
-                <p className="text-muted-foreground font-body text-xs leading-relaxed mb-5">{t("price.addable")}</p>
+              {pkg.note && (
+                <p className="text-muted-foreground font-body text-xs leading-relaxed mb-5">{pkg.note}</p>
               )}
               <a
                 href={getWhatsAppLink(`${pkg.name} - ${pkg.price} SAR/person`)}

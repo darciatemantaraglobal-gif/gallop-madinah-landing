@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         display: ['Akira Expanded', 'system-ui', 'sans-serif'],
         body: ['Creato Display', 'system-ui', 'sans-serif'],
+        note: ['Outfit', 'Creato Display', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
