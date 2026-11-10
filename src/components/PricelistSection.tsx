@@ -1,4 +1,4 @@
-import { Phone, Tent, User, ChevronRight, Car, Camera, Coffee } from "lucide-react";
+import { Phone, Tent, User, ChevronRight, Car, Camera, Coffee, MessageCircle } from "lucide-react";
 import arabianCampImg from "@/assets/arabian-camp-cover.jpg";
 import HorseIcon from "@/components/icons/HorseIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -54,7 +54,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   ];
 
   return (
-    <section id="pricelist" className="section-padding bg-card">
+    <section id="pricelist" className="section-padding bg-card scroll-mt-14">
       <div className="container mx-auto px-5 md:px-8 max-w-6xl">
         {!hideHeader && (
           <div className="text-center mb-10 md:mb-20">
@@ -77,16 +77,16 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
               }`}
             >
               {pkg.featured && (
-                <span className="absolute -top-2.5 right-5 bg-gold text-primary-foreground px-3 py-0.5 font-body text-[9px] md:text-[10px] tracking-[0.2em] uppercase">
+                <span className="absolute -top-2.5 right-5 bg-gold text-primary-foreground px-3 py-0.5 font-body text-[10px] tracking-[0.2em] uppercase">
                   {t("price.complete")}
                 </span>
               )}
               <div className="flex items-center gap-2 mb-2 text-gold">
                 <HorseIcon className="w-5 h-5" />
-                <span className="font-body text-[10px] md:text-xs tracking-[0.3em] uppercase">{pkg.letter}</span>
+                <span className="font-body text-xs tracking-[0.3em] uppercase">{pkg.letter}</span>
               </div>
               <h3 className="font-display text-lg md:text-xl text-foreground mb-1">{pkg.name}</h3>
-              <p className="text-muted-foreground font-body text-[11px] md:text-xs mb-4">{pkg.desc}</p>
+              <p className="text-muted-foreground font-body text-[13px] md:text-xs mb-4">{pkg.desc}</p>
               <div className="flex items-baseline gap-1.5 pb-4 mb-4 border-b border-border">
                 <span className={`font-body font-bold text-2xl md:text-3xl normal-case tracking-normal ${pkg.featured ? "text-gold" : "text-foreground"}`}>
                   {pkg.price}
@@ -97,23 +97,24 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                 {pkg.features.map((f) => (
                   <li key={f} className="flex items-center gap-2.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
-                    <span className="text-foreground/80 font-body text-xs md:text-sm">{f}</span>
+                    <span className="text-foreground/85 font-body text-sm">{f}</span>
                   </li>
                 ))}
               </ul>
               {!pkg.featured && (
-                <p className="text-muted-foreground font-body text-[11px] leading-relaxed mb-5">{t("price.addable")}</p>
+                <p className="text-muted-foreground font-body text-xs leading-relaxed mb-5">{t("price.addable")}</p>
               )}
               <a
                 href={getWhatsAppLink(`${pkg.name} - ${pkg.price} SAR/person`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-auto w-full flex items-center justify-center gap-2 border px-4 py-2 md:py-2.5 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase transition-all duration-300 ${
+                className={`mt-auto w-full flex items-center justify-center gap-2 border px-4 py-3 md:py-2.5 font-body text-xs tracking-[0.15em] uppercase transition-all duration-300 ${
                   pkg.featured
                     ? "border-gold bg-gold text-primary-foreground hover:bg-gold/90"
                     : "border-gold/50 text-gold hover:bg-gold hover:text-primary-foreground"
                 }`}
               >
+                <MessageCircle className="w-3.5 h-3.5" />
                 {t("price.booknow")}
                 <ChevronRight className="w-3 h-3" />
               </a>
@@ -125,18 +126,18 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         <div className="max-w-6xl mx-auto mb-10 md:mb-16">
           <div className="text-center mb-4 md:mb-6">
             <h3 className="font-display text-lg md:text-xl text-foreground mb-1">{t("price.addons")}</h3>
-            <p className="text-muted-foreground font-body text-[11px] md:text-xs">{t("price.addons.desc")}</p>
+            <p className="text-muted-foreground font-body text-xs md:text-sm">{t("price.addons.desc")}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4">
             {addOns.map((item) => (
               <div key={item.label} className="bg-background border border-border p-4 md:p-5 flex items-center justify-between gap-3 hover:border-gold/30 transition-all duration-500">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <item.icon className="w-4 h-4 text-gold flex-shrink-0" strokeWidth={1.5} />
-                  <span className="text-foreground/80 font-body text-xs md:text-sm">{item.label}</span>
+                  <span className="text-foreground/85 font-body text-sm">{item.label}</span>
                 </div>
                 <div className="flex items-baseline gap-1 flex-shrink-0">
                   <span className="font-body font-bold text-lg md:text-xl text-gold normal-case tracking-normal">{item.price}</span>
-                  <span className="text-muted-foreground font-body text-[10px] md:text-xs">SAR</span>
+                  <span className="text-muted-foreground font-body text-xs">SAR</span>
                 </div>
               </div>
             ))}
@@ -156,16 +157,16 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                 </h3>
               </div>
             </div>
-            <div className="p-4 md:p-10">
+            <div className="p-5 md:p-10">
               <div className="flex items-baseline gap-2 mb-4 md:mb-8">
                 <span className="font-body font-bold text-2xl md:text-4xl text-gold normal-case tracking-normal">5.500</span>
                 <span className="text-muted-foreground font-body text-xs md:text-sm">{t("price.arabian.for30")}</span>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-2 gap-1.5 md:gap-2.5 mb-5 md:mb-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-2.5 mb-6 md:mb-10">
                 {campItems.map((item, i) => (
                   <div key={i} className="flex items-center gap-1.5 md:gap-2.5">
-                    <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-gold flex-shrink-0" />
-                    <span className="text-muted-foreground font-body text-[11px] md:text-sm">{item}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
+                    <span className="text-foreground/80 font-body text-sm">{item}</span>
                   </div>
                 ))}
               </div>
@@ -173,7 +174,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                 href={WHATSAPP_CAMP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-gold/60 text-gold px-6 py-2.5 md:px-8 md:py-3 font-body text-[10px] md:text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+                className="w-full sm:w-auto justify-center inline-flex items-center gap-2 border border-gold/60 text-gold px-6 py-3 md:px-8 font-body text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
               >
                 <Phone className="w-3 h-3 md:w-3.5 md:h-3.5" />
                 {t("price.arabian.book")}

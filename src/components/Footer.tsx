@@ -9,7 +9,7 @@ const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="py-10 md:py-16 bg-card border-t border-border">
+    <footer className="pt-10 pb-28 md:py-16 bg-card border-t border-border">
       <div className="container mx-auto px-5 md:px-8 max-w-6xl">
         <div className="text-center">
           <Link to="/" className="inline-block mb-2">

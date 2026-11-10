@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { Phone, ChevronRight } from "lucide-react";
 import gallopTitle from "@/assets/gallop-title-2.png";
 import hero1 from "@/assets/hero-1.jpg";
@@ -102,13 +101,14 @@ const HeroSection = () => {
             <Phone className="w-4 h-4" />
             {t("hero.booking")}
           </a>
-          <Link
-            to="/prices"
+          {/* Scrolls to the price list on this page instead of leaving it */}
+          <a
+            href="#pricelist"
             className="w-full sm:w-auto justify-center whitespace-nowrap inline-flex items-center gap-2 border border-white/40 text-white px-8 lg:px-10 py-3.5 font-body text-xs md:text-sm tracking-[0.2em] uppercase backdrop-blur-sm hover:border-gold hover:text-gold transition-colors duration-300"
           >
             {t("hero.packages")}
             <ChevronRight className="w-4 h-4" />
-          </Link>
+          </a>
         </div>
           </div>
         </div>

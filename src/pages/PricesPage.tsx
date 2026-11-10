@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PricelistSection from "@/components/PricelistSection";
+import HowToBookSection from "@/components/HowToBookSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,6 +17,7 @@ const PricesPage = () => {
         </h2>
       </div>
       <PricelistSection hideHeader />
+      <HowToBookSection />
       <Footer />
       <FloatingWhatsApp />
     </div>

@@ -80,8 +80,8 @@ const translations: Record<string, Record<Lang, string>> = {
 
   // Services Section
   "svc.subtitle": { id: "Layanan Kami", en: "Our Services" },
-  "svc.title1": { id: "Paket", en: "Service" },
-  "svc.title2": { id: "Layanan", en: "Packages" },
+  "svc.title1": { id: "Fasilitas", en: "Facilities" },
+  "svc.title2": { id: "& Layanan", en: "& Services" },
   "svc.s1.title": { id: "Kuda Arabian Terlatih", en: "Trained Arabian Horses" },
   "svc.s1.desc": { id: "Kuda pilihan yang jinak dan tangguh untuk segala medan", en: "Hand-picked gentle and sturdy horses for all terrains" },
   "svc.s2.title": { id: "Antar Jemput Hotel", en: "Hotel Transfer" },
@@ -100,7 +100,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "price.title1": { id: "Price", en: "Price" },
   "price.title2": { id: "List", en: "List" },
   "price.perperson": { id: "/ orang", en: "/ person" },
-  "price.booknow": { id: "Book Now", en: "Book Now" },
+  "price.booknow": { id: "Booking via WhatsApp", en: "Book on WhatsApp" },
   "price.complete": { id: "Paling Lengkap", en: "Most Complete" },
   "price.addable": {
     id: "Bisa ditambah transportasi, foto & video, atau snack lewat Additional Services.",
@@ -141,6 +141,33 @@ const translations: Record<string, Record<Lang, string>> = {
   "price.camp7": { id: "Arabic coffee & tea", en: "Arabic coffee & tea" },
   "price.camp8": { id: "Transportation (bus)", en: "Transportation (bus)" },
 
+  // How to book
+  "how.subtitle": { id: "Mudah & Cepat", en: "Quick & Easy" },
+  "how.title1": { id: "Cara", en: "How to" },
+  "how.title2": { id: "Booking", en: "Book" },
+  "how.step": { id: "Langkah", en: "Step" },
+  "how.s1.title": { id: "Pilih paket", en: "Pick a package" },
+  "how.s1.desc": {
+    id: "Stable, Gallop, atau Premium Experience. Tambah layanan lain kalau perlu.",
+    en: "Stable, Gallop or Premium Experience. Add extra services if you need them.",
+  },
+  "how.s2.title": { id: "Chat via WhatsApp", en: "Chat on WhatsApp" },
+  "how.s2.desc": {
+    id: "Kirim tanggal dan jumlah orang. Tim kami konfirmasi jadwal dan ketersediaan kuda.",
+    en: "Send your date and group size. Our team confirms the schedule and horse availability.",
+  },
+  "how.s3.title": { id: "Datang & berkuda", en: "Arrive & ride" },
+  "how.s3.desc": {
+    id: "Datang ke lokasi atau dijemput (Private Transportation), lalu berkuda bersama coach.",
+    en: "Come to the site or get picked up (Private Transportation), then ride with your coach.",
+  },
+  "how.cta": { id: "Booking via WhatsApp", en: "Book on WhatsApp" },
+  "how.note": { id: "Tanya-tanya dulu juga boleh, gratis.", en: "Questions are welcome too — no obligation." },
+
+  // Sticky mobile bar
+  "bar.prices": { id: "Lihat Harga", en: "See Prices" },
+  "bar.book": { id: "Booking", en: "Book Now" },
+
   // Gallery
   "gallery.subtitle": { id: "Captured Moments", en: "Captured Moments" },
   "gallery.title1": { id: "Our", en: "Our" },
@@ -171,8 +198,8 @@ const translations: Record<string, Record<Lang, string>> = {
   "page.exp.title": { id: "Desert", en: "Desert" },
   "page.exp.accent": { id: "Horse Riding", en: "Horse Riding" },
   "page.svc.subtitle": { id: "Layanan Kami", en: "Our Services" },
-  "page.svc.title": { id: "Paket", en: "Service" },
-  "page.svc.accent": { id: "Layanan", en: "Packages" },
+  "page.svc.title": { id: "Fasilitas", en: "Facilities" },
+  "page.svc.accent": { id: "& Layanan", en: "& Services" },
   "page.gallery.subtitle": { id: "Captured Moments", en: "Captured Moments" },
   "page.gallery.title": { id: "Our", en: "Our" },
   "page.gallery.accent": { id: "Gallery", en: "Gallery" },
