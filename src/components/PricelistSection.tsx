@@ -1,5 +1,6 @@
-import { Phone, Tent, Users, User, ChevronRight } from "lucide-react";
-import arabianCampImg from "@/assets/arabian-camp.png";
+import { Phone, Tent, User, ChevronRight, Car, Camera, Coffee } from "lucide-react";
+import arabianCampImg from "@/assets/arabian-camp-cover.jpg";
+import HorseIcon from "@/components/icons/HorseIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
@@ -10,21 +11,41 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
 
   const WHATSAPP_CAMP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.camp.template"))}`;
 
-  const personalPackages = [
-    { label: t("price.single"), price: "1.300", desc: t("price.single.desc") },
-    { label: t("price.double"), price: "2.150", desc: t("price.double.desc") },
-    { label: t("price.triple"), price: "2.550", desc: t("price.triple.desc") },
-  ];
-
-  const groupPackages = [
-    { label: "4–5 pax", price: "850", desc: t("price.perorang") },
-    { label: "6–10 pax", price: "750", desc: t("price.perorang") },
-    { label: "11+ pax", price: "650", desc: t("price.perorang") },
+  const packages = [
+    {
+      letter: "A",
+      name: "Stable Experience",
+      price: "350",
+      desc: t("price.stable.desc"),
+      features: [t("price.f.horse"), t("price.f.stableride"), t("price.f.groom")],
+      featured: false,
+    },
+    {
+      letter: "B",
+      name: "Gallop Experience",
+      price: "850",
+      desc: t("price.gallop.desc"),
+      features: [t("price.f.horse"), t("price.f.coach"), t("price.f.trekking")],
+      featured: false,
+    },
+    {
+      letter: "C",
+      name: "Premium Experience",
+      price: "1.300",
+      desc: t("price.premium.desc"),
+      features: [
+        t("price.f.horse"), t("price.f.privatecoach"), t("price.f.transport"),
+        t("price.f.snack"), t("price.f.photo"), t("price.f.premiumtrek"),
+      ],
+      featured: true,
+    },
   ];
 
   const addOns = [
-    { label: t("price.drone"), price: "600" },
-    { label: t("price.gmc"), price: "800" },
+    { icon: Car, label: t("price.a.transport"), price: "250" },
+    { icon: Camera, label: t("price.a.photo"), price: "250" },
+    { icon: User, label: t("price.a.coach"), price: "200" },
+    { icon: Coffee, label: t("price.a.snack"), price: "50" },
   ];
 
   const campItems = [
@@ -44,28 +65,54 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           </div>
         )}
 
-        {/* Personal Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4 max-w-6xl mx-auto mb-6 md:mb-10">
-          {personalPackages.map((item, i) => (
-            <div key={`p-${i}`} className="bg-background border border-border p-3 md:p-4 hover:border-gold/30 transition-all duration-500 group">
-              <div className="flex items-center justify-between mb-2 md:mb-3">
-                <div className="flex items-center gap-2.5">
-                  <User className="w-3.5 h-3.5 text-gold" strokeWidth={1.5} />
-                  <div>
-                    <h3 className="font-body font-bold text-sm text-foreground normal-case tracking-normal">{item.label}</h3>
-                    <p className="text-muted-foreground font-body text-[11px]">{item.desc}</p>
-                  </div>
-                </div>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-body font-bold text-lg md:text-2xl text-foreground normal-case tracking-normal">{item.price}</span>
-                  <span className="text-muted-foreground font-body text-[10px] md:text-xs">SAR</span>
-                </div>
+        {/* Experience Packages */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto mb-10 md:mb-16">
+          {packages.map((pkg) => (
+            <div
+              key={pkg.letter}
+              className={`relative border p-5 md:p-6 flex flex-col transition-all duration-500 ${
+                pkg.featured
+                  ? "bg-gradient-to-b from-forest to-forest-deep/60 border-gold/60 hover:border-gold"
+                  : "bg-background border-border hover:border-forest-light/60"
+              }`}
+            >
+              {pkg.featured && (
+                <span className="absolute -top-2.5 right-5 bg-gold text-primary-foreground px-3 py-0.5 font-body text-[9px] md:text-[10px] tracking-[0.2em] uppercase">
+                  {t("price.complete")}
+                </span>
+              )}
+              <div className="flex items-center gap-2 mb-2 text-gold">
+                <HorseIcon className="w-5 h-5" />
+                <span className="font-body text-[10px] md:text-xs tracking-[0.3em] uppercase">{pkg.letter}</span>
               </div>
+              <h3 className="font-display text-lg md:text-xl text-foreground mb-1">{pkg.name}</h3>
+              <p className="text-muted-foreground font-body text-[11px] md:text-xs mb-4">{pkg.desc}</p>
+              <div className="flex items-baseline gap-1.5 pb-4 mb-4 border-b border-border">
+                <span className={`font-body font-bold text-2xl md:text-3xl normal-case tracking-normal ${pkg.featured ? "text-gold" : "text-foreground"}`}>
+                  {pkg.price}
+                </span>
+                <span className="text-muted-foreground font-body text-xs">SAR {t("price.perperson")}</span>
+              </div>
+              <ul className="space-y-2 mb-5">
+                {pkg.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
+                    <span className="text-foreground/80 font-body text-xs md:text-sm">{f}</span>
+                  </li>
+                ))}
+              </ul>
+              {!pkg.featured && (
+                <p className="text-muted-foreground font-body text-[11px] leading-relaxed mb-5">{t("price.addable")}</p>
+              )}
               <a
-                href={getWhatsAppLink(`Personal ${item.label} - ${item.price} SAR`)}
+                href={getWhatsAppLink(`${pkg.name} - ${pkg.price} SAR/person`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-3 py-1.5 md:px-4 md:py-2 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+                className={`mt-auto w-full flex items-center justify-center gap-2 border px-4 py-2 md:py-2.5 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase transition-all duration-300 ${
+                  pkg.featured
+                    ? "border-gold bg-gold text-primary-foreground hover:bg-gold/90"
+                    : "border-gold/50 text-gold hover:bg-gold hover:text-primary-foreground"
+                }`}
               >
                 {t("price.booknow")}
                 <ChevronRight className="w-3 h-3" />
@@ -74,50 +121,22 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           ))}
         </div>
 
-        {/* Group Cards */}
-        <div className="max-w-6xl mx-auto mb-8 md:mb-14">
-          <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 md:mb-6 justify-center">
-            <Users className="w-4 h-4 text-gold" strokeWidth={1.5} />
-            <h3 className="font-display text-lg md:text-xl text-foreground">{t("price.group")} <span className="text-gold">{t("price.packages")}</span></h3>
-            <span className="ml-1 border border-gold/60 text-gold px-3 py-0.5 font-body text-[9px] md:text-[10px] tracking-[0.2em] uppercase">{t("price.bestvalue")}</span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4">
-            {groupPackages.map((item, i) => (
-              <div key={`g-${i}`} className="bg-background border border-gold/20 p-3 md:p-4 hover:border-gold/40 transition-all duration-500 group">
-                <div className="flex items-center justify-between mb-2 md:mb-3">
-                  <div>
-                    <p className="text-muted-foreground font-body text-[11px] mb-0.5">{item.desc}</p>
-                    <h3 className="font-body font-bold text-sm text-foreground normal-case tracking-normal">{item.label}</h3>
-                  </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="font-body font-bold text-lg md:text-2xl text-foreground normal-case tracking-normal">{item.price}</span>
-                    <span className="text-muted-foreground font-body text-[10px] md:text-xs">SAR/pax</span>
-                  </div>
-                </div>
-                <a
-                  href={getWhatsAppLink(`Group ${item.label} - ${item.price} SAR/pax`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 border border-gold/50 text-gold px-3 py-1.5 md:px-4 md:py-2 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
-                >
-                  {t("price.booknow")}
-                  <ChevronRight className="w-3 h-3" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Add-Ons */}
+        {/* Additional Services */}
         <div className="max-w-6xl mx-auto mb-10 md:mb-16">
-          <h3 className="font-display text-lg md:text-xl text-foreground mb-4 md:mb-5 text-center">{t("price.addons")}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
-            {addOns.map((item, i) => (
-              <div key={i} className="bg-background border border-border p-4 md:p-5 flex items-center justify-between hover:border-gold/30 transition-all duration-500">
-                <span className="text-foreground/80 font-body text-xs md:text-sm tracking-wide">{item.label}</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-body font-bold text-xl md:text-2xl text-gold normal-case tracking-normal">{item.price}</span>
-                  <span className="text-muted-foreground font-body text-xs">SAR</span>
+          <div className="text-center mb-4 md:mb-6">
+            <h3 className="font-display text-lg md:text-xl text-foreground mb-1">{t("price.addons")}</h3>
+            <p className="text-muted-foreground font-body text-[11px] md:text-xs">{t("price.addons.desc")}</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4">
+            {addOns.map((item) => (
+              <div key={item.label} className="bg-background border border-border p-4 md:p-5 flex items-center justify-between gap-3 hover:border-gold/30 transition-all duration-500">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <item.icon className="w-4 h-4 text-gold flex-shrink-0" strokeWidth={1.5} />
+                  <span className="text-foreground/80 font-body text-xs md:text-sm">{item.label}</span>
+                </div>
+                <div className="flex items-baseline gap-1 flex-shrink-0">
+                  <span className="font-body font-bold text-lg md:text-xl text-gold normal-case tracking-normal">{item.price}</span>
+                  <span className="text-muted-foreground font-body text-[10px] md:text-xs">SAR</span>
                 </div>
               </div>
             ))}
@@ -129,7 +148,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
           <div className="bg-background border border-gold/20 overflow-hidden">
             <div className="relative h-36 md:h-72">
               <img src={arabianCampImg} alt="Arabian Camp Experience" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
               <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 flex items-center gap-2 md:gap-3">
                 <Tent className="w-4 h-4 md:w-6 md:h-6 text-gold" strokeWidth={1.2} />
                 <h3 className="font-display text-lg md:text-3xl text-white">

@@ -28,6 +28,7 @@
 
 @layer base {
   :root {
+    /* Base stays black; Gallop green (--forest) and gold are the accents */
     --background: 0 0% 7%;
     --foreground: 0 0% 95%;
 
@@ -66,6 +67,11 @@
     --deeper-green: 0 0% 5%;
     --cream: 0 0% 10%;
     --warm-white: 0 0% 9%;
+
+    /* Brand green accent (#193B2C / #112919 family) */
+    --forest: 154 40% 16%;
+    --forest-deep: 141 41% 11%;
+    --forest-light: 152 32% 34%;
 
     --font-display: 'Akira Expanded', system-ui, sans-serif;
     --font-body: 'Creato Display', system-ui, sans-serif;

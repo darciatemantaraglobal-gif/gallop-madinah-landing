@@ -42,7 +42,7 @@ const Navbar = () => {
     <>
       {/* Full-screen mobile overlay */}
       <div
-        className={`fixed inset-0 z-[55] md:hidden transition-all duration-500 ${
+        className={`fixed inset-0 z-[55] lg:hidden transition-all duration-500 ${
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -107,12 +107,12 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-8 xl:gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`font-body text-xs tracking-[0.25em] uppercase transition-colors duration-300 ${
+                className={`font-body text-xs tracking-[0.2em] xl:tracking-[0.25em] uppercase transition-colors duration-300 ${
                   isActive(link.href) ? "text-gold" : "text-muted-foreground hover:text-gold"
                 }`}
               >
@@ -137,7 +137,7 @@ const Navbar = () => {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 border border-gold/50 text-gold px-5 py-2.5 text-xs font-body tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+              className="hidden lg:inline-flex items-center gap-2 border border-gold/50 text-gold px-5 py-2.5 text-xs font-body tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
             >
               <Phone className="w-3.5 h-3.5" />
               {t("nav.booking")}
@@ -146,7 +146,7 @@ const Navbar = () => {
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center text-foreground"
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-foreground"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
               <span className={`transition-transform duration-300 ${mobileOpen ? 'rotate-90' : 'rotate-0'}`}>

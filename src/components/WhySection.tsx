@@ -1,4 +1,5 @@
-import { Award, Shield, Heart, Users } from "lucide-react";
+import { Award, Shield, Users } from "lucide-react";
+import HorseIcon from "@/components/icons/HorseIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const WhySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
@@ -7,7 +8,7 @@ const WhySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const reasons = [
     { icon: Award, title: t("why.r1.title"), desc: t("why.r1.desc") },
     { icon: Shield, title: t("why.r2.title"), desc: t("why.r2.desc") },
-    { icon: Heart, title: t("why.r3.title"), desc: t("why.r3.desc") },
+    { icon: HorseIcon, title: t("why.r3.title"), desc: t("why.r3.desc") },
     { icon: Users, title: t("why.r4.title"), desc: t("why.r4.desc") },
   ];
 
@@ -35,7 +36,7 @@ const WhySection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 max-w-6xl mx-auto">
           {reasons.map((item, i) => (
             <div key={i} className="text-center group">
-              <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 border border-border rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">
+              <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 bg-forest/50 border border-forest-light/40 rounded-full flex items-center justify-center group-hover:border-gold/60 transition-all duration-500">
                 <item.icon className="w-5 h-5 md:w-6 md:h-6 text-gold" strokeWidth={1.5} />
               </div>
               <h3 className="font-body font-bold text-sm md:text-base text-foreground mb-2 md:mb-3 normal-case tracking-normal">{item.title}</h3>

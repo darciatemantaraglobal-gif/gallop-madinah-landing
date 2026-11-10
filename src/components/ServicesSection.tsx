@@ -1,11 +1,12 @@
 import { Waypoints, Car, UserCheck, Camera, UtensilsCrossed } from "lucide-react";
+import HorseIcon from "@/components/icons/HorseIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const ServicesSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const { t } = useLanguage();
 
   const services = [
-    { icon: Waypoints, title: t("svc.s1.title"), desc: t("svc.s1.desc") },
+    { icon: HorseIcon, title: t("svc.s1.title"), desc: t("svc.s1.desc") },
     { icon: Car, title: t("svc.s2.title"), desc: t("svc.s2.desc") },
     { icon: UserCheck, title: t("svc.s3.title"), desc: t("svc.s3.desc") },
     { icon: Camera, title: t("svc.s4.title"), desc: t("svc.s4.desc") },
@@ -27,7 +28,7 @@ const ServicesSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5 max-w-6xl mx-auto">
           {services.map((item, i) => (
             <div key={i} className="bg-card border border-border p-4 md:p-7 group hover:border-gold/30 transition-all duration-500">
-              <div className="w-9 h-9 md:w-12 md:h-12 border border-border rounded-full flex items-center justify-center mb-3 md:mb-5 group-hover:border-gold/40 transition-colors duration-500">
+              <div className="w-9 h-9 md:w-12 md:h-12 bg-forest/50 border border-forest-light/40 rounded-full flex items-center justify-center mb-3 md:mb-5 group-hover:border-gold/40 transition-colors duration-500">
                 <item.icon className="w-4 h-4 md:w-5 md:h-5 text-gold" strokeWidth={1.5} />
               </div>
               <h3 className="font-body font-bold text-sm md:text-base text-foreground mb-1.5 md:mb-2 normal-case tracking-normal">{item.title}</h3>

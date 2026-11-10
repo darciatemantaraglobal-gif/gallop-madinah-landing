@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 type Lang = "id" | "en";
 
@@ -21,6 +21,16 @@ const translations: Record<string, Record<Lang, string>> = {
   // Hero
   "hero.booking": { id: "Booking Now", en: "Book Now" },
   "hero.scroll": { id: "Scroll", en: "Scroll" },
+  "hero.eyebrow": { id: "Desert Horse Riding · Madinah", en: "Desert Horse Riding · Madinah" },
+  "hero.tagline": {
+    id: "Berkuda di padang pasir Madinah bersama kuda Arabian terlatih dan coach profesional.",
+    en: "Ride across the Madinah desert on trained Arabian horses, guided by professional coaches.",
+  },
+  "hero.packages": { id: "Lihat Paket", en: "View Packages" },
+  "hero.stat1": { id: "Trek Gurun 8–10 KM", en: "8–10 KM Desert Trek" },
+  "hero.stat2": { id: "Kuda Arabian Terlatih", en: "Trained Arabian Horses" },
+  "hero.stat3": { id: "Coach Profesional", en: "Professional Coaches" },
+  "hero.slide": { id: "Foto", en: "Slide" },
 
   // Why Section
   "why.subtitle": { id: "Tentang Kami", en: "About Us" },
@@ -89,20 +99,35 @@ const translations: Record<string, Record<Lang, string>> = {
   "price.subtitle": { id: "Investment", en: "Investment" },
   "price.title1": { id: "Price", en: "Price" },
   "price.title2": { id: "List", en: "List" },
-  "price.single": { id: "Single", en: "Single" },
-  "price.double": { id: "Double", en: "Double" },
-  "price.triple": { id: "Triple", en: "Triple" },
-  "price.single.desc": { id: "1 orang rider", en: "1 rider" },
-  "price.double.desc": { id: "2 orang rider", en: "2 riders" },
-  "price.triple.desc": { id: "3 orang rider", en: "3 riders" },
-  "price.group": { id: "Group", en: "Group" },
-  "price.packages": { id: "Packages", en: "Packages" },
-  "price.bestvalue": { id: "Best Value", en: "Best Value" },
-  "price.perorang": { id: "Per orang", en: "Per person" },
+  "price.perperson": { id: "/ orang", en: "/ person" },
   "price.booknow": { id: "Book Now", en: "Book Now" },
-  "price.addons": { id: "Add-Ons", en: "Add-Ons" },
-  "price.drone": { id: "Drone Documentation", en: "Drone Documentation" },
-  "price.gmc": { id: "GMC Experience", en: "GMC Experience" },
+  "price.complete": { id: "Paling Lengkap", en: "Most Complete" },
+  "price.addable": {
+    id: "Bisa ditambah transportasi, foto & video, atau snack lewat Additional Services.",
+    en: "Add transportation, photo & video, or snacks via Additional Services.",
+  },
+  "price.stable.desc": { id: "Pengalaman berkuda di area stable", en: "Riding experience at the stable" },
+  "price.gallop.desc": { id: "Trekking berkuda didampingi coach", en: "Horse trekking with a coach" },
+  "price.premium.desc": { id: "Pengalaman lengkap, semua sudah termasuk", en: "The full experience, everything included" },
+  "price.f.horse": { id: "1 kuda", en: "1 horse" },
+  "price.f.stableride": { id: "Stable-based riding experience", en: "Stable-based riding experience" },
+  "price.f.groom": { id: "Pendampingan coach/groom dari stable", en: "Guided by a stable coach/groom" },
+  "price.f.coach": { id: "Coach pendamping", en: "Accompanying coach" },
+  "price.f.trekking": { id: "Horse trekking experience", en: "Horse trekking experience" },
+  "price.f.privatecoach": { id: "Private coach", en: "Private coach" },
+  "price.f.transport": { id: "Private transportation", en: "Private transportation" },
+  "price.f.snack": { id: "Snack", en: "Snack" },
+  "price.f.photo": { id: "Professional photo & video", en: "Professional photo & video" },
+  "price.f.premiumtrek": { id: "Premium trekking experience", en: "Premium trekking experience" },
+  "price.addons": { id: "Additional Services", en: "Additional Services" },
+  "price.addons.desc": {
+    id: "Bisa ditambahkan ke paket Stable atau Gallop Experience",
+    en: "Can be added to the Stable or Gallop Experience package",
+  },
+  "price.a.transport": { id: "Private transportation", en: "Private transportation" },
+  "price.a.photo": { id: "Professional photo & video", en: "Professional photo & video" },
+  "price.a.coach": { id: "Private coach", en: "Private coach" },
+  "price.a.snack": { id: "Snack package", en: "Snack package" },
   "price.arabian.title1": { id: "Arabian Camp", en: "Arabian Camp" },
   "price.arabian.title2": { id: "Experience", en: "Experience" },
   "price.arabian.for30": { id: "SAR — untuk 30 orang", en: "SAR — for 30 people" },
@@ -120,6 +145,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "gallery.subtitle": { id: "Captured Moments", en: "Captured Moments" },
   "gallery.title1": { id: "Our", en: "Our" },
   "gallery.title2": { id: "Gallery", en: "Gallery" },
+  "gallery.viewall": { id: "Lihat Semua Foto", en: "View All Photos" },
 
   // CTA
   "cta.title1": { id: "Come As A Guest,", en: "Come As A Guest," },
@@ -160,6 +186,16 @@ const translations: Record<string, Record<Lang, string>> = {
     id: "Halo Gallop Madinah, saya ingin booking *Arabian Camp Experience* untuk 30 orang. Mohon info ketersediaan dan jadwalnya. Terima kasih 🙏",
     en: "Hello Gallop Madinah, I would like to book the *Arabian Camp Experience* for 30 people. Please share availability and schedule. Thank you 🙏",
   },
+  "wa.aria": { id: "Chat via WhatsApp", en: "Chat on WhatsApp" },
+
+  // 404
+  "notfound.title": { id: "Halaman Tidak Ditemukan", en: "Page Not Found" },
+  "notfound.desc": {
+    id: "Sepertinya kudanya salah belok. Halaman yang Anda cari tidak ada.",
+    en: "Looks like the horse took a wrong turn. The page you're looking for doesn't exist.",
+  },
+  "notfound.back": { id: "Kembali ke Beranda", en: "Back to Home" },
+
   "wa.general": {
     id: "Halo Gallop Madinah, saya ingin booking berkuda",
     en: "Hello Gallop Madinah, I would like to book horse riding",
@@ -169,7 +205,23 @@ const translations: Record<string, Record<Lang, string>> = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLang] = useState<Lang>("id");
+  // Remember the visitor's language choice across pages/visits.
+  const [lang, setLang] = useState<Lang>(() => {
+    try {
+      return localStorage.getItem("lang") === "en" ? "en" : "id";
+    } catch {
+      return "id";
+    }
+  });
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    try {
+      localStorage.setItem("lang", lang);
+    } catch {
+      /* storage blocked: language still works for this visit */
+    }
+  }, [lang]);
 
   const t = (key: string) => {
     return translations[key]?.[lang] ?? key;

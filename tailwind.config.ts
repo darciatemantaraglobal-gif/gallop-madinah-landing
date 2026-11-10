@@ -55,6 +55,11 @@ export default {
           DEFAULT: "hsl(var(--gold))",
           highlight: "hsl(var(--gold-highlight))",
         },
+        forest: {
+          DEFAULT: "hsl(var(--forest))",
+          deep: "hsl(var(--forest-deep))",
+          light: "hsl(var(--forest-light))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -88,12 +93,29 @@ export default {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        "ken-burns": {
+          from: { transform: "scale(1.02) translate3d(0, 0, 0)" },
+          to: { transform: "scale(1.14) translate3d(-1.5%, -1%, 0)" },
+        },
+        "progress-fill": {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
+        },
+        "scroll-line": {
+          "0%": { transform: "scaleY(0)", transformOrigin: "top" },
+          "45%": { transform: "scaleY(1)", transformOrigin: "top" },
+          "55%": { transform: "scaleY(1)", transformOrigin: "bottom" },
+          "100%": { transform: "scaleY(0)", transformOrigin: "bottom" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 1s ease-out forwards",
         "fade-in": "fade-in 1.2s ease-out forwards",
+        "ken-burns": "ken-burns 18s ease-out infinite alternate",
+        "progress-fill": "progress-fill linear forwards",
+        "scroll-line": "scroll-line 2.4s ease-in-out infinite",
       },
     },
   },
