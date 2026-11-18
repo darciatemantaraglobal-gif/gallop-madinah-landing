@@ -102,6 +102,30 @@
     }
   }
 
+  /* /penawaran "Simpan PDF": dark page becomes black-on-white so it prints legibly */
+  @media print {
+    body:has(.proposal-print) {
+      background: #fff;
+    }
+    .proposal-print,
+    .proposal-print * {
+      color: #111 !important;
+      background: transparent !important;
+      border-color: #d4d4d4 !important;
+      box-shadow: none !important;
+    }
+    .proposal-print .text-gold {
+      color: #8a6a1c !important;
+    }
+    /* the logo's wordmark is white; print it solid black instead */
+    .proposal-print header img {
+      filter: brightness(0);
+    }
+    .proposal-print .break-inside-avoid {
+      break-inside: avoid;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);

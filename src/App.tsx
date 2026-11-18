@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,9 @@ import ServicesPage from "./pages/ServicesPage";
 import PricesPage from "./pages/PricesPage";
 import GalleryPage from "./pages/GalleryPage";
 import NotFound from "./pages/NotFound";
+
+// Proposal page is shared by link only, so it loads separately from the main site bundle.
+const ProposalPage = lazy(() => import("./pages/ProposalPage"));
 
 const queryClient = new QueryClient();
 
@@ -28,6 +32,14 @@ const App = () => (
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/prices" element={<PricesPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
+            <Route
+              path="/penawaran"
+              element={
+                <Suspense fallback={<div className="min-h-screen bg-background" />}>
+                  <ProposalPage />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
