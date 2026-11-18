@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   IdCard, Award, CalendarDays, Calculator, Handshake, ClipboardCheck,
-  Settings2, Star, Languages, BarChart3, Check, Printer, TicketPercent, X,
+  Settings2, Star, Languages, BarChart3, Check, Printer, TicketPercent, X, ChevronDown, Plus,
 } from "lucide-react";
 import logo from "@/assets/logo-landscape.png";
 
@@ -14,14 +14,16 @@ type Feature = {
   name: string;
   price: number;
   days: string;
-  why: string;
+  why: string; // the benefit in one plain sentence
+  story: string; // a concrete everyday example of that benefit
   scope: string[];
 };
 
 const FEATURES: Feature[] = [
   {
     no: 1, icon: IdCard, name: "Gallop Membercard", price: 850_000, days: "3–5 hari",
-    why: "Customer cukup buka satu link untuk melihat dokumentasi berkudanya, tanpa perlu minta file lewat chat.",
+    why: "Customer dapat foto & video berkudanya lewat satu link. Admin tidak perlu kirim file satu per satu.",
+    story: "Pak Ahmad datang bersama 8 jamaah. Selesai berkuda, admin cukup kirim satu link ke grup WhatsApp mereka. Semua jamaah bisa melihat dan menyimpan fotonya sendiri, lalu membagikannya ke Instagram dengan nama Gallop Madinah ikut terbawa. Foto customer jadi promosi gratis.",
     scope: [
       "Halaman member per customer/grup, misalnya gallopmadinah.id/member/ABC123",
       "QR code untuk dibagikan di lokasi",
@@ -33,7 +35,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 2, icon: Award, name: "Sertifikat \"First Gallop\" Digital", price: 500_000, days: "1–2 hari",
-    why: "Kenang-kenangan yang suka dibagikan, terutama oleh anak-anak dan jamaah umrah.",
+    why: "Peserta pulang membawa bukti \"saya pernah berkuda di Madinah\" yang senang mereka pamerkan.",
+    story: "Seorang anak 10 tahun baru pertama kali naik kuda. Orang tuanya menerima sertifikat berisi nama anaknya, tanggal, dan nama kudanya. Sertifikat itu dipasang di status WhatsApp keluarga, lalu teman-temannya bertanya, \"Ini di mana? Mau ke sana juga.\"",
     scope: [
       "Sertifikat otomatis dari nama peserta & tanggal",
       "Bisa diunduh (gambar/PDF) dan dibagikan",
@@ -43,7 +46,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 3, icon: CalendarDays, name: "Booking Online + Pilih Tanggal", price: 800_000, days: "3–4 hari",
-    why: "Data booking langsung lengkap, admin tidak perlu tanya-jawab bolak-balik.",
+    why: "Customer bisa pesan kapan saja, dan data yang sampai ke admin sudah lengkap.",
+    story: "Sekarang: customer chat \"kak mau booking\", lalu admin menanyakan paket, tanggal, jam, dan jumlah orang satu per satu. Dengan fitur ini, customer mengisi form sekitar 1 menit dan admin langsung menerima pesan rapi: \"Premium, 5 orang, Jumat 20 Desember, jam 16.00, tambah GMC.\" Admin tinggal konfirmasi.",
     scope: [
       "Form pilih paket, tanggal, jam, dan jumlah orang",
       "Pilihan add-on (GMC, video drone)",
@@ -53,7 +57,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 4, icon: Calculator, name: "Kalkulator Harga Grup", price: 400_000, days: "1 hari",
-    why: "Menjawab pertanyaan \"kalau 7 orang jadi berapa?\" sebelum customer chat.",
+    why: "Customer langsung tahu total biayanya tanpa menunggu admin membalas.",
+    story: "Rombongan 7 orang ingin tahu biayanya. Mereka memilih \"7 orang, Premium, tambah video drone\" dan langsung muncul: 7 × 750 = 5.250 SAR, ditambah 600 SAR, total 5.850 SAR. Orang yang sudah tahu harganya biasanya lebih cepat memutuskan.",
     scope: [
       "Isi jumlah orang & paket, total langsung muncul",
       "Mengikuti harga grup (1 / 2–4 / 5–10 orang) dan minimal Open Trip",
@@ -63,7 +68,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 5, icon: Handshake, name: "Portal Partner Travel", price: 850_000, days: "4–5 hari",
-    why: "Travel umrah membawa jamaah dalam rombongan, sumber customer yang paling besar.",
+    why: "Travel umrah lebih mudah menjual Gallop ke jamaahnya, dan setiap jamaah yang dibawa tercatat.",
+    story: "Sebuah travel membawa sekitar 40 jamaah per bulan. Mereka punya halaman sendiri dengan harga agen dan kode booking, misalnya \"TRAVELX\". Setiap booking dengan kode itu tercatat, jadi di akhir bulan Gallop dan travel sama-sama tahu berapa jamaah yang sudah dibawa. Tidak ada lagi hitung manual.",
     scope: [
       "Halaman khusus agen dengan harga agen",
       "Kode booking per travel partner",
@@ -73,7 +79,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 6, icon: ClipboardCheck, name: "Form Registrasi + Persetujuan Keselamatan", price: 500_000, days: "2 hari",
-    why: "Coach sudah tahu siapa yang pemula, usia, dan berat badan peserta sebelum hari H.",
+    why: "Coach sudah mengenal pesertanya sebelum mereka datang, jadi berkuda lebih aman.",
+    story: "Sehari sebelum jadwal, coach membuka daftar peserta: 3 pemula, 1 anak 8 tahun, dan 1 orang dengan berat 95 kg. Coach bisa menyiapkan kuda yang tenang untuk pemula dan kuda yang kuat untuk peserta yang lebih berat. Semua peserta juga sudah menyetujui aturan keselamatan sebelum naik kuda.",
     scope: [
       "Form nama, usia, berat badan, pengalaman berkuda",
       "Centang persetujuan aturan keselamatan",
@@ -82,7 +89,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 7, icon: Settings2, name: "Panel Admin (Lite)", price: 850_000, days: "3–4 hari",
-    why: "Harga dan isi website bisa diubah sendiri tanpa menunggu developer.",
+    why: "Harga dan isi website bisa diubah sendiri dalam hitungan menit, tanpa menunggu developer.",
+    story: "Owner ingin mengubah harga Open Trip dari 350 menjadi 400 SAR. Cukup buka Google Sheet, ganti angkanya, lalu simpan. Beberapa menit kemudian website sudah menampilkan harga baru. Begitu juga untuk menambah FAQ atau logo partner.",
     scope: [
       "Harga paket, harga grup, add-on, FAQ, dan partner diedit dari Google Sheet",
       "Website ikut berubah otomatis",
@@ -91,7 +99,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 8, icon: Star, name: "Testimoni + Rating Google", price: 350_000, days: "1 hari",
-    why: "Ulasan dari customer asli membuat calon customer lebih yakin.",
+    why: "Calon customer lebih percaya karena membaca cerita dari orang yang sudah datang.",
+    story: "Calon customer yang masih ragu membaca ulasan: \"Saya pemula dan awalnya takut, tapi coachnya sabar sekali. Anak saya minta datang lagi!\" Di sebelahnya ada rating bintang dari Google. Keraguannya berkurang, dan ia menekan tombol booking.",
     scope: [
       "Section testimoni di halaman depan",
       "Tombol ke ulasan Google Maps",
@@ -100,7 +109,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 9, icon: Languages, name: "Bahasa Arab + Melayu", price: 750_000, days: "3–4 hari",
-    why: "Banyak pengunjung Madinah datang dari Malaysia dan negara Arab.",
+    why: "Pengunjung dari Malaysia dan negara Arab bisa membaca website dalam bahasa mereka sendiri.",
+    story: "Jamaah dari Malaysia membuka website dan langsung melihat tombol \"Tempah Sekarang\". Pengunjung dari Saudi melihat versi bahasa Arab yang dibaca dari kanan ke kiri. Orang yang paham isi websitenya jauh lebih mungkin memesan.",
     scope: [
       "Dua bahasa tambahan di samping Indonesia & Inggris",
       "Tampilan kanan-ke-kiri untuk bahasa Arab",
@@ -109,7 +119,8 @@ const FEATURES: Feature[] = [
   },
   {
     no: 10, icon: BarChart3, name: "Tracking Klik WhatsApp", price: 250_000, days: "1 hari",
-    why: "Tahu paket mana yang paling diminati dan dari mana pengunjung datang. Wajib jika nanti beriklan.",
+    why: "Owner tahu promosi mana yang benar-benar mendatangkan customer, jadi uang iklan tidak terbuang.",
+    story: "Contoh laporan bulanan: 120 orang menekan tombol booking. 70 datang dari Instagram, 30 dari TikTok, dan 20 dari Google. Paket Premium paling sering diklik. Dari situ owner tahu harus fokus promosi di mana bulan depan.",
     scope: [
       "Google Analytics 4 + Meta Pixel",
       "Tracking klik tiap tombol booking & paket",
@@ -139,6 +150,7 @@ const TERMS = [
 ];
 
 const rupiah = (n: number) => "Rp " + n.toLocaleString("id-ID");
+const sameSet = (a: number[], b: number[]) => a.length === b.length && b.every((x) => a.includes(x));
 
 // Discount codes for this proposal (code -> share taken off every price).
 // A link like /penawaran?kode=GALLOP50 opens the page with the code already applied.
@@ -146,6 +158,9 @@ const DISCOUNT_CODES: Record<string, number> = { GALLOP50: 0.5 };
 
 const ProposalPage = () => {
   const [picked, setPicked] = useState<number[]>([]);
+  const [expanded, setExpanded] = useState<number[]>([]);
+  const toggleExpanded = (no: number) =>
+    setExpanded((e) => (e.includes(no) ? e.filter((x) => x !== no) : [...e, no]));
   const [codeInput, setCodeInput] = useState("");
   const [appliedCode, setAppliedCode] = useState<string | null>(null);
   const [codeError, setCodeError] = useState(false);
@@ -194,8 +209,9 @@ const ProposalPage = () => {
     const sum = FEATURES.filter((f) => picked.includes(f.no)).reduce((a, f) => a + f.price, 0);
     // Certificate is cheaper when taken with the Membercard
     const certDiscount = picked.includes(1) && picked.includes(2) ? 200_000 : 0;
-    const all = picked.length === FEATURES.length;
-    return { sum: sum - certDiscount, final: all ? ALL_PRICE : sum - certDiscount, all };
+    // Exactly a bundle's features picked → charge the bundle price
+    const bundle = BUNDLES.find((b) => sameSet(picked, b.items)) ?? null;
+    return { sum, final: bundle ? bundle.price : sum - certDiscount, bundle, certDiscount };
   }, [picked]);
 
   const fullSum = FEATURES.reduce((a, f) => a + f.price, 0);
@@ -297,58 +313,86 @@ const ProposalPage = () => {
 
         {/* Features */}
         <section className="py-10 md:py-14">
-          <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
+          <div className="mb-5 md:mb-8 md:flex md:items-end md:justify-between md:gap-4">
             <h2 className="font-display text-xl md:text-2xl">Daftar Fitur</h2>
-            <p className="print:hidden text-muted-foreground font-body text-xs md:text-sm text-right">
-              Ketuk fitur untuk menghitung total
+            <p className="print:hidden text-muted-foreground font-body text-xs md:text-sm mt-1.5 md:mt-0">
+              Tekan <span className="text-gold">Pilih</span> pada fitur yang diminati, totalnya muncul di bawah.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {FEATURES.map((f) => {
               const on = picked.includes(f.no);
+              const open = expanded.includes(f.no);
               return (
-                <button
+                <article
                   key={f.no}
-                  type="button"
-                  onClick={() => toggle(f.no)}
-                  aria-pressed={on}
-                  className={`flex flex-col items-stretch text-left bg-card border p-5 md:p-6 transition-colors break-inside-avoid ${
-                    on ? "border-gold" : "border-border hover:border-gold/40"
+                  className={`flex flex-col bg-card border transition-colors break-inside-avoid ${
+                    on ? "border-gold" : "border-border"
                   }`}
                 >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-forest/50 border border-forest-light/40 flex items-center justify-center">
-                      <f.icon className="w-[18px] h-[18px] text-gold" strokeWidth={1.5} />
+                  <div className="p-4 md:p-6 flex-1 flex flex-col">
+                    {/* Title */}
+                    <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                      <div className="flex-shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-full bg-forest/50 border border-forest-light/40 flex items-center justify-center">
+                        <f.icon className="w-4 h-4 md:w-[18px] md:h-[18px] text-gold" strokeWidth={1.5} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-gold/80 font-body text-[10px] md:text-[11px] tracking-[0.18em] uppercase mb-0.5">
+                          Fitur {String(f.no).padStart(2, "0")} · {f.days}
+                        </p>
+                        <h3 className="font-body font-bold text-[15px] md:text-base leading-snug">{f.name}</h3>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-gold/80 font-body text-[11px] tracking-[0.2em] uppercase mb-0.5">
-                        Fitur {String(f.no).padStart(2, "0")} · {f.days}
-                      </p>
-                      <h3 className="font-body font-bold text-base leading-snug">{f.name}</h3>
+
+                    {/* Benefit + example */}
+                    <p className="text-foreground font-body font-bold text-[15px] leading-snug mb-3">{f.why}</p>
+                    <div className="border-l-2 border-gold/60 bg-background/60 pl-3 pr-3 py-2.5 mb-3 md:mb-4">
+                      <p className="text-gold/90 font-body text-[10px] tracking-[0.2em] uppercase mb-1">Contohnya</p>
+                      <p className="text-foreground/80 font-body text-[13.5px] md:text-sm leading-relaxed">{f.story}</p>
                     </div>
-                    <span
-                      className={`print:hidden flex-shrink-0 w-6 h-6 border flex items-center justify-center ${
-                        on ? "bg-gold border-gold" : "border-border"
+
+                    {/* Scope: folded on phones to keep the page short, always open on desktop and in print */}
+                    <button
+                      type="button"
+                      onClick={() => toggleExpanded(f.no)}
+                      aria-expanded={open}
+                      className="md:hidden print:hidden flex items-center justify-between w-full py-2 text-muted-foreground font-body text-xs tracking-[0.12em] uppercase"
+                    >
+                      Yang didapat ({f.scope.length})
+                      <ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} />
+                    </button>
+                    <div className={`${open ? "block" : "hidden"} md:block print:block`}>
+                      <p className="hidden md:block print:block text-muted-foreground font-body text-[10px] tracking-[0.2em] uppercase mb-2">Yang didapat</p>
+                      <ul className="space-y-1.5 pb-1 md:pb-0 md:mb-5">
+                        {f.scope.map((s) => (
+                          <li key={s} className="flex gap-2.5 text-muted-foreground font-note font-light text-[13px] leading-snug">
+                            <span className="mt-[7px] w-1 h-1 rounded-full bg-gold flex-shrink-0" />
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Price + select */}
+                  <div className="flex items-stretch border-t border-border mt-auto">
+                    <div className="flex-1 px-4 md:px-6 py-3 flex items-baseline flex-wrap gap-x-2.5">
+                      <span className="font-body font-bold text-lg md:text-xl text-gold">{rupiah(d(f.price))}</span>
+                      {rate > 0 && <span className="text-muted-foreground font-body text-xs line-through">{rupiah(f.price)}</span>}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => toggle(f.no)}
+                      aria-pressed={on}
+                      className={`print:hidden flex-shrink-0 min-w-[108px] inline-flex items-center justify-center gap-1.5 px-4 font-body font-bold text-xs tracking-[0.12em] uppercase transition-colors ${
+                        on ? "bg-gold text-primary-foreground" : "border-l border-border text-gold hover:bg-gold/10"
                       }`}
                     >
-                      {on && <Check className="w-4 h-4 text-primary-foreground" strokeWidth={3} />}
-                    </span>
+                      {on ? <><Check className="w-4 h-4" strokeWidth={3} /> Dipilih</> : <><Plus className="w-4 h-4" /> Pilih</>}
+                    </button>
                   </div>
-                  <p className="text-foreground/80 font-body text-sm leading-relaxed mb-4">{f.why}</p>
-                  <ul className="space-y-1.5 mb-5">
-                    {f.scope.map((s) => (
-                      <li key={s} className="flex gap-2.5 text-muted-foreground font-note font-light text-[13px] leading-snug">
-                        <span className="mt-[7px] w-1 h-1 rounded-full bg-gold flex-shrink-0" />
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto flex items-baseline gap-2.5">
-                    <p className="font-body font-bold text-xl text-gold">{rupiah(d(f.price))}</p>
-                    {rate > 0 && <p className="text-muted-foreground font-body text-sm line-through">{rupiah(f.price)}</p>}
-                  </div>
-                </button>
+                </article>
               );
             })}
           </div>
@@ -357,27 +401,38 @@ const ProposalPage = () => {
         {/* Bundles */}
         <section className="py-10 md:py-14 border-t border-border">
           <h2 className="font-display text-xl md:text-2xl mb-2">Paket Hemat</h2>
-          <p className="text-muted-foreground font-body text-sm mb-6 md:mb-8">
-            Mengambil beberapa fitur sekaligus lebih murah daripada satuan.
+          <p className="text-muted-foreground font-body text-sm mb-5 md:mb-8">
+            Mengambil beberapa fitur sekaligus lebih murah daripada satuan. Tekan paket untuk memilih isinya.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-4">
             {BUNDLES.map((b) => {
               const normal = FEATURES.filter((f) => b.items.includes(f.no)).reduce((a, f) => a + f.price, 0);
+              const active = sameSet(picked, b.items);
               return (
-                <div
+                <button
                   key={b.name}
-                  className={`border p-5 flex flex-col break-inside-avoid ${b.featured ? "border-gold bg-forest/30" : "border-border bg-card"}`}
+                  type="button"
+                  onClick={() => setPicked(active ? [] : [...b.items])}
+                  aria-pressed={active}
+                  className={`text-left border p-4 md:p-5 flex sm:flex-col gap-4 sm:gap-0 items-center sm:items-stretch break-inside-avoid transition-colors ${
+                    active ? "border-gold bg-forest/40" : b.featured ? "border-gold/60 bg-forest/25" : "border-border bg-card hover:border-gold/40"
+                  }`}
                 >
-                  <h3 className="font-body font-bold text-base mb-1">{b.name}</h3>
-                  <p className="text-muted-foreground font-note font-light text-[13px] leading-snug mb-4">{b.note}</p>
-                  <p className="text-muted-foreground font-body text-xs mb-4">
-                    Fitur {b.items.map((n) => String(n).padStart(2, "0")).join(", ")}
-                  </p>
-                  <div className="mt-auto">
-                    <p className="text-muted-foreground font-body text-xs line-through">{rupiah(normal)}</p>
-                    <p className="font-body font-bold text-xl text-gold">{rupiah(d(b.price))}</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-body font-bold text-[15px] md:text-base mb-0.5 sm:mb-1 flex items-center gap-2">
+                      {b.name}
+                      {active && <Check className="w-4 h-4 text-gold" strokeWidth={3} />}
+                    </h3>
+                    <p className="text-muted-foreground font-note font-light text-[12.5px] md:text-[13px] leading-snug sm:mb-4">{b.note}</p>
+                    <p className="text-muted-foreground font-body text-[11px] md:text-xs mt-1 sm:mt-0 sm:mb-4">
+                      Fitur {b.items.length === FEATURES.length ? "01–10" : b.items.map((n) => String(n).padStart(2, "0")).join(", ")}
+                    </p>
                   </div>
-                </div>
+                  <div className="flex-shrink-0 text-right sm:text-left sm:mt-auto">
+                    <p className="text-muted-foreground font-body text-[11px] md:text-xs line-through">{rupiah(normal)}</p>
+                    <p className="font-body font-bold text-lg md:text-xl text-gold whitespace-nowrap">{rupiah(d(b.price))}</p>
+                  </div>
+                </button>
               );
             })}
           </div>
@@ -425,24 +480,26 @@ const ProposalPage = () => {
       </main>
 
       {/* Running total of the selected features */}
-      <div className="print:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-background/95 backdrop-blur">
+      <div className="print:hidden fixed bottom-0 inset-x-0 z-40 border-t border-gold/30 bg-background/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
         <div className="container mx-auto px-5 md:px-8 max-w-5xl flex items-center justify-between gap-4 py-3 md:py-4">
           <div className="min-w-0">
-            <p className="text-muted-foreground font-body text-[11px] tracking-[0.15em] uppercase">
+            <p className="text-foreground font-body font-bold text-[13px] md:text-sm">
               {picked.length ? `${picked.length} fitur dipilih` : "Belum ada fitur dipilih"}
             </p>
-            <p className="font-body text-xs text-muted-foreground truncate">
+            <p className="font-body text-[11.5px] md:text-xs text-muted-foreground truncate">
               {rate > 0 && <span className="text-gold">Diskon {Math.round(rate * 100)}% · </span>}
-              {total.all
-                ? "Harga paket semua fitur"
-                : picked.includes(1) && picked.includes(2)
-                  ? "Termasuk potongan sertifikat + Membercard"
-                  : "Ketuk fitur di atas untuk menambah"}
+              {total.bundle
+                ? `Harga Paket ${total.bundle.name}`
+                : total.certDiscount
+                  ? "Termasuk potongan sertifikat"
+                  : picked.length
+                    ? "Harga satuan"
+                    : "Tekan Pilih pada fitur"}
             </p>
           </div>
           <div className="text-right flex-shrink-0">
-            {picked.length > 0 && (total.all || rate > 0) && (
-              <p className="text-muted-foreground font-body text-xs line-through">{rupiah(total.all ? fullSum : total.final)}</p>
+            {picked.length > 0 && (total.final !== total.sum || rate > 0) && (
+              <p className="text-muted-foreground font-body text-xs line-through">{rupiah(total.sum)}</p>
             )}
             <p className="font-body font-bold text-xl md:text-2xl text-gold">{rupiah(d(total.final))}</p>
           </div>
