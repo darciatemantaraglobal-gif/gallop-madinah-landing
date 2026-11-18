@@ -11,7 +11,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const ITEMS = ["horse", "helmet", "boots", "coach", "rest", "transport", "videographer"];
 // Item column flexes; package columns are fixed so ✓/✗ line up (narrow on phones).
 const GRID_COLS =
-  "grid-cols-[minmax(0,1fr)_58px_58px_66px] sm:grid-cols-[minmax(0,1fr)_96px_96px_104px] md:grid-cols-[minmax(0,1fr)_170px_170px_190px]";
+  "grid-cols-[minmax(0,1fr)_84px_84px] sm:grid-cols-[minmax(0,1fr)_120px_120px] md:grid-cols-[minmax(0,1fr)_200px_210px]";
 const FEATURED_CELL = "bg-forest/45";
 
 const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
@@ -24,11 +24,10 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
 
   // `features` lists which ITEMS each package includes (✓); the rest show ✗.
   const packages = [
-    { letter: "A", short: "Stable", name: "Stable Experience", price: "450", featured: false,
-      features: ["horse", "helmet", "boots", "coach", "rest"] },
-    { letter: "B", short: "Gallop", name: "Gallop Experience", price: "850", featured: false,
-      features: ["horse", "helmet", "boots", "coach", "rest"] },
-    { letter: "C", short: "Premium", name: "Premium Experience", price: "1.250", featured: true,
+    // Open Trip: the low price only applies to groups of 20+ people
+    { letter: "A", short: "Open Trip", name: "Open Trip", price: "350", featured: false, minNote: t("price.min20"),
+      features: ["horse", "coach", "rest"] },
+    { letter: "C", short: "Premium", name: "Premium Experience", price: "1.250", featured: true, minNote: "",
       features: ["horse", "helmet", "boots", "coach", "rest", "transport", "videographer"] },
   ];
 
@@ -90,6 +89,11 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
                   {pkg.price}
                 </p>
                 <p className="text-muted-foreground font-body text-[10px] md:text-xs mt-1">SAR{" "}<span className="hidden md:inline">{t("price.perperson")}</span></p>
+                {pkg.minNote && (
+                  <p className="inline-block mt-1.5 border border-gold/40 text-gold font-body text-[9px] md:text-[11px] tracking-[0.08em] uppercase px-1.5 py-0.5 leading-tight">
+                    {pkg.minNote}
+                  </p>
+                )}
               </div>
             ))}
 
@@ -124,11 +128,11 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
         </div>
 
         {/* One booking button per package */}
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-2.5 md:gap-4 mb-10 md:mb-16">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4 mb-10 md:mb-16">
           {packages.map((pkg) => (
             <a
               key={pkg.letter}
-              href={getWhatsAppLink(`${pkg.name} - ${pkg.price} SAR/person`)}
+              href={getWhatsAppLink(`${pkg.name} - ${pkg.price} SAR/person${pkg.minNote ? ` (${pkg.minNote})` : ""}`)}
               target="_blank"
               rel="noopener noreferrer"
               className={`w-full flex items-center justify-center gap-2 border px-4 py-3.5 font-body text-xs tracking-[0.15em] uppercase transition-all duration-300 ${

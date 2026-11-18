@@ -69,16 +69,13 @@ const HeroSection = () => {
         {/* Top padding clears the fixed navbar so the content never slides under it on short screens */}
         <div className="container mx-auto px-5 md:px-8 max-w-6xl pt-24 pb-8 md:pt-28 md:pb-6">
           <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[440px] lg:max-w-[480px]">
-        {/* Phones: the eyebrow sits on bright sand, so it gets a dark glass pill. Desktop: plain line + text on the dark panel. */}
+        {/* Phones: plain type, no pill or rules; a soft shadow keeps it readable over bright sand.
+            Desktop: plain text on the dark panel. */}
         <div className="mb-5 md:mb-8 opacity-0 animate-fade-in-up [animation-delay:150ms]">
-          <span className="md:hidden inline-flex items-center gap-2 rounded-full border border-gold/40 bg-black/55 backdrop-blur-md px-4 py-1.5 text-gold-highlight font-body text-[10px] tracking-[0.25em] uppercase whitespace-nowrap">
-            <span className="w-1 h-1 rotate-45 bg-gold" />
+          <span className="md:hidden block text-gold-highlight font-body font-bold text-[11px] tracking-[0.3em] uppercase whitespace-nowrap [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_0_14px_rgba(0,0,0,0.7)]">
             {t("hero.eyebrow")}
           </span>
-          <span className="hidden md:flex items-center gap-4">
-            <span className="w-12 h-px bg-gold/70" />
-            <span className="text-gold font-body text-xs tracking-[0.4em] uppercase whitespace-nowrap">{t("hero.eyebrow")}</span>
-          </span>
+          <span className="hidden md:block text-gold font-body text-xs tracking-[0.4em] uppercase whitespace-nowrap">{t("hero.eyebrow")}</span>
         </div>
 
         <img

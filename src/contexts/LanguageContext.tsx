@@ -105,6 +105,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "price.notincluded": { id: "Tidak termasuk", en: "Not included" },
   "price.book": { id: "Booking", en: "Book" },
   "price.complete": { id: "Paling Lengkap", en: "Most Complete" },
+  "price.min20": { id: "Min. 20 orang", en: "Min. 20 people" },
   "price.f.horse": { id: "1 kuda", en: "1 horse" },
   "price.f.horse.desc": {
     id: "Kuda Arabian terlatih, disesuaikan dengan kemampuan Anda",
@@ -171,8 +172,8 @@ const translations: Record<string, Record<Lang, string>> = {
   "how.step": { id: "Langkah", en: "Step" },
   "how.s1.title": { id: "Pilih paket", en: "Pick a package" },
   "how.s1.desc": {
-    id: "Stable, Gallop, atau Premium Experience. Tambah layanan lain kalau perlu.",
-    en: "Stable, Gallop or Premium Experience. Add extra services if you need them.",
+    id: "Open Trip (min. 20 orang) atau Premium Experience. Tambah layanan lain kalau perlu.",
+    en: "Open Trip (min. 20 people) or Premium Experience. Add extra services if you need them.",
   },
   "how.s2.title": { id: "Chat via WhatsApp", en: "Chat on WhatsApp" },
   "how.s2.desc": {
@@ -186,6 +187,16 @@ const translations: Record<string, Record<Lang, string>> = {
   },
   "how.cta": { id: "Booking via WhatsApp", en: "Book on WhatsApp" },
   "how.note": { id: "Tanya-tanya dulu juga boleh, gratis.", en: "Questions are welcome too — no obligation." },
+
+  // Brand poster section
+  "story.eyebrow": { id: "Gallop Pertama", en: "Your First Gallop" },
+  "story.title1": { id: "Satu Gallop", en: "One Gallop" },
+  "story.title2": { id: "Mengubah Segalanya", en: "Changes Everything" },
+  "story.body": {
+    id: "Awalnya ragu, lalu berubah jadi semangat. Tiba-tiba Anda bergerak seirama dengan kuda Arabian di tengah gurun Madinah, dan rasanya tidak akan terlupakan.",
+    en: "What starts as hesitation turns into excitement. Suddenly you're moving in sync with an Arabian horse across the Madinah desert, and it stays with you.",
+  },
+  "story.cta": { id: "Lihat Paket", en: "See Packages" },
 
   // FAQ (wording from the client)
   "faq.subtitle": { id: "FAQ", en: "FAQ" },
