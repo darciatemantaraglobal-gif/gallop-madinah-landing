@@ -136,13 +136,14 @@ const translations: Record<string, Record<Lang, string>> = {
   },
   "price.group.title": { id: "Harga Grup", en: "Group Rates" },
   "price.group.desc": {
-    id: "Datang bareng keluarga atau rombongan? Ada harga khusus per jumlah orang.",
-    en: "Coming with family or a group? Special rates by group size.",
+    id: "Premium Experience makin hemat kalau datang bareng keluarga atau rombongan. Harga per orang:",
+    en: "The Premium Experience costs less per person when you come as a family or group:",
   },
-  "price.group.t1": { id: "2–5 orang", en: "2–5 people" },
-  "price.group.t2": { id: "6–10 orang", en: "6–10 people" },
+  "price.group.t0": { id: "1 orang", en: "1 person" },
+  "price.group.t1": { id: "2–4 orang", en: "2–4 people" },
+  "price.group.t2": { id: "5–10 orang", en: "5–10 people" },
   "price.group.t3": { id: "11+ orang", en: "11+ people" },
-  "price.group.ask": { id: "Tanya harga", en: "Ask for rate" },
+  "price.group.ask": { id: "Hubungi kami", en: "Contact us" },
   "price.addons": { id: "Additional Services", en: "Additional Services" },
   "price.addons.desc": {
     id: "Bisa ditambahkan ke paket mana pun",
@@ -185,6 +186,62 @@ const translations: Record<string, Record<Lang, string>> = {
   },
   "how.cta": { id: "Booking via WhatsApp", en: "Book on WhatsApp" },
   "how.note": { id: "Tanya-tanya dulu juga boleh, gratis.", en: "Questions are welcome too — no obligation." },
+
+  // FAQ (wording from the client)
+  "faq.subtitle": { id: "FAQ", en: "FAQ" },
+  "faq.title1": { id: "Pertanyaan", en: "Frequently Asked" },
+  "faq.title2": { id: "Umum", en: "Questions" },
+  "faq.more": { id: "Masih ada pertanyaan? Chat kami di WhatsApp", en: "Still have a question? Chat with us on WhatsApp" },
+  "faq.q1": { id: "Apakah berkuda di Gallop Madinah cocok untuk pemula?", en: "Is riding at Gallop Madinah suitable for beginners?" },
+  "faq.a1": {
+    id: "Ya, pemula bisa ikut karena akan didampingi coach berkuda selama aktivitas berlangsung.",
+    en: "Yes, beginners are welcome — a riding coach accompanies you throughout the activity.",
+  },
+  "faq.q2": { id: "Berapa lama perjalanan dari hotel ke stable Gallop Madinah?", en: "How long is the trip from my hotel to the Gallop Madinah stable?" },
+  "faq.a2": {
+    id: "Sekitar 30 menit, tergantung lokasi hotel dan kondisi lalu lintas.",
+    en: "About 30 minutes, depending on your hotel's location and traffic.",
+  },
+  "faq.q3": { id: "Apa saja yang saya dapatkan dalam Paket Premium?", en: "What do I get with the Premium package?" },
+  "faq.a3": {
+    id: "Paket Premium menawarkan fasilitas dan pengalaman berkuda eksklusif dengan benefit sesuai pilihan paket.",
+    en: "The Premium package offers exclusive facilities and riding experience, with benefits according to the package you choose.",
+  },
+  "faq.q4": { id: "Apakah perlengkapan berkuda sudah disediakan?", en: "Is riding equipment provided?" },
+  "faq.a4": {
+    id: "Ya, kami menyediakan helm, sepatu berkuda, dan sorban untuk setiap peserta.",
+    en: "Yes, we provide a helmet, riding boots and a shemagh (headscarf) for every rider.",
+  },
+  "faq.q5": { id: "Berapa lama durasi aktivitas berkuda?", en: "How long does the ride last?" },
+  "faq.a5": {
+    id: "Sekitar 1,5 jam dengan jarak tempuh kurang lebih 10 KM.",
+    en: "About 1.5 hours, covering roughly 10 km.",
+  },
+  "faq.q6": { id: "Apakah anak-anak boleh ikut berkuda?", en: "Can children ride?" },
+  "faq.a6": {
+    id: "Ya, anak-anak dapat mengikuti aktivitas berkuda dengan ketentuan usia, kondisi fisik, dan pendampingan yang sesuai.",
+    en: "Yes, children can join the ride, subject to age, physical condition and appropriate supervision.",
+  },
+  "faq.q7": { id: "Apakah tersedia dokumentasi foto dan video?", en: "Are photos and videos available?" },
+  "faq.a7": {
+    id: "Silakan pilih paket yang tersedia untuk mengetahui fasilitas dokumentasi foto dan video.",
+    en: "Please check the available packages to see which include photo and video documentation.",
+  },
+  "faq.q8": { id: "Apakah bisa berkuda bersama keluarga atau rombongan?", en: "Can I ride with my family or a group?" },
+  "faq.a8": {
+    id: "Tentu, kami menerima reservasi individu, keluarga, maupun rombongan.",
+    en: "Of course — we welcome individual, family and group bookings.",
+  },
+  "faq.q9": { id: "Apakah tersedia layanan antar-jemput hotel?", en: "Is hotel pick-up and drop-off available?" },
+  "faq.a9": {
+    id: "Layanan transportasi dapat disediakan sesuai pilihan paket dan konfirmasi reservasi.",
+    en: "Transportation can be arranged depending on your package and booking confirmation.",
+  },
+  "faq.q10": { id: "Apakah ada batasan usia atau berat badan peserta?", en: "Is there an age or weight limit?" },
+  "faq.a10": {
+    id: "Ya, terdapat ketentuan tertentu untuk memastikan keselamatan dan kenyamanan selama berkuda.",
+    en: "Yes, certain requirements apply to ensure safety and comfort while riding.",
+  },
 
   // Sticky mobile bar
   "bar.prices": { id: "Lihat Harga", en: "See Prices" },

@@ -21,6 +21,8 @@ import gallery17 from "@/assets/gallery-17.jpg";
 import gallery18 from "@/assets/gallery-18.jpg";
 import gallery19 from "@/assets/gallery-19.jpg";
 import gallery20 from "@/assets/gallery-20.jpg";
+import gallery21 from "@/assets/gallery-21.jpg";
+import gallery22 from "@/assets/gallery-22.jpg";
 import galleryBg from "@/assets/gallery-bg.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -39,8 +41,8 @@ const images = [
   { src: gallery7, alt: "Smiling young rider in a helmet", span: "" },
   { src: gallery11, alt: "Woman resting her head against a white horse", span: "" },
   { src: gallery8, alt: "Young rider on a white horse among desert rocks", span: BIG },
-  { src: gallery10, alt: "Woman leading a white Arabian horse", span: TALL },
-  { src: gallery12, alt: "Rider on a grey Arabian horse", span: TALL },
+  { src: gallery21, alt: "Rider on a white Arabian horse on a hilltop at sunset", span: TALL },
+  { src: gallery22, alt: "Rider in Arabian dress on a white horse by red rocks", span: TALL },
   { src: gallery9, alt: "Rider framed by a desert tree", span: WIDE },
   { src: gallery2, alt: "Smiling horse rider", span: "" },
   { src: gallery3, alt: "Black horse rider in desert", span: "" },
@@ -49,6 +51,8 @@ const images = [
   { src: gallery4, alt: "Two riders galloping in desert", span: TALL },
   { src: gallery5, alt: "Riding across the desert", span: "" },
   { src: gallery6, alt: "White-robed rider in desert", span: "" },
+  { src: gallery10, alt: "Woman leading a white Arabian horse", span: TALL },
+  { src: gallery12, alt: "Rider on a grey Arabian horse", span: TALL },
   // Rows 8–11: from the Drive shoots
   { src: gallery20, alt: "Riders and coaches at the stable at golden hour", span: BIG },
   { src: gallery18, alt: "Rider on a black Arabian horse among desert rocks", span: TALL },

@@ -32,7 +32,13 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
       features: ["horse", "helmet", "boots", "coach", "rest", "transport", "videographer"] },
   ];
 
-  const groupTiers = [t("price.group.t1"), t("price.group.t2"), t("price.group.t3")];
+  // Premium Experience price per person by group size (11+ is quoted on WhatsApp)
+  const groupTiers = [
+    { label: t("price.group.t0"), price: "1.250" },
+    { label: t("price.group.t1"), price: "850" },
+    { label: t("price.group.t2"), price: "750" },
+    { label: t("price.group.t3"), price: null },
+  ];
 
   const addOns = [
     { icon: Car, label: t("price.a.gmc"), price: "800" },
@@ -147,17 +153,24 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
               </div>
               <p className="text-muted-foreground font-note font-light text-sm leading-snug">{t("price.group.desc")}</p>
             </div>
-            <div className="grid grid-cols-3 gap-2 md:gap-3 md:w-[420px]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3 md:w-[520px]">
               {groupTiers.map((tier) => (
                 <a
-                  key={tier}
-                  href={getWhatsAppLink(`Group rate (${tier})`)}
+                  key={tier.label}
+                  href={getWhatsAppLink(`Premium Experience - ${tier.label}${tier.price ? ` - ${tier.price} SAR/person` : ""}`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="border border-border hover:border-gold/60 px-2 py-3 text-center transition-colors duration-300"
                 >
-                  <span className="block font-body font-bold text-sm md:text-base text-foreground">{tier}</span>
-                  <span className="block text-gold font-body text-[10px] md:text-[11px] tracking-[0.12em] uppercase mt-1">{t("price.group.ask")}</span>
+                  <span className="block font-body text-xs md:text-sm text-muted-foreground">{tier.label}</span>
+                  {tier.price ? (
+                    <span className="block mt-1">
+                      <span className="font-body font-bold text-lg md:text-xl text-gold">{tier.price}</span>
+                      <span className="text-muted-foreground font-body text-[10px] md:text-[11px]"> SAR</span>
+                    </span>
+                  ) : (
+                    <span className="block text-gold font-body text-[11px] md:text-xs tracking-[0.12em] uppercase mt-2">{t("price.group.ask")}</span>
+                  )}
                 </a>
               ))}
             </div>
