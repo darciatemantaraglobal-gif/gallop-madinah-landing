@@ -21,7 +21,7 @@ type Feature = {
 
 const FEATURES: Feature[] = [
   {
-    no: 1, icon: IdCard, name: "Gallop Membercard", price: 850_000, days: "3–5 hari",
+    no: 1, icon: IdCard, name: "Gallop Membercard", price: 600_000, days: "3–5 hari",
     why: "Customer dapat foto & video berkudanya lewat satu link. Admin tidak perlu kirim file satu per satu.",
     story: "Pak Ahmad datang bersama 8 jamaah. Selesai berkuda, admin cukup kirim satu link ke grup WhatsApp mereka. Semua jamaah bisa melihat dan menyimpan fotonya sendiri, lalu membagikannya ke Instagram dengan nama Gallop Madinah ikut terbawa. Foto customer jadi promosi gratis.",
     scope: [
@@ -34,7 +34,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 2, icon: Award, name: "Sertifikat \"First Gallop\" Digital", price: 500_000, days: "1–2 hari",
+    no: 2, icon: Award, name: "Sertifikat \"First Gallop\" Digital", price: 400_000, days: "1–2 hari",
     why: "Peserta pulang membawa bukti \"saya pernah berkuda di Madinah\" yang senang mereka pamerkan.",
     story: "Seorang anak 10 tahun baru pertama kali naik kuda. Orang tuanya menerima sertifikat berisi nama anaknya, tanggal, dan nama kudanya. Sertifikat itu dipasang di status WhatsApp keluarga, lalu teman-temannya bertanya, \"Ini di mana? Mau ke sana juga.\"",
     scope: [
@@ -45,7 +45,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 3, icon: CalendarDays, name: "Booking Online + Pilih Tanggal", price: 800_000, days: "3–4 hari",
+    no: 3, icon: CalendarDays, name: "Booking Online + Pilih Tanggal", price: 550_000, days: "3–4 hari",
     why: "Customer bisa pesan kapan saja, dan data yang sampai ke admin sudah lengkap.",
     story: "Sekarang: customer chat \"kak mau booking\", lalu admin menanyakan paket, tanggal, jam, dan jumlah orang satu per satu. Dengan fitur ini, customer mengisi form sekitar 1 menit dan admin langsung menerima pesan rapi: \"Premium, 5 orang, Jumat 20 Desember, jam 16.00, tambah GMC.\" Admin tinggal konfirmasi.",
     scope: [
@@ -56,7 +56,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 4, icon: Calculator, name: "Kalkulator Harga Grup", price: 400_000, days: "1 hari",
+    no: 4, icon: Calculator, name: "Kalkulator Harga Grup", price: 350_000, days: "1 hari",
     why: "Customer langsung tahu total biayanya tanpa menunggu admin membalas.",
     story: "Rombongan 7 orang ingin tahu biayanya. Mereka memilih \"7 orang, Premium, tambah video drone\" dan langsung muncul: 7 × 750 = 5.250 SAR, ditambah 600 SAR, total 5.850 SAR. Orang yang sudah tahu harganya biasanya lebih cepat memutuskan.",
     scope: [
@@ -67,7 +67,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 5, icon: Handshake, name: "Portal Partner Travel", price: 850_000, days: "4–5 hari",
+    no: 5, icon: Handshake, name: "Portal Partner Travel", price: 600_000, days: "4–5 hari",
     why: "Travel umrah lebih mudah menjual Gallop ke jamaahnya, dan setiap jamaah yang dibawa tercatat.",
     story: "Sebuah travel membawa sekitar 40 jamaah per bulan. Mereka punya halaman sendiri dengan harga agen dan kode booking, misalnya \"TRAVELX\". Setiap booking dengan kode itu tercatat, jadi di akhir bulan Gallop dan travel sama-sama tahu berapa jamaah yang sudah dibawa. Tidak ada lagi hitung manual.",
     scope: [
@@ -78,7 +78,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 6, icon: ClipboardCheck, name: "Form Registrasi + Persetujuan Keselamatan", price: 500_000, days: "2 hari",
+    no: 6, icon: ClipboardCheck, name: "Form Registrasi + Persetujuan Keselamatan", price: 400_000, days: "2 hari",
     why: "Coach sudah mengenal pesertanya sebelum mereka datang, jadi berkuda lebih aman.",
     story: "Sehari sebelum jadwal, coach membuka daftar peserta: 3 pemula, 1 anak 8 tahun, dan 1 orang dengan berat 95 kg. Coach bisa menyiapkan kuda yang tenang untuk pemula dan kuda yang kuat untuk peserta yang lebih berat. Semua peserta juga sudah menyetujui aturan keselamatan sebelum naik kuda.",
     scope: [
@@ -88,7 +88,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 7, icon: Settings2, name: "Panel Admin (Lite)", price: 850_000, days: "3–4 hari",
+    no: 7, icon: Settings2, name: "Panel Admin (Lite)", price: 600_000, days: "3–4 hari",
     why: "Harga dan isi website bisa diubah sendiri dalam hitungan menit, tanpa menunggu developer.",
     story: "Owner ingin mengubah harga Open Trip dari 350 menjadi 400 SAR. Cukup buka Google Sheet, ganti angkanya, lalu simpan. Beberapa menit kemudian website sudah menampilkan harga baru. Begitu juga untuk menambah FAQ atau logo partner.",
     scope: [
@@ -98,7 +98,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 8, icon: Star, name: "Testimoni + Rating Google", price: 350_000, days: "1 hari",
+    no: 8, icon: Star, name: "Testimoni + Rating Google", price: 300_000, days: "1 hari",
     why: "Calon customer lebih percaya karena membaca cerita dari orang yang sudah datang.",
     story: "Calon customer yang masih ragu membaca ulasan: \"Saya pemula dan awalnya takut, tapi coachnya sabar sekali. Anak saya minta datang lagi!\" Di sebelahnya ada rating bintang dari Google. Keraguannya berkurang, dan ia menekan tombol booking.",
     scope: [
@@ -108,7 +108,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 9, icon: Languages, name: "Bahasa Arab + Melayu", price: 750_000, days: "3–4 hari",
+    no: 9, icon: Languages, name: "Bahasa Arab + Melayu", price: 500_000, days: "3–4 hari",
     why: "Pengunjung dari Malaysia dan negara Arab bisa membaca website dalam bahasa mereka sendiri.",
     story: "Jamaah dari Malaysia membuka website dan langsung melihat tombol \"Tempah Sekarang\". Pengunjung dari Saudi melihat versi bahasa Arab yang dibaca dari kanan ke kiri. Orang yang paham isi websitenya jauh lebih mungkin memesan.",
     scope: [
@@ -118,7 +118,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 10, icon: BarChart3, name: "Tracking Klik WhatsApp", price: 250_000, days: "1 hari",
+    no: 10, icon: BarChart3, name: "Tracking Klik WhatsApp", price: 200_000, days: "1 hari",
     why: "Owner tahu promosi mana yang benar-benar mendatangkan customer, jadi uang iklan tidak terbuang.",
     story: "Contoh laporan bulanan: 120 orang menekan tombol booking. 70 datang dari Instagram, 30 dari TikTok, dan 20 dari Google. Paket Premium paling sering diklik. Dari situ owner tahu harus fokus promosi di mana bulan depan.",
     scope: [
@@ -130,12 +130,12 @@ const FEATURES: Feature[] = [
 ];
 
 // Price when all 10 features are taken together
-const ALL_PRICE = 5_250_000;
+const ALL_PRICE = 3_850_000;
 
 const BUNDLES = [
-  { name: "Starter", items: [4, 8, 10], price: 850_000, note: "Kecil, cepat jadi, hasilnya langsung terasa." },
-  { name: "Member Experience", items: [1, 2, 6], price: 1_500_000, note: "Paling terasa untuk customer." },
-  { name: "Operasional", items: [3, 7], price: 1_450_000, note: "Booking lebih rapi, isi website dikelola sendiri." },
+  { name: "Starter", items: [4, 8, 10], price: 700_000, note: "Kecil, cepat jadi, hasilnya langsung terasa." },
+  { name: "Member Experience", items: [1, 2, 6], price: 1_150_000, note: "Paling terasa untuk customer." },
+  { name: "Operasional", items: [3, 7], price: 950_000, note: "Booking lebih rapi, isi website dikelola sendiri." },
   { name: "Semua Fitur", items: FEATURES.map((f) => f.no), price: ALL_PRICE, note: "Seluruh 10 fitur sekaligus.", featured: true },
 ];
 
@@ -208,7 +208,7 @@ const ProposalPage = () => {
   const total = useMemo(() => {
     const sum = FEATURES.filter((f) => picked.includes(f.no)).reduce((a, f) => a + f.price, 0);
     // Certificate is cheaper when taken with the Membercard
-    const certDiscount = picked.includes(1) && picked.includes(2) ? 200_000 : 0;
+    const certDiscount = picked.includes(1) && picked.includes(2) ? 100_000 : 0;
     // Exactly a bundle's features picked → charge the bundle price
     const bundle = BUNDLES.find((b) => sameSet(picked, b.items)) ?? null;
     return { sum, final: bundle ? bundle.price : sum - certDiscount, bundle, certDiscount };
