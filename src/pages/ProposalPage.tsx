@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   IdCard, Award, CalendarDays, Calculator, Handshake, ClipboardCheck,
-  Settings2, Star, Languages, BarChart3, Check, Printer,
+  Settings2, Star, Languages, BarChart3, Check, Printer, TicketPercent, X,
 } from "lucide-react";
 import logo from "@/assets/logo-landscape.png";
 
@@ -20,7 +20,7 @@ type Feature = {
 
 const FEATURES: Feature[] = [
   {
-    no: 1, icon: IdCard, name: "Gallop Membercard", price: 900_000, days: "3–5 hari",
+    no: 1, icon: IdCard, name: "Gallop Membercard", price: 850_000, days: "3–5 hari",
     why: "Customer cukup buka satu link untuk melihat dokumentasi berkudanya, tanpa perlu minta file lewat chat.",
     scope: [
       "Halaman member per customer/grup, misalnya gallopmadinah.id/member/ABC123",
@@ -42,7 +42,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 3, icon: CalendarDays, name: "Booking Online + Pilih Tanggal", price: 950_000, days: "3–4 hari",
+    no: 3, icon: CalendarDays, name: "Booking Online + Pilih Tanggal", price: 800_000, days: "3–4 hari",
     why: "Data booking langsung lengkap, admin tidak perlu tanya-jawab bolak-balik.",
     scope: [
       "Form pilih paket, tanggal, jam, dan jumlah orang",
@@ -62,7 +62,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 5, icon: Handshake, name: "Portal Partner Travel", price: 1_000_000, days: "4–5 hari",
+    no: 5, icon: Handshake, name: "Portal Partner Travel", price: 850_000, days: "4–5 hari",
     why: "Travel umrah membawa jamaah dalam rombongan, sumber customer yang paling besar.",
     scope: [
       "Halaman khusus agen dengan harga agen",
@@ -81,7 +81,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    no: 7, icon: Settings2, name: "Panel Admin (Lite)", price: 1_000_000, days: "3–4 hari",
+    no: 7, icon: Settings2, name: "Panel Admin (Lite)", price: 850_000, days: "3–4 hari",
     why: "Harga dan isi website bisa diubah sendiri tanpa menunggu developer.",
     scope: [
       "Harga paket, harga grup, add-on, FAQ, dan partner diedit dari Google Sheet",
@@ -118,11 +118,14 @@ const FEATURES: Feature[] = [
   },
 ];
 
+// Price when all 10 features are taken together
+const ALL_PRICE = 5_250_000;
+
 const BUNDLES = [
   { name: "Starter", items: [4, 8, 10], price: 850_000, note: "Kecil, cepat jadi, hasilnya langsung terasa." },
   { name: "Member Experience", items: [1, 2, 6], price: 1_500_000, note: "Paling terasa untuk customer." },
-  { name: "Operasional", items: [3, 7], price: 1_750_000, note: "Booking lebih rapi, isi website dikelola sendiri." },
-  { name: "Semua Fitur", items: FEATURES.map((f) => f.no), price: 5_500_000, note: "Seluruh 10 fitur sekaligus.", featured: true },
+  { name: "Operasional", items: [3, 7], price: 1_450_000, note: "Booking lebih rapi, isi website dikelola sendiri." },
+  { name: "Semua Fitur", items: FEATURES.map((f) => f.no), price: ALL_PRICE, note: "Seluruh 10 fitur sekaligus.", featured: true },
 ];
 
 const TERMS = [
@@ -137,8 +140,38 @@ const TERMS = [
 
 const rupiah = (n: number) => "Rp " + n.toLocaleString("id-ID");
 
+// Discount codes for this proposal (code -> share taken off every price).
+// A link like /penawaran?kode=GALLOP50 opens the page with the code already applied.
+const DISCOUNT_CODES: Record<string, number> = { GALLOP50: 0.5 };
+
 const ProposalPage = () => {
   const [picked, setPicked] = useState<number[]>([]);
+  const [codeInput, setCodeInput] = useState("");
+  const [appliedCode, setAppliedCode] = useState<string | null>(null);
+  const [codeError, setCodeError] = useState(false);
+  const rate = appliedCode ? DISCOUNT_CODES[appliedCode] : 0;
+  // Price after the discount code (unchanged when no code is applied)
+  const d = (n: number) => Math.round(n * (1 - rate));
+
+  const applyCode = (raw: string) => {
+    const code = raw.trim().toUpperCase();
+    if (DISCOUNT_CODES[code] !== undefined) {
+      setAppliedCode(code);
+      setCodeError(false);
+    } else {
+      setAppliedCode(null);
+      setCodeError(true);
+    }
+  };
+
+  // Pre-apply ?kode=... from the link
+  useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get("kode");
+    if (code) {
+      setCodeInput(code.toUpperCase());
+      applyCode(code);
+    }
+  }, []);
 
   // Keep this page out of search engines; it is shared by link only.
   useEffect(() => {
@@ -162,7 +195,7 @@ const ProposalPage = () => {
     // Certificate is cheaper when taken with the Membercard
     const certDiscount = picked.includes(1) && picked.includes(2) ? 200_000 : 0;
     const all = picked.length === FEATURES.length;
-    return { sum: sum - certDiscount, final: all ? 5_500_000 : sum - certDiscount, all };
+    return { sum: sum - certDiscount, final: all ? ALL_PRICE : sum - certDiscount, all };
   }, [picked]);
 
   const fullSum = FEATURES.reduce((a, f) => a + f.price, 0);
@@ -211,6 +244,55 @@ const ProposalPage = () => {
               </div>
             ))}
           </dl>
+
+          {/* Discount code */}
+          <div className="mt-6 md:mt-8 border border-border bg-card p-4 md:p-5">
+            {appliedCode ? (
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3 min-w-0">
+                  <TicketPercent className="w-5 h-5 text-gold flex-shrink-0" strokeWidth={1.5} />
+                  <p className="font-body text-sm">
+                    <span className="font-bold text-gold">Diskon {Math.round(rate * 100)}%</span>{" "}
+                    <span className="text-muted-foreground">sudah diterapkan ke semua harga (kode {appliedCode})</span>
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { setAppliedCode(null); setCodeInput(""); }}
+                  className="print:hidden flex-shrink-0 inline-flex items-center gap-1 text-muted-foreground hover:text-foreground font-body text-xs"
+                  aria-label="Hapus kode diskon"
+                >
+                  <X className="w-3.5 h-3.5" /> Hapus
+                </button>
+              </div>
+            ) : (
+              <form
+                className="print:hidden"
+                onSubmit={(e) => { e.preventDefault(); applyCode(codeInput); }}
+              >
+                <label htmlFor="kode" className="flex items-center gap-2 text-muted-foreground font-body text-[11px] tracking-[0.2em] uppercase mb-2">
+                  <TicketPercent className="w-4 h-4 text-gold" strokeWidth={1.5} /> Punya kode diskon?
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    id="kode"
+                    value={codeInput}
+                    onChange={(e) => { setCodeInput(e.target.value.toUpperCase()); setCodeError(false); }}
+                    placeholder="Masukkan kode"
+                    autoComplete="off"
+                    className="flex-1 min-w-0 bg-background border border-border focus:border-gold outline-none px-3 py-2.5 font-body text-sm tracking-[0.1em] uppercase placeholder:normal-case placeholder:tracking-normal placeholder:text-muted-foreground"
+                  />
+                  <button
+                    type="submit"
+                    className="flex-shrink-0 bg-gold text-primary-foreground px-5 font-body font-bold text-xs tracking-[0.15em] uppercase hover:bg-gold-highlight transition-colors"
+                  >
+                    Terapkan
+                  </button>
+                </div>
+                {codeError && <p className="text-red-400 font-body text-xs mt-2">Kode tidak valid. Periksa lagi penulisannya.</p>}
+              </form>
+            )}
+          </div>
         </section>
 
         {/* Features */}
@@ -262,7 +344,10 @@ const ProposalPage = () => {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-auto font-body font-bold text-xl text-gold">{rupiah(f.price)}</p>
+                  <div className="mt-auto flex items-baseline gap-2.5">
+                    <p className="font-body font-bold text-xl text-gold">{rupiah(d(f.price))}</p>
+                    {rate > 0 && <p className="text-muted-foreground font-body text-sm line-through">{rupiah(f.price)}</p>}
+                  </div>
                 </button>
               );
             })}
@@ -290,7 +375,7 @@ const ProposalPage = () => {
                   </p>
                   <div className="mt-auto">
                     <p className="text-muted-foreground font-body text-xs line-through">{rupiah(normal)}</p>
-                    <p className="font-body font-bold text-xl text-gold">{rupiah(b.price)}</p>
+                    <p className="font-body font-bold text-xl text-gold">{rupiah(d(b.price))}</p>
                   </div>
                 </div>
               );
@@ -321,7 +406,10 @@ const ProposalPage = () => {
                   <span className="text-muted-foreground mr-2">{String(f.no).padStart(2, "0")}</span>
                   {f.name}
                 </span>
-                <span className="font-bold whitespace-nowrap">{rupiah(f.price)}</span>
+                <span className="whitespace-nowrap">
+                  {rate > 0 && <span className="text-muted-foreground line-through text-xs mr-2">{rupiah(f.price)}</span>}
+                  <span className="font-bold">{rupiah(d(f.price))}</span>
+                </span>
               </div>
             ))}
             <div className="flex items-center justify-between gap-4 px-4 md:px-5 py-3 border-b border-border font-body text-sm text-muted-foreground">
@@ -329,8 +417,8 @@ const ProposalPage = () => {
               <span className="line-through whitespace-nowrap">{rupiah(fullSum)}</span>
             </div>
             <div className="flex items-center justify-between gap-4 px-4 md:px-5 py-4 font-body">
-              <span className="font-bold">Semua fitur (paket)</span>
-              <span className="font-bold text-lg text-gold whitespace-nowrap">{rupiah(5_500_000)}</span>
+              <span className="font-bold">Semua fitur (paket){rate > 0 && ` · diskon ${Math.round(rate * 100)}%`}</span>
+              <span className="font-bold text-lg text-gold whitespace-nowrap">{rupiah(d(ALL_PRICE))}</span>
             </div>
           </div>
         </section>
@@ -344,6 +432,7 @@ const ProposalPage = () => {
               {picked.length ? `${picked.length} fitur dipilih` : "Belum ada fitur dipilih"}
             </p>
             <p className="font-body text-xs text-muted-foreground truncate">
+              {rate > 0 && <span className="text-gold">Diskon {Math.round(rate * 100)}% · </span>}
               {total.all
                 ? "Harga paket semua fitur"
                 : picked.includes(1) && picked.includes(2)
@@ -352,8 +441,10 @@ const ProposalPage = () => {
             </p>
           </div>
           <div className="text-right flex-shrink-0">
-            {total.all && <p className="text-muted-foreground font-body text-xs line-through">{rupiah(total.sum)}</p>}
-            <p className="font-body font-bold text-xl md:text-2xl text-gold">{rupiah(total.final)}</p>
+            {picked.length > 0 && (total.all || rate > 0) && (
+              <p className="text-muted-foreground font-body text-xs line-through">{rupiah(total.all ? fullSum : total.final)}</p>
+            )}
+            <p className="font-body font-bold text-xl md:text-2xl text-gold">{rupiah(d(total.final))}</p>
           </div>
         </div>
       </div>
