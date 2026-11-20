@@ -17,7 +17,7 @@ const PosterSection = () => {
           className="block w-full h-auto"
         />
 
-        <div className="px-5 py-10 md:p-0 text-center md:text-left">
+        <div className="px-5 py-10 md:p-0 text-center md:text-start">
           <p className="text-gold font-body text-xs md:text-sm tracking-[0.35em] uppercase mb-3 md:mb-5">{t("story.eyebrow")}</p>
           <h2 className="font-display text-2xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-4 md:mb-6">
             {t("story.title1")} <span className="text-gold">{t("story.title2")}</span>

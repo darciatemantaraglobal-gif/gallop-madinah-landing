@@ -8,6 +8,7 @@ import heroM1 from "@/assets/hero-m1.jpg";
 import heroM2 from "@/assets/hero-m2.jpg";
 import heroM3 from "@/assets/hero-m3.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { waLink, trackWhatsApp } from "@/lib/whatsapp";
 
 // Real Gallop Madinah photos. Landscape shots for desktop, portrait shots for phones.
 const slides = [
@@ -21,7 +22,7 @@ const SLIDE_MS = 6500;
 const HeroSection = () => {
   const { t } = useLanguage();
   const [active, setActive] = useState(0);
-  const WHATSAPP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.general"))}`;
+  const WHATSAPP_LINK = waLink(t("wa.general"));
 
   useEffect(() => {
     const id = window.setInterval(() => setActive((i) => (i + 1) % slides.length), SLIDE_MS);
@@ -33,11 +34,11 @@ const HeroSection = () => {
   return (
     <section className="relative h-[100svh] min-h-[640px] flex flex-col overflow-hidden bg-background">
       {/* Left panel glow (desktop): keeps the text side rich instead of flat black */}
-      <div className="absolute inset-0 hidden md:block bg-[radial-gradient(ellipse_at_10%_50%,hsl(var(--forest)/0.75),transparent_60%)]" />
+      <div className="absolute inset-0 hidden md:block bg-[radial-gradient(ellipse_at_10%_50%,hsl(var(--forest)/0.75),transparent_60%)] rtl:bg-[radial-gradient(ellipse_at_90%_50%,hsl(var(--forest)/0.75),transparent_60%)]" />
 
       {/* Slides: full-bleed on phones, right ~60% on desktop so riders are never behind the text */}
       <div
-        className="absolute inset-x-0 top-0 bottom-[30%] md:bottom-0 md:left-[36%] [mask-image:linear-gradient(to_bottom,black_60%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,black_35%)]"
+        className="absolute inset-x-0 top-0 bottom-[30%] md:bottom-0 md:start-[36%] [mask-image:linear-gradient(to_bottom,black_60%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,black_35%)] md:rtl:[mask-image:linear-gradient(to_left,transparent,black_35%)]"
         aria-hidden="true"
       >
         {slides.map((s, i) => (
@@ -68,7 +69,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex-1 flex items-end md:items-center">
         {/* Top padding clears the fixed navbar so the content never slides under it on short screens */}
         <div className="container mx-auto px-5 md:px-8 max-w-6xl pt-24 pb-8 md:pt-28 md:pb-6">
-          <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[440px] lg:max-w-[480px]">
+          <div className="flex flex-col items-center text-center md:items-start md:text-start md:max-w-[440px] lg:max-w-[480px]">
         {/* Phones: plain type, no pill or rules; a soft shadow keeps it readable over bright sand.
             Desktop: plain text on the dark panel. */}
         <div className="mb-5 md:mb-8 opacity-0 animate-fade-in-up [animation-delay:150ms]">
@@ -91,6 +92,7 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 w-full sm:w-auto opacity-0 animate-fade-in-up [animation-delay:700ms]">
           <a
             href={WHATSAPP_LINK}
+            onClick={() => trackWhatsApp("hero")}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto justify-center whitespace-nowrap inline-flex items-center gap-2.5 bg-gold text-primary-foreground px-8 lg:px-10 py-3.5 font-body font-bold text-xs md:text-sm tracking-[0.2em] uppercase hover:bg-gold-highlight transition-colors duration-300 shadow-gold"
@@ -124,7 +126,7 @@ const HeroSection = () => {
           </ul>
 
           <div className="flex items-center gap-4 mx-auto md:mx-0">
-            <span className="font-body text-xs text-white/60 tabular-nums tracking-widest whitespace-nowrap">
+            <span dir="ltr" className="font-body text-xs text-white/60 tabular-nums tracking-widest whitespace-nowrap">
               <span className="text-gold">0{active + 1}</span> / 0{slides.length}
             </span>
             <div className="flex items-center gap-2">
@@ -140,7 +142,7 @@ const HeroSection = () => {
                   {i === active && (
                     <span
                       key={`p-${active}`}
-                      className="absolute inset-x-0 h-px bg-gold origin-left animate-progress-fill motion-reduce:animate-none"
+                      className="absolute inset-x-0 h-px bg-gold origin-left rtl:origin-right animate-progress-fill motion-reduce:animate-none"
                       style={{ animationDuration: `${SLIDE_MS}ms` }}
                     />
                   )}

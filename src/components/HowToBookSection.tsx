@@ -1,12 +1,13 @@
 import { MessageCircle, ChevronRight } from "lucide-react";
 import HorseIcon from "@/components/icons/HorseIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { waLink, trackWhatsApp } from "@/lib/whatsapp";
 
 // Three-step "how do I book?" explainer shown right after the price list,
 // so visitors know exactly what happens after they pick a package.
 const HowToBookSection = () => {
   const { t } = useLanguage();
-  const WHATSAPP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.general"))}`;
+  const WHATSAPP_LINK = waLink(t("wa.general"));
 
   const steps = [
     { n: "01", title: t("how.s1.title"), desc: t("how.s1.desc") },
@@ -48,6 +49,7 @@ const HowToBookSection = () => {
         <div className="text-center">
           <a
             href={WHATSAPP_LINK}
+            onClick={() => trackWhatsApp("how_to_book")}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gold text-primary-foreground px-10 py-3.5 font-body font-bold text-xs md:text-sm tracking-[0.2em] uppercase hover:bg-gold-highlight transition-colors duration-300"

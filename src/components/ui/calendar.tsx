@@ -22,8 +22,9 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
           buttonVariants({ variant: "outline" }),
           "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
         ),
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
+        // start/end so the buttons swap sides in right-to-left languages
+        nav_button_previous: "absolute start-1",
+        nav_button_next: "absolute end-1",
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell: "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
@@ -42,8 +43,9 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4" />,
-        IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4" />,
+        // DayPicker already picks the right icon for the reading direction: no global flip.
+        IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4 no-flip" />,
+        IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4 no-flip" />,
       }}
       {...props}
     />

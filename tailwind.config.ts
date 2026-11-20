@@ -14,9 +14,11 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Akira Expanded', 'system-ui', 'sans-serif'],
-        body: ['Creato Display', 'system-ui', 'sans-serif'],
-        note: ['Outfit', 'Creato Display', 'system-ui', 'sans-serif'],
+        // Noto Kufi Arabic only supplies Arabic letters (Latin stays in the brand fonts);
+        // it is downloaded only when the visitor switches to Arabic.
+        display: ['Akira Expanded', 'Noto Kufi Arabic', 'system-ui', 'sans-serif'],
+        body: ['Creato Display', 'Noto Kufi Arabic', 'system-ui', 'sans-serif'],
+        note: ['Outfit', 'Creato Display', 'Noto Kufi Arabic', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

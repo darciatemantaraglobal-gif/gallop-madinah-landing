@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,9 +12,19 @@ import ServicesPage from "./pages/ServicesPage";
 import PricesPage from "./pages/PricesPage";
 import GalleryPage from "./pages/GalleryPage";
 import NotFound from "./pages/NotFound";
+import RouteTracker from "./components/RouteTracker";
 
-// Proposal page is shared by link only, so it loads separately from the main site bundle.
+// Pages that are only opened from a button or a shared link load separately, so the home page
+// stays light on phones (the booking calendar and date library live only in the booking chunk).
+const BookingPage = lazy(() => import("./pages/BookingPage"));
+const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
 const ProposalPage = lazy(() => import("./pages/ProposalPage"));
+const MemberPage = lazy(() => import("./pages/MemberPage"));
+const PartnerPage = lazy(() => import("./pages/PartnerPage"));
+
+const Lazy = ({ children }: { children: ReactNode }) => (
+  <Suspense fallback={<div className="min-h-screen bg-background" />}>{children}</Suspense>
+);
 
 const queryClient = new QueryClient();
 
@@ -25,6 +35,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <RouteTracker />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<AboutPage />} />
@@ -32,14 +43,11 @@ const App = () => (
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/prices" element={<PricesPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
-            <Route
-              path="/penawaran"
-              element={
-                <Suspense fallback={<div className="min-h-screen bg-background" />}>
-                  <ProposalPage />
-                </Suspense>
-              }
-            />
+            <Route path="/booking" element={<Lazy><BookingPage /></Lazy>} />
+            <Route path="/registrasi" element={<Lazy><RegistrationPage /></Lazy>} />
+            <Route path="/penawaran" element={<Lazy><ProposalPage /></Lazy>} />
+            <Route path="/member/:kode" element={<Lazy><MemberPage /></Lazy>} />
+            <Route path="/partner/:kode" element={<Lazy><PartnerPage /></Lazy>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

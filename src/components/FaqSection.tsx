@@ -1,14 +1,16 @@
 import { MessageCircle } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-const FAQ_COUNT = 10;
+import { waLink, trackWhatsApp } from "@/lib/whatsapp";
+import { useSiteData } from "@/lib/siteData";
+import { pick } from "@/data/siteData";
 
 // Common questions as an accordion: short on phones, one tap to read an answer.
+// Questions come from the Sheet ("FAQ" tab) or the built-in copy.
 const FaqSection = () => {
-  const { t } = useLanguage();
-  const WHATSAPP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.general"))}`;
-  const items = Array.from({ length: FAQ_COUNT }, (_, i) => i + 1);
+  const { t, lang } = useLanguage();
+  const { faq } = useSiteData();
+  const WHATSAPP_LINK = waLink(t("wa.general"));
 
   return (
     <section id="faq" className="py-16 md:py-24 bg-card border-t border-border scroll-mt-16">
@@ -21,13 +23,13 @@ const FaqSection = () => {
         </div>
 
         <Accordion type="single" collapsible className="border-t border-border">
-          {items.map((n) => (
-            <AccordionItem key={n} value={`q${n}`} className="border-border">
-              <AccordionTrigger className="gap-4 py-4 md:py-5 text-left font-body font-bold text-[15px] md:text-base text-foreground normal-case tracking-normal leading-snug hover:no-underline hover:text-gold [&[data-state=open]]:text-gold [&>svg]:text-gold">
-                {t(`faq.q${n}`)}
+          {faq.map((item, i) => (
+            <AccordionItem key={i} value={`q${i}`} className="border-border">
+              <AccordionTrigger className="gap-4 py-4 md:py-5 text-start font-body font-bold text-[15px] md:text-base text-foreground normal-case tracking-normal leading-snug hover:no-underline hover:text-gold [&[data-state=open]]:text-gold [&>svg]:text-gold">
+                {pick(item.q, lang)}
               </AccordionTrigger>
-              <AccordionContent className="pr-8 text-muted-foreground font-body text-sm md:text-[15px] leading-relaxed">
-                {t(`faq.a${n}`)}
+              <AccordionContent className="pe-8 text-muted-foreground font-body text-sm md:text-[15px] leading-relaxed">
+                {pick(item.a, lang)}
               </AccordionContent>
             </AccordionItem>
           ))}
@@ -36,6 +38,7 @@ const FaqSection = () => {
         <div className="text-center mt-8 md:mt-10">
           <a
             href={WHATSAPP_LINK}
+            onClick={() => trackWhatsApp("faq")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-gold font-body text-sm hover:text-gold-highlight transition-colors"

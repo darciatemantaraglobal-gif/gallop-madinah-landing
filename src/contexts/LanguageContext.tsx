@@ -1,6 +1,18 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { ar } from "@/i18n/ar";
+import { ms } from "@/i18n/ms";
 
-type Lang = "id" | "en";
+export type Lang = "id" | "en" | "ms" | "ar";
+
+/** Languages in the switcher, in display order. Arabic is written right-to-left. */
+export const LANGUAGES: { code: Lang; label: string; name: string }[] = [
+  { code: "id", label: "ID", name: "Bahasa Indonesia" },
+  { code: "en", label: "EN", name: "English" },
+  { code: "ms", label: "MS", name: "Bahasa Melayu" },
+  { code: "ar", label: "AR", name: "العربية" },
+];
+
+export const isRtl = (lang: Lang) => lang === "ar";
 
 interface LanguageContextType {
   lang: Lang;
@@ -8,7 +20,9 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const translations: Record<string, Record<Lang, string>> = {
+// Indonesian and English live here; Malay and Arabic are in src/i18n/ (same keys).
+// A key missing in Malay/Arabic falls back to English.
+export const translations: Record<string, { id: string; en: string }> = {
   // Navbar
   "nav.home": { id: "Home", en: "Home" },
   "nav.about": { id: "About", en: "About" },
@@ -105,7 +119,11 @@ const translations: Record<string, Record<Lang, string>> = {
   "price.notincluded": { id: "Tidak termasuk", en: "Not included" },
   "price.book": { id: "Booking", en: "Book" },
   "price.complete": { id: "Paling Lengkap", en: "Most Complete" },
-  "price.min20": { id: "Min. 20 orang", en: "Min. 20 people" },
+  "price.min": { id: "Min. {n} orang", en: "Min. {n} people" },
+  "price.people.one": { id: "1 orang", en: "1 person" },
+  "price.people.n": { id: "{n} orang", en: "{n} people" },
+  "price.people.range": { id: "{a}–{b} orang", en: "{a}–{b} people" },
+  "price.people.plus": { id: "{n}+ orang", en: "{n}+ people" },
   "price.f.horse": { id: "1 kuda", en: "1 horse" },
   "price.f.horse.desc": {
     id: "Kuda Arabian terlatih, disesuaikan dengan kemampuan Anda",
@@ -140,10 +158,6 @@ const translations: Record<string, Record<Lang, string>> = {
     id: "Premium Experience makin hemat kalau datang bareng keluarga atau rombongan. Harga per orang:",
     en: "The Premium Experience costs less per person when you come as a family or group:",
   },
-  "price.group.t0": { id: "1 orang", en: "1 person" },
-  "price.group.t1": { id: "2–4 orang", en: "2–4 people" },
-  "price.group.t2": { id: "5–10 orang", en: "5–10 people" },
-  "price.group.t3": { id: "11+ orang", en: "11+ people" },
   "price.group.ask": { id: "Hubungi kami", en: "Contact us" },
   "price.addons": { id: "Additional Services", en: "Additional Services" },
   "price.addons.desc": {
@@ -198,61 +212,290 @@ const translations: Record<string, Record<Lang, string>> = {
   },
   "story.cta": { id: "Lihat Paket", en: "See Packages" },
 
+  // Price calculator
+  "calc.subtitle": { id: "Kalkulator", en: "Calculator" },
+  "calc.title1": { id: "Hitung", en: "Estimate" },
+  "calc.title2": { id: "Biaya", en: "Your Cost" },
+  "calc.desc": {
+    id: "Pilih paket dan jumlah orang, total biayanya langsung muncul.",
+    en: "Pick a package and group size to see the total right away.",
+  },
+  "calc.package": { id: "Paket", en: "Package" },
+  "calc.from": { id: "mulai", en: "from" },
+  "calc.people": { id: "Jumlah orang", en: "Number of people" },
+  "calc.less": { id: "Kurangi orang", en: "Fewer people" },
+  "calc.more": { id: "Tambah orang", en: "More people" },
+  "calc.nudge": {
+    id: "Tambah {n} orang lagi, harga jadi {price} SAR per orang",
+    en: "Add {n} more and it's {price} SAR per person",
+  },
+  "calc.addons": { id: "Tambahan (opsional)", en: "Add-ons (optional)" },
+  "calc.noaddon": { id: "tanpa tambahan", en: "none" },
+  "calc.result": { id: "Rincian", en: "Breakdown" },
+  "calc.total": { id: "Estimasi total", en: "Estimated total" },
+  "calc.belowmin": {
+    id: "{pkg} minimal {n} orang.",
+    en: "{pkg} needs at least {n} people.",
+  },
+  "calc.switch": { id: "Hitung sebagai {pkg}: {total} SAR", en: "Price as {pkg}: {total} SAR" },
+  "calc.onrequest": {
+    id: "Untuk {n} orang atau lebih ada harga khusus. Kami kirim penawarannya lewat WhatsApp.",
+    en: "Groups of {n} or more get a special rate. We'll send it on WhatsApp.",
+  },
+  "calc.book": { id: "Booking dengan total ini", en: "Book with this total" },
+  "calc.ask": { id: "Minta harga grup", en: "Ask for group rate" },
+  "calc.note": { id: "Estimasi. Harga final dikonfirmasi admin.", en: "Estimate. Final price confirmed by our team." },
+  // Membercard (/member/:kode)
+  "member.subtitle": { id: "Member Gallop", en: "Gallop Member" },
+  "member.demo": {
+    id: "Ini halaman contoh. Data member asli diisi admin lewat Google Sheet.",
+    en: "This is a sample page. Real member data is added by our team in the Google Sheet.",
+  },
+  "member.card": { id: "Membercard", en: "Membercard" },
+  "member.code": { id: "Kode", en: "Code" },
+  "member.riders": { id: "Peserta", en: "Riders" },
+  "member.qr": { id: "QR code halaman member", en: "QR code for this member page" },
+  "member.qr.download": { id: "Unduh QR", en: "Download QR" },
+  "member.share": { id: "Bagikan", en: "Share" },
+  "member.share.text": {
+    id: "Dokumentasi berkuda {group} di Gallop Madinah 🐎",
+    en: "{group}'s desert ride at Gallop Madinah 🐎",
+  },
+  "member.copy": { id: "Salin link", en: "Copy link" },
+  "member.copied": { id: "Link tersalin", en: "Link copied" },
+  "member.photos": { id: "Foto Pilihan", en: "Selected Photos" },
+  "member.photo": { id: "Foto", en: "Photo" },
+  "member.close": { id: "Tutup", en: "Close" },
+  "member.prev": { id: "Foto sebelumnya", en: "Previous photo" },
+  "member.next": { id: "Foto berikutnya", en: "Next photo" },
+  "member.video": { id: "Video", en: "Video" },
+  "member.video.open": { id: "Tonton video", en: "Watch the video" },
+  "member.drive": { id: "Semua foto & video", en: "All photos & videos" },
+  "member.drive.desc": { id: "Buka folder Google Drive untuk mengunduh semuanya", en: "Open the Google Drive folder to download everything" },
+  "member.instagram": {
+    id: "Bagikan momenmu di Instagram dan tag @gallopmadinah",
+    en: "Share your moment on Instagram and tag @gallopmadinah",
+  },
+  "member.loading": { id: "Memuat data member…", en: "Loading member page…" },
+  "member.notfound.title": { id: "Kode tidak ditemukan", en: "Code not found" },
+  "member.notfound.desc": {
+    id: "Kami tidak menemukan member dengan kode {code}. Periksa lagi link-nya atau hubungi admin.",
+    en: "We couldn't find a member with code {code}. Check the link or contact our team.",
+  },
+  "member.unavailable.title": { id: "Halaman belum bisa dibuka", en: "Page unavailable" },
+  "member.unavailable.desc": {
+    id: "Data member sedang tidak bisa dimuat. Coba lagi sebentar lagi atau hubungi admin.",
+    en: "Member data can't be loaded right now. Please try again shortly or contact our team.",
+  },
+  "member.help": { id: "Hubungi admin", en: "Contact us" },
+  "member.help.wa": {
+    id: "Halo Gallop Madinah, saya tidak bisa membuka halaman member dengan kode {code}.",
+    en: "Hello Gallop Madinah, I can't open the member page with code {code}.",
+  },
+
+  // Travel partner portal (/partner/:kode)
+  "partner.subtitle": { id: "Portal Partner", en: "Partner Portal" },
+  "partner.demo": {
+    id: "Ini halaman contoh. Data partner asli dan harga agen diisi admin lewat Google Sheet.",
+    en: "This is a sample page. Real partner details and agent prices are set by our team in the Google Sheet.",
+  },
+  "partner.desc": {
+    id: "Bagikan link booking di bawah ke jamaah Anda. Setiap booking lewat link ini tercatat atas nama travel Anda.",
+    en: "Share the booking link below with your guests. Every booking made through it is recorded under your agency.",
+  },
+  "partner.link.title": { id: "Link booking khusus Anda", en: "Your booking link" },
+  "partner.link.desc": {
+    id: "Jamaah memilih paket, tanggal, dan jumlah orang sendiri. Kode partner Anda ikut terkirim otomatis.",
+    en: "Guests pick the package, date and group size themselves. Your partner code is sent along automatically.",
+  },
+  "partner.qr": { id: "QR code link booking", en: "QR code for the booking link" },
+  "partner.share.wa": { id: "Bagikan ke WhatsApp", en: "Share on WhatsApp" },
+  "partner.prices.title": { id: "Harga agen", en: "Agent prices" },
+  "partner.prices.public": { id: "Umum", en: "Public" },
+  "partner.prices.agent": { id: "Agen", en: "Agent" },
+  "partner.prices.ask": { id: "Tanya admin", en: "Ask us" },
+  "partner.prices.note": {
+    id: "Harga per orang dalam SAR. Harga agen diterapkan admin saat mengonfirmasi booking yang masuk lewat link Anda. Halaman ini khusus untuk partner, mohon tidak disebarkan ke jamaah.",
+    en: "Prices per person in SAR. Agent prices are applied by our team when confirming bookings made through your link. This page is for partners only; please don't share it with guests.",
+  },
+  "partner.promo.title": { id: "Pesan siap kirim", en: "Ready-to-send message" },
+  "partner.promo.desc": {
+    id: "Salin dan kirim ke grup jamaah Anda. Link booking Anda sudah ada di dalamnya.",
+    en: "Copy and send it to your guest groups. Your booking link is already inside.",
+  },
+  "partner.promo.text": {
+    id: "Assalamu'alaikum 🙏\n\nMau merasakan berkuda kuda Arabian di padang pasir Madinah? Bersama Gallop Madinah, didampingi coach berpengalaman, cocok juga untuk pemula dan keluarga.\n\nPilih paket dan jadwalnya di sini:\n{link}",
+    en: "Assalamu'alaikum 🙏\n\nWould you like to ride an Arabian horse in the desert of Madinah? Gallop Madinah's experienced coaches guide every rider, and beginners and families are welcome.\n\nPick your package and date here:\n{link}",
+  },
+  "partner.promo.copy": { id: "Salin pesan", en: "Copy message" },
+  "partner.media.title": { id: "Materi promosi", en: "Promo material" },
+  "partner.media.download": { id: "Unduh", en: "Download" },
+  "partner.how.title": { id: "Cara kerjanya", en: "How it works" },
+  "partner.how.1": {
+    id: "Bagikan link atau QR booking Anda ke jamaah.",
+    en: "Share your booking link or QR code with your guests.",
+  },
+  "partner.how.2": {
+    id: "Jamaah mengisi form booking; admin Gallop mengonfirmasi lewat WhatsApp.",
+    en: "Guests fill in the booking form; the Gallop team confirms on WhatsApp.",
+  },
+  "partner.how.3": {
+    id: "Setiap booking tercatat dengan kode partner Anda. Rekap bulanan dikirim oleh admin.",
+    en: "Every booking is recorded with your partner code. Our team sends you a monthly summary.",
+  },
+  "partner.contact": { id: "Hubungi admin Gallop", en: "Contact the Gallop team" },
+  "partner.contact.wa": {
+    id: "Halo Gallop Madinah, saya dari {name} (kode partner {code}). ",
+    en: "Hello Gallop Madinah, this is {name} (partner code {code}). ",
+  },
+  "partner.notfound.desc": {
+    id: "Kami tidak menemukan partner dengan kode {code}. Periksa lagi link-nya atau hubungi admin.",
+    en: "We couldn't find a partner with code {code}. Check the link or contact our team.",
+  },
+
+  // First Gallop certificate
+  "cert.title": { id: "Sertifikat First Gallop", en: "First Gallop Certificate" },
+  "cert.desc": {
+    id: "Pilih nama peserta, lalu simpan atau bagikan sertifikatnya.",
+    en: "Pick a rider's name, then save or share the certificate.",
+  },
+  "cert.pick": { id: "Nama di sertifikat", en: "Name on certificate" },
+  "cert.other": { id: "Nama lain", en: "Other name" },
+  "cert.name.ph": { id: "Ketik nama peserta", en: "Type the rider's name" },
+  "cert.download": { id: "Unduh sertifikat", en: "Download certificate" },
+  "cert.share": { id: "Bagikan", en: "Share" },
+  "cert.share.text": { id: "Sertifikat First Gallop dari Gallop Madinah 🐎", en: "My First Gallop certificate from Gallop Madinah 🐎" },
+
+  // Rider registration (/registrasi)
+  "reg.subtitle": { id: "Registrasi", en: "Registration" },
+  "reg.title1": { id: "Data", en: "Rider" },
+  "reg.title2": { id: "Peserta", en: "Details" },
+  "reg.desc": {
+    id: "Diisi sebelum hari berkuda, supaya coach bisa menyiapkan kuda yang sesuai untuk setiap peserta.",
+    en: "Fill this in before your ride so the coach can prepare the right horse for every rider.",
+  },
+  "reg.code": { id: "Kode booking (opsional)", en: "Booking code (optional)" },
+  "reg.rider": { id: "Peserta {n}", en: "Rider {n}" },
+  "reg.name": { id: "Nama", en: "Name" },
+  "reg.age": { id: "Usia (tahun)", en: "Age (years)" },
+  "reg.weight": { id: "Berat badan (kg)", en: "Weight (kg)" },
+  "reg.exp": { id: "Pengalaman berkuda", en: "Riding experience" },
+  "reg.exp.none": { id: "Belum pernah", en: "Never" },
+  "reg.exp.some": { id: "Pernah beberapa kali", en: "A few times" },
+  "reg.exp.regular": { id: "Rutin berkuda", en: "Ride regularly" },
+  "reg.add": { id: "Tambah peserta", en: "Add rider" },
+  "reg.remove": { id: "Hapus", en: "Remove" },
+  "reg.warn.age": {
+    id: "Di bawah usia minimal {n} tahun. Coach akan memastikan apakah bisa ikut.",
+    en: "Below the minimum age of {n}. The coach will confirm whether they can ride.",
+  },
+  "reg.warn.weight": {
+    id: "Di atas batas berat {n} kg. Coach akan menyiapkan kuda yang sesuai atau menghubungi Anda.",
+    en: "Above the {n} kg weight limit. The coach will arrange a suitable horse or contact you.",
+  },
+  "reg.err.fields": { id: "Lengkapi data yang ditandai merah.", en: "Please complete the fields marked in red." },
+  "reg.rules": { id: "Aturan keselamatan", en: "Safety rules" },
+  "reg.agree": {
+    id: "Saya sudah membaca dan menyetujui aturan di atas untuk semua peserta yang saya daftarkan.",
+    en: "I have read and agree to the rules above for every rider I am registering.",
+  },
+  "reg.err.agree": { id: "Centang persetujuan dulu.", en: "Please tick the agreement." },
+  "reg.submit": { id: "Kirim data peserta", en: "Send rider details" },
+  "reg.done.title": { id: "Data peserta terkirim", en: "Rider details sent" },
+  "reg.done.desc": { id: "Terima kasih. Sampai jumpa di Gallop Madinah!", en: "Thank you. See you at Gallop Madinah!" },
+  "reg.done.wa": {
+    id: "Kalau WhatsApp belum terbuka, tekan tombol di bawah untuk mengirim data ke admin.",
+    en: "If WhatsApp didn't open, tap below to send the details to our team.",
+  },
+  "reg.back": { id: "Kembali ke beranda", en: "Back to home" },
+  "reg.wa": { id: "Halo Gallop Madinah, ini data peserta", en: "Hello Gallop Madinah, here are the rider details" },
+  "reg.wa.for": { id: "untuk booking", en: "for booking" },
+  "reg.wa.agree": { id: "Semua peserta menyetujui aturan keselamatan.", en: "All riders agree to the safety rules." },
+  "reg.wa.yo": { id: "th", en: "y/o" },
+
+  // Booking form (/booking)
+  "booking.subtitle": { id: "Booking", en: "Booking" },
+  "booking.title1": { id: "Pesan", en: "Book Your" },
+  "booking.title2": { id: "Jadwal Berkuda", en: "Ride" },
+  "booking.desc": {
+    id: "Isi data singkat di bawah. Setelah dikirim, WhatsApp admin terbuka dengan rincian booking Anda.",
+    en: "Fill in the short form below. When you send it, WhatsApp opens with your booking details for our team.",
+  },
+  "booking.step1": { id: "Paket & rombongan", en: "Package & group" },
+  "booking.step2": { id: "Tanggal & waktu", en: "Date & time" },
+  "booking.step3": { id: "Data pemesan", en: "Your details" },
+  "booking.date": { id: "Tanggal", en: "Date" },
+  "booking.date.pick": { id: "Pilih tanggal di kalender", en: "Pick a date on the calendar" },
+  "booking.time": { id: "Waktu", en: "Time" },
+  "booking.time.pagi": { id: "Pagi", en: "Morning" },
+  "booking.time.sore": { id: "Sore", en: "Afternoon" },
+  "booking.time.note": { id: "Jam pastinya dikonfirmasi admin.", en: "Exact time is confirmed by our team." },
+  "booking.name": { id: "Nama pemesan", en: "Your name" },
+  "booking.phone": { id: "Nomor WhatsApp (opsional)", en: "WhatsApp number (optional)" },
+  "booking.hotel": { id: "Nama hotel di Madinah (untuk antar-jemput)", en: "Hotel in Madinah (for pick-up)" },
+  "booking.notes": { id: "Catatan (opsional)", en: "Notes (optional)" },
+  "booking.notes.ph": { id: "Misalnya: ada anak-anak, pemula semua", en: "e.g. children in the group, all beginners" },
+  "booking.err.date": { id: "Pilih tanggal dulu.", en: "Please pick a date." },
+  "booking.err.time": { id: "Pilih waktu.", en: "Please pick a time." },
+  "booking.err.name": { id: "Isi nama pemesan.", en: "Please enter your name." },
+  "booking.err.phone": { id: "Nomor WhatsApp belum benar.", en: "That WhatsApp number doesn't look right." },
+  "booking.err.pkg": { id: "Paket ini belum bisa untuk jumlah orang tersebut.", en: "This package isn't available for that group size." },
+  "booking.summary": { id: "Ringkasan", en: "Summary" },
+  "booking.agent": { id: "Kode partner", en: "Partner code" },
+  "booking.submit": { id: "Kirim booking via WhatsApp", en: "Send booking via WhatsApp" },
+  "booking.submit.note": {
+    id: "Belum ada pembayaran di sini. Admin mengonfirmasi jadwal dan cara bayar lewat WhatsApp.",
+    en: "No payment here. Our team confirms the schedule and payment on WhatsApp.",
+  },
+  "booking.total.request": { id: "harga grup (mohon info)", en: "group rate (please advise)" },
+  "booking.done.title": { id: "Booking terkirim", en: "Booking sent" },
+  "booking.done.desc": {
+    id: "Lanjutkan percakapan di WhatsApp. Admin akan mengonfirmasi jadwal dan cara pembayaran.",
+    en: "Carry on in WhatsApp. Our team will confirm the schedule and how to pay.",
+  },
+  "booking.done.code": { id: "Kode booking", en: "Booking code" },
+  "booking.done.blocked": {
+    id: "WhatsApp belum terbuka? Tekan tombol di bawah.",
+    en: "WhatsApp didn't open? Tap the button below.",
+  },
+  "booking.done.openwa": { id: "Buka WhatsApp", en: "Open WhatsApp" },
+  "booking.done.reg.title": { id: "Satu langkah lagi", en: "One more step" },
+  "booking.done.reg.desc": {
+    id: "Isi data peserta (usia, berat, pengalaman) supaya coach bisa menyiapkan kuda yang tepat.",
+    en: "Add each rider's age, weight and experience so the coach can prepare the right horses.",
+  },
+  "booking.done.reg.btn": { id: "Isi data peserta", en: "Add rider details" },
+  "booking.done.new": { id: "Buat booking lain", en: "Make another booking" },
+  "booking.wa": {
+    id: "Halo Gallop Madinah, saya ingin booking:",
+    en: "Hello Gallop Madinah, I would like to book:",
+  },
+  "booking.wa.end": { id: "Mohon konfirmasinya. Terima kasih 🙏", en: "Please confirm. Thank you 🙏" },
+  "booking.wa.code": { id: "Kode", en: "Code" },
+  "booking.wa.pkg": { id: "Paket", en: "Package" },
+  "booking.wa.people": { id: "Jumlah", en: "Group" },
+  "booking.wa.addons": { id: "Tambahan", en: "Add-ons" },
+  "booking.wa.total": { id: "Estimasi total", en: "Estimated total" },
+  "booking.wa.phone": { id: "No. WA", en: "WhatsApp" },
+  "booking.wa.hotel": { id: "Hotel", en: "Hotel" },
+  "calc.wa.ask": {
+    id: "Halo Gallop Madinah, saya ingin harga grup untuk paket {pkg}, {people}. Mohon info harga dan jadwalnya. Terima kasih 🙏",
+    en: "Hello Gallop Madinah, I'd like a group rate for the {pkg} package, {people}. Please share the price and schedule. Thank you 🙏",
+  },
+
+  // Testimonials
+  "testi.subtitle": { id: "Kata Mereka", en: "Testimonials" },
+  "testi.title1": { id: "Cerita", en: "Rider" },
+  "testi.title2": { id: "Para Rider", en: "Stories" },
+  "testi.swipe": { id: "Geser untuk melihat lainnya", en: "Swipe to see more" },
+  "testi.google": { id: "Lihat ulasan di Google", en: "Read reviews on Google" },
+  "testi.write": { id: "Tulis ulasan", en: "Write a review" },
+
   // FAQ (wording from the client)
   "faq.subtitle": { id: "FAQ", en: "FAQ" },
   "faq.title1": { id: "Pertanyaan", en: "Frequently Asked" },
   "faq.title2": { id: "Umum", en: "Questions" },
   "faq.more": { id: "Masih ada pertanyaan? Chat kami di WhatsApp", en: "Still have a question? Chat with us on WhatsApp" },
-  "faq.q1": { id: "Apakah berkuda di Gallop Madinah cocok untuk pemula?", en: "Is riding at Gallop Madinah suitable for beginners?" },
-  "faq.a1": {
-    id: "Ya, pemula bisa ikut karena akan didampingi coach berkuda selama aktivitas berlangsung.",
-    en: "Yes, beginners are welcome — a riding coach accompanies you throughout the activity.",
-  },
-  "faq.q2": { id: "Berapa lama perjalanan dari hotel ke stable Gallop Madinah?", en: "How long is the trip from my hotel to the Gallop Madinah stable?" },
-  "faq.a2": {
-    id: "Sekitar 30 menit, tergantung lokasi hotel dan kondisi lalu lintas.",
-    en: "About 30 minutes, depending on your hotel's location and traffic.",
-  },
-  "faq.q3": { id: "Apa saja yang saya dapatkan dalam Paket Premium?", en: "What do I get with the Premium package?" },
-  "faq.a3": {
-    id: "Paket Premium menawarkan fasilitas dan pengalaman berkuda eksklusif dengan benefit sesuai pilihan paket.",
-    en: "The Premium package offers exclusive facilities and riding experience, with benefits according to the package you choose.",
-  },
-  "faq.q4": { id: "Apakah perlengkapan berkuda sudah disediakan?", en: "Is riding equipment provided?" },
-  "faq.a4": {
-    id: "Ya, kami menyediakan helm, sepatu berkuda, dan sorban untuk setiap peserta.",
-    en: "Yes, we provide a helmet, riding boots and a shemagh (headscarf) for every rider.",
-  },
-  "faq.q5": { id: "Berapa lama durasi aktivitas berkuda?", en: "How long does the ride last?" },
-  "faq.a5": {
-    id: "Sekitar 1,5 jam dengan jarak tempuh kurang lebih 10 KM.",
-    en: "About 1.5 hours, covering roughly 10 km.",
-  },
-  "faq.q6": { id: "Apakah anak-anak boleh ikut berkuda?", en: "Can children ride?" },
-  "faq.a6": {
-    id: "Ya, anak-anak dapat mengikuti aktivitas berkuda dengan ketentuan usia, kondisi fisik, dan pendampingan yang sesuai.",
-    en: "Yes, children can join the ride, subject to age, physical condition and appropriate supervision.",
-  },
-  "faq.q7": { id: "Apakah tersedia dokumentasi foto dan video?", en: "Are photos and videos available?" },
-  "faq.a7": {
-    id: "Silakan pilih paket yang tersedia untuk mengetahui fasilitas dokumentasi foto dan video.",
-    en: "Please check the available packages to see which include photo and video documentation.",
-  },
-  "faq.q8": { id: "Apakah bisa berkuda bersama keluarga atau rombongan?", en: "Can I ride with my family or a group?" },
-  "faq.a8": {
-    id: "Tentu, kami menerima reservasi individu, keluarga, maupun rombongan.",
-    en: "Of course — we welcome individual, family and group bookings.",
-  },
-  "faq.q9": { id: "Apakah tersedia layanan antar-jemput hotel?", en: "Is hotel pick-up and drop-off available?" },
-  "faq.a9": {
-    id: "Layanan transportasi dapat disediakan sesuai pilihan paket dan konfirmasi reservasi.",
-    en: "Transportation can be arranged depending on your package and booking confirmation.",
-  },
-  "faq.q10": { id: "Apakah ada batasan usia atau berat badan peserta?", en: "Is there an age or weight limit?" },
-  "faq.a10": {
-    id: "Ya, terdapat ketentuan tertentu untuk memastikan keselamatan dan kenyamanan selama berkuda.",
-    en: "Yes, certain requirements apply to ensure safety and comfort while riding.",
-  },
 
   // Sticky mobile bar
   "bar.prices": { id: "Lihat Harga", en: "See Prices" },
@@ -321,18 +564,32 @@ const translations: Record<string, Record<Lang, string>> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+/** Akira and Creato have no Arabic letters; load an Arabic face only when Arabic is chosen. */
+function loadArabicFont() {
+  if (document.getElementById("font-arabic")) return;
+  const link = document.createElement("link");
+  link.id = "font-arabic";
+  link.rel = "stylesheet";
+  link.href = "https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&display=swap";
+  document.head.appendChild(link);
+}
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   // Remember the visitor's language choice across pages/visits.
   const [lang, setLang] = useState<Lang>(() => {
     try {
-      return localStorage.getItem("lang") === "en" ? "en" : "id";
+      const saved = localStorage.getItem("lang");
+      return LANGUAGES.some((l) => l.code === saved) ? (saved as Lang) : "id";
     } catch {
       return "id";
     }
   });
 
   useEffect(() => {
-    document.documentElement.lang = lang;
+    const html = document.documentElement;
+    html.lang = lang;
+    html.dir = isRtl(lang) ? "rtl" : "ltr";
+    if (lang === "ar") loadArabicFont();
     try {
       localStorage.setItem("lang", lang);
     } catch {
@@ -341,7 +598,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [lang]);
 
   const t = (key: string) => {
-    return translations[key]?.[lang] ?? key;
+    const base = translations[key];
+    if (lang === "id" || lang === "en") return base?.[lang] ?? key;
+    const dict = lang === "ar" ? ar : ms;
+    return dict[key] ?? base?.en ?? key;
   };
 
   return (

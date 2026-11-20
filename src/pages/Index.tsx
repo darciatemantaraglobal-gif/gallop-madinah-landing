@@ -3,8 +3,10 @@ import HeroSection from "@/components/HeroSection";
 import WhySection from "@/components/WhySection";
 import ExperienceSection from "@/components/ExperienceSection";
 import PricelistSection from "@/components/PricelistSection";
+import CalculatorSection from "@/components/CalculatorSection";
 import HowToBookSection from "@/components/HowToBookSection";
 import PosterSection from "@/components/PosterSection";
+import TestimonialSection from "@/components/TestimonialSection";
 import GallerySection from "@/components/GallerySection";
 import FaqSection from "@/components/FaqSection";
 import FinalCTA from "@/components/FinalCTA";
@@ -22,8 +24,10 @@ const Index = () => {
       <WhySection />
       <ExperienceSection />
       <PricelistSection />
+      <CalculatorSection />
       <HowToBookSection />
       <PosterSection />
+      <TestimonialSection />
       <GallerySection preview />
       <FaqSection />
       <FinalCTA />

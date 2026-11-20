@@ -153,7 +153,7 @@ const GallerySection = ({ hideHeader = false, preview = false }: { hideHeader?: 
         )}
       </div>
       {selected !== null && (
-        <div className="fixed inset-0 z-[70] bg-background/95 flex items-center justify-center p-4 md:p-16 animate-in fade-in duration-200" onClick={() => setSelected(null)}>
+        <div dir="ltr" className="fixed inset-0 z-[70] bg-background/95 flex items-center justify-center p-4 md:p-16 animate-in fade-in duration-200" onClick={() => setSelected(null)}>
           <button onClick={() => setSelected(null)} className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-10" aria-label="Close">
             <X className="w-8 h-8" />
           </button>

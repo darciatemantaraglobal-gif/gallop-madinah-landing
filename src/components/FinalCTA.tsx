@@ -1,10 +1,11 @@
 import { Phone } from "lucide-react";
 import ctaBg from "@/assets/cta-background.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { waLink, trackWhatsApp } from "@/lib/whatsapp";
 
 const FinalCTA = () => {
   const { t } = useLanguage();
-  const WHATSAPP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.general"))}`;
+  const WHATSAPP_LINK = waLink(t("wa.general"));
 
   return (
     <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
@@ -21,6 +22,7 @@ const FinalCTA = () => {
         </p>
         <a
           href={WHATSAPP_LINK}
+          onClick={() => trackWhatsApp("final_cta")}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 md:gap-3 border border-gold/60 text-gold px-8 md:px-10 py-3 md:py-3.5 font-body text-xs md:text-sm tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"

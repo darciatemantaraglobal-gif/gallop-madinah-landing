@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import PricelistSection from "@/components/PricelistSection";
+import CalculatorSection from "@/components/CalculatorSection";
 import HowToBookSection from "@/components/HowToBookSection";
 import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
@@ -18,6 +19,7 @@ const PricesPage = () => {
         </h2>
       </div>
       <PricelistSection hideHeader />
+      <CalculatorSection />
       <HowToBookSection />
       <FaqSection />
       <Footer />

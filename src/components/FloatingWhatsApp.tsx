@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MessageCircle, Tag } from "lucide-react";
+import { CalendarCheck, MessageCircle, Tag } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { waLink, trackWhatsApp } from "@/lib/whatsapp";
 
 // Desktop: floating WhatsApp bubble.
 // Phones: a sticky bottom bar ("See prices" + "Book") that appears once the visitor
@@ -11,7 +12,7 @@ const FloatingChat = () => {
   const { t } = useLanguage();
   const { pathname } = useLocation();
   const [showBar, setShowBar] = useState(false);
-  const WHATSAPP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.general"))}`;
+  const WHATSAPP_LINK = waLink(t("wa.general"));
 
   useEffect(() => {
     const onScroll = () => setShowBar(window.scrollY > window.innerHeight * 0.6);
@@ -30,6 +31,7 @@ const FloatingChat = () => {
       {/* Desktop / tablet bubble */}
       <a
         href={WHATSAPP_LINK}
+        onClick={() => trackWhatsApp("floating")}
         target="_blank"
         rel="noopener noreferrer"
         className="hidden md:block fixed bottom-6 right-6 z-40 group"
@@ -60,16 +62,15 @@ const FloatingChat = () => {
               {t("bar.prices")}
             </Link>
           )}
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Booking opens the booking form; the form itself hands over to WhatsApp. */}
+          <Link
+            to="/booking"
             tabIndex={showBar ? 0 : -1}
-            className="flex-[1.3] inline-flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 font-body font-bold text-xs tracking-[0.15em] uppercase active:brightness-95"
+            className="flex-[1.3] inline-flex items-center justify-center gap-2 bg-gold text-primary-foreground py-3 font-body font-bold text-xs tracking-[0.15em] uppercase active:brightness-95"
           >
-            <MessageCircle className="w-4 h-4" />
+            <CalendarCheck className="w-4 h-4" />
             {t("bar.book")}
-          </a>
+          </Link>
         </div>
       </div>
     </>

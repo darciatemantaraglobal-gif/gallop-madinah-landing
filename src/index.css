@@ -102,6 +102,15 @@
     }
   }
 
+  /* Arabic: letter-spacing breaks the joins between Arabic letters, and "uppercase" means
+     nothing in Arabic script, so the wide-tracked Latin label style is switched off. */
+  html[lang="ar"] body * {
+    letter-spacing: 0 !important;
+  }
+  html[lang="ar"] body {
+    line-height: 1.7;
+  }
+
   /* /penawaran "Simpan PDF": dark page becomes black-on-white so it prints legibly */
   @media print {
     body:has(.proposal-print) {
@@ -188,4 +197,15 @@
   .section-padding {
     @apply py-20 md:py-32 lg:py-40;
   }
+}
+
+/* Right-to-left: "forward" arrows point the other way. :dir() follows the nearest dir, so photo
+   viewers marked dir="ltr" keep their arrows. Kept outside @layer on purpose: Tailwind drops
+   layered rules whose classes it can't find in the source, and lucide adds these at runtime.
+   Icons that already handle direction themselves carry .no-flip (e.g. the booking calendar). */
+.lucide-chevron-right:dir(rtl):not(.no-flip),
+.lucide-chevron-left:dir(rtl):not(.no-flip),
+.lucide-arrow-right:dir(rtl):not(.no-flip),
+.lucide-arrow-left:dir(rtl):not(.no-flip) {
+  transform: scaleX(-1);
 }

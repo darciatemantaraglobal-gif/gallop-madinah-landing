@@ -2,7 +2,8 @@ import { Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo-landscape.png";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { LANGUAGES, useLanguage } from "@/contexts/LanguageContext";
+import { waLink, trackWhatsApp } from "@/lib/whatsapp";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +35,7 @@ const Navbar = () => {
     { href: "/gallery", label: t("nav.gallery") },
   ];
 
-  const WHATSAPP_LINK = `https://wa.me/628118880818?text=${encodeURIComponent(t("wa.general"))}`;
+  const WHATSAPP_LINK = waLink(t("wa.general"));
 
   const isActive = (href: string) => location.pathname === href;
 
@@ -80,6 +81,7 @@ const Navbar = () => {
             <div className="w-10 h-[1px] bg-gold/30 mb-6" />
             <a
               href={WHATSAPP_LINK}
+              onClick={() => trackWhatsApp("navbar_mobile")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 border border-gold/60 text-gold px-8 py-3 font-body text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
@@ -123,18 +125,30 @@ const Navbar = () => {
 
           <div className="flex items-center gap-4">
             {/* Language Toggle */}
-            <button
-              onClick={() => setLang(lang === "id" ? "en" : "id")}
-              className="flex items-center gap-1.5 font-body text-[10px] md:text-xs tracking-[0.15em] uppercase text-muted-foreground hover:text-gold transition-colors duration-300"
-              aria-label="Toggle language"
-            >
-              <span className={lang === "id" ? "text-gold font-bold" : ""}>ID</span>
-              <span className="text-border">/</span>
-              <span className={lang === "en" ? "text-gold font-bold" : ""}>EN</span>
-            </button>
+            {/* Language switcher: always left-to-right so the order doesn't flip in Arabic */}
+            <div dir="ltr" role="group" aria-label="Language" className="flex items-center font-body text-[10px] md:text-xs tracking-[0.12em] uppercase">
+              {LANGUAGES.map((l, i) => (
+                <span key={l.code} className="flex items-center">
+                  {i > 0 && <span className="text-border px-0.5 md:px-1">/</span>}
+                  <button
+                    type="button"
+                    onClick={() => setLang(l.code)}
+                    aria-pressed={lang === l.code}
+                    lang={l.code}
+                    title={l.name}
+                    className={`px-0.5 py-1 transition-colors duration-300 ${
+                      lang === l.code ? "text-gold font-bold" : "text-muted-foreground hover:text-gold"
+                    }`}
+                  >
+                    {l.label}
+                  </button>
+                </span>
+              ))}
+            </div>
 
             <a
               href={WHATSAPP_LINK}
+              onClick={() => trackWhatsApp("navbar")}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:inline-flex items-center gap-2 border border-gold/50 text-gold px-5 py-2.5 text-xs font-body tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
