@@ -6,7 +6,7 @@ import { useSiteData } from "@/lib/siteData";
 import { pick } from "@/data/siteData";
 
 // Common questions as an accordion: short on phones, one tap to read an answer.
-// Questions come from the Sheet ("FAQ" tab) or the built-in copy.
+// Questions come from the database (FAQ tab in /admin) or the built-in copy.
 const FaqSection = () => {
   const { t, lang } = useLanguage();
   const { faq } = useSiteData();

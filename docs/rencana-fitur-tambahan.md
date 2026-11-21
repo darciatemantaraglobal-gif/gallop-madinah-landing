@@ -3,6 +3,9 @@
 Disepakati: 10 fitur (versi lite), total Rp 1.200.000. DP Rp 600.000 sudah diterima, pelunasan Rp 600.000 setelah semua live.
 Penawaran: gallopmadinah.id/penawaran
 
+> **Update:** penyimpanan data tidak lagi memakai Google Sheet + Apps Script, tetapi **Supabase** dengan panel admin di
+> `/admin` (lihat `docs/setup-supabase.md` dan `docs/panduan-admin.md`). Bagian Google Sheet di bawah ini adalah rencana awal.
+
 Urutan kerja:
 
 | Tahap | Fitur | Perkiraan |

@@ -1,17 +1,19 @@
 import { z } from "zod";
-import { SHEET_API_URL } from "@/lib/sheetApi";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { supabase, withTimeout } from "@/lib/supabase";
 import { AGENT_CODE_RE } from "@/lib/booking";
 
 // Travel-partner page (/partner/KODE): agent prices, a personal booking link, promo material.
 
 export const DEMO_AGENT_CODE = "DEMO";
 
+// What public.get_agent() returns (one active row of the agents table).
 const rawAgentSchema = z.object({
-  kode: z.string(),
-  namaTravel: z.string().default(""),
-  hargaOpenTrip: z.number().nullable().catch(null),
-  hargaPremium: z.number().nullable().catch(null),
-  kontak: z.string().default(""),
+  code: z.string(),
+  name: z.string().nullish().transform((v) => v ?? ""),
+  price_open_trip: z.number().nullable().catch(null),
+  price_premium: z.number().nullable().catch(null),
+  contact: z.string().nullish().transform((v) => v ?? ""),
 });
 
 export type Agent = {
@@ -31,33 +33,29 @@ const price = (n: number | null) => (typeof n === "number" && Number.isFinite(n)
 export function resolveAgent(raw: unknown): Agent | null {
   const r = rawAgentSchema.safeParse(raw);
   if (!r.success) return null;
-  const code = r.data.kode.trim().toUpperCase();
+  const code = r.data.code.trim().toUpperCase();
   if (!AGENT_CODE_RE.test(code)) return null;
   return {
     code,
-    name: r.data.namaTravel.trim() || code,
-    priceOpenTrip: price(r.data.hargaOpenTrip),
-    pricePremium: price(r.data.hargaPremium),
-    contact: r.data.kontak.trim(),
+    name: r.data.name.trim() || code,
+    priceOpenTrip: price(r.data.price_open_trip),
+    pricePremium: price(r.data.price_premium),
+    contact: r.data.contact.trim(),
   };
 }
 
-export async function fetchAgent(code: string, url = SHEET_API_URL): Promise<AgentResult> {
+/** Looks up one active agent through public.get_agent (visitors cannot list the agents table). */
+export async function fetchAgent(code: string, client: SupabaseClient | null = supabase): Promise<AgentResult> {
   if (!AGENT_CODE_RE.test(code)) return { status: "not_found" };
-  if (!url) return { status: "unavailable" };
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
+  if (!client) return { status: "unavailable" };
   try {
-    const res = await fetch(`${url}?action=agen&kode=${encodeURIComponent(code)}`, { signal: controller.signal });
-    if (!res.ok) return { status: "unavailable" };
-    const body = (await res.json()) as { found?: boolean; data?: unknown };
-    if (!body?.found) return { status: "not_found" };
-    const agent = resolveAgent(body.data);
+    const { data, error } = await withTimeout(client.rpc("get_agent", { p_code: code }), 8000);
+    if (error) return { status: "unavailable" };
+    if (!data) return { status: "not_found" };
+    const agent = resolveAgent(data);
     return agent ? { status: "found", agent } : { status: "not_found" };
   } catch {
     return { status: "unavailable" };
-  } finally {
-    clearTimeout(timer);
   }
 }
 

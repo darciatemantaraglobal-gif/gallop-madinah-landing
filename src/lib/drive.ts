@@ -18,11 +18,13 @@ export function driveFileId(input: string): string | null {
 }
 
 /**
- * For Drive links/ids: a thumbnail URL of the given width. Other https links are returned as-is.
- * Anything else (not https, empty) becomes "".
+ * For Drive links/ids: a thumbnail URL of the given width. Other https links and paths on this
+ * site ("/partners/x.png") are returned as-is. Anything else (http, "//host", empty) becomes "".
  */
 export function imageUrl(input: string, width = 1200): string {
-  const id = driveFileId(input);
+  const s = input.trim();
+  const id = driveFileId(s);
   if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
-  return /^https:\/\/\S+$/i.test(input.trim()) ? input.trim() : "";
+  if (/^https:\/\/\S+$/i.test(s)) return s;
+  return /^\/(?!\/)[\w\-./]+$/.test(s) ? s : "";
 }

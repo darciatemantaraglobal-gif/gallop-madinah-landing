@@ -10,7 +10,7 @@ const BOX: Record<PartnerSize, string> = {
   tall: "w-[120px] h-[52px] md:w-[150px] md:h-[62px]",
 };
 
-// Logos come from the Sheet ("Partner" tab) or the built-in set.
+// Logos come from the database (Partner tab in /admin) or the built-in set.
 const PartnersSection = () => {
   const { t } = useLanguage();
   const { partners } = useSiteData();

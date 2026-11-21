@@ -91,7 +91,7 @@ export const TestimonialList = ({
   );
 };
 
-// Real customer reviews from the Google Sheet ("Testimoni" tab). Hidden until there are enough.
+// Real customer reviews from the database (Testimoni tab in /admin). Hidden until there are enough.
 const TestimonialSection = () => {
   const { testimonials, reviews } = useSiteData();
   return <TestimonialList testimonials={testimonials} mapsUrl={reviews.mapsUrl} writeReviewUrl={reviews.writeReviewUrl} />;

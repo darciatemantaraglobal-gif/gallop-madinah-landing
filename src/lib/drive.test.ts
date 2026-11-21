@@ -25,8 +25,10 @@ describe("imageUrl", () => {
     );
   });
 
-  it("keeps other https links and drops anything else", () => {
+  it("keeps other https links and paths on this site, drops anything else", () => {
     expect(imageUrl("https://example.com/logo.png")).toBe("https://example.com/logo.png");
+    expect(imageUrl("/partners/lintas-haramain.png")).toBe("/partners/lintas-haramain.png");
+    expect(imageUrl("//evil.example/logo.png")).toBe("");
     expect(imageUrl("http://example.com/logo.png")).toBe("");
     expect(imageUrl("javascript:alert(1)")).toBe("");
     expect(imageUrl("")).toBe("");

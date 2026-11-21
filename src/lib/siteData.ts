@@ -1,38 +1,35 @@
 import { useQuery } from "@tanstack/react-query";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { FALLBACK_DATA, parseSiteData, type SiteData } from "@/data/siteData";
-import { SHEET_API_URL } from "@/lib/sheetApi";
+import { supabase, withTimeout } from "@/lib/supabase";
+import { loadSiteRows } from "@/lib/backend";
 
-// Reads prices (and later FAQ, partners, testimonials) from the Google Sheet through the
-// Apps Script web app. Anything missing, slow, or malformed falls back to FALLBACK_DATA,
-// so a typo in the Sheet can never break the website.
+// Prices, FAQ, partners, testimonials, booking settings and safety rules come from the database
+// (edited in /admin). Anything missing, slow, or malformed falls back to FALLBACK_DATA, so a bad
+// entry or an outage can never break the website.
 
-const API_URL = SHEET_API_URL;
-const TIMEOUT_MS = 4000;
+const TIMEOUT_MS = 5000;
 
-export async function fetchSiteData(url = API_URL): Promise<SiteData> {
-  if (!url) return FALLBACK_DATA;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+export async function fetchSiteData(client: SupabaseClient | null = supabase): Promise<SiteData> {
+  if (!client) return FALLBACK_DATA;
   try {
-    const res = await fetch(`${url}?action=config`, { signal: controller.signal });
-    if (!res.ok) return FALLBACK_DATA;
-    // Each section is taken from the Sheet only if it is valid on its own.
-    return parseSiteData(await res.json());
+    // Each section is taken from the database only if it is valid on its own.
+    return parseSiteData(await withTimeout(loadSiteRows(client), TIMEOUT_MS));
   } catch {
     return FALLBACK_DATA;
-  } finally {
-    clearTimeout(timer);
   }
 }
 
+export const SITE_DATA_KEY = ["site-data"] as const;
+
 export function useSiteData(): SiteData {
   const { data } = useQuery({
-    queryKey: ["site-data"],
+    queryKey: SITE_DATA_KEY,
     queryFn: () => fetchSiteData(),
-    staleTime: 5 * 60 * 1000,
+    staleTime: 60 * 1000,
     retry: false,
     refetchOnWindowFocus: false,
   });
-  // Render immediately with the fallback; swap to Sheet data once it arrives.
+  // Render immediately with the fallback; swap to database data once it arrives.
   return data ?? FALLBACK_DATA;
 }

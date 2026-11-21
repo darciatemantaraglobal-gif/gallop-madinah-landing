@@ -304,7 +304,7 @@ const MemberView = ({ member }: { member: Member }) => {
   );
 };
 
-// /member/:kode — a rider group's private page. Data comes from the Sheet ("Member" tab).
+// /member/:kode — a rider group's private page. Data comes from the database via get_member().
 const MemberPage = () => {
   const { t } = useLanguage();
   const code = (useParams().kode ?? "").toUpperCase();

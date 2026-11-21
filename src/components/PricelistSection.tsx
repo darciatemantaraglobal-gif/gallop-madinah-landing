@@ -28,7 +28,7 @@ const PricelistSection = ({ hideHeader = false }: { hideHeader?: boolean }) => {
   const getWhatsAppLink = (packageName: string) => waLink(t("wa.template").replace("{pkg}", packageName));
   const WHATSAPP_CAMP_LINK = waLink(t("wa.camp.template"));
 
-  // Prices come from the shared site data (Google Sheet, or the built-in fallback).
+  // Prices come from the shared site data (database via /admin, or the built-in fallback).
   // `features` lists which ITEMS each package includes (✓); the rest show ✗.
   const packages = prices.packages.map((p) => ({
     ...p,

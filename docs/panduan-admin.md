@@ -1,116 +1,70 @@
 # Panduan Admin Website Gallop Madinah
 
-Semua yang bisa diubah sendiri ada di **Google Sheet "Gallop Madinah — Data Website"**.
-Ubah isi sel → tunggu ±5 menit → website ikut berubah. Tidak perlu menghubungi developer.
+Semua dikelola di **gallopmadinah.id/admin** (bisa dari HP). Masuk dengan email dan password admin.
+Lupa password: isi email di halaman login → **Lupa password?** → buka link di email.
 
-> Kalau ada yang salah ketik (misalnya harga ditulis huruf), website **tidak rusak**: baris yang salah dilewati
-> atau website kembali memakai data bawaan. Cek website setelah mengubah sesuatu.
+Perubahan harga, FAQ, partner, testimoni, dan pengaturan langsung tampil di website (muat ulang halaman).
+Kalau ada isian yang salah format, admin langsung memberi tanda merah dan tidak menyimpan.
 
-## Mengubah harga
+## Booking
 
-Tab **`Harga`** (satu baris per paket)
-- `harga`: angka saja, tanpa titik juga boleh (`1250` atau `1.250`).
-- `min_orang`: minimal peserta. Open Trip = `20`.
-- `fitur`: isi tabel centang, dipisah koma: `horse, helmet, boots, coach, rest, transport, videographer`.
+Setiap customer menekan **"Kirim booking via WhatsApp"** di website:
+1. WhatsApp admin menerima pesan berisi **kode booking** (contoh `GM-7K2QX`), paket, tanggal, jam, jumlah orang, total, dan hotel.
+2. Booking yang sama muncul di tab **Booking** dengan status **Baru**.
 
-Tab **`HargaGrup`** (harga Premium per orang sesuai jumlah)
-- Contoh: `2 | 4 | 850` berarti 2–4 orang, 850 SAR per orang.
-- `sampai` dikosongkan = tanpa batas atas. `harga` dikosongkan = tampil "Hubungi kami".
+Di tab Booking:
+- Ubah status: **Baru → Terkonfirmasi → Selesai** (atau **Batal**).
+- Tulis catatan internal (tersimpan otomatis), mis. "DP sudah masuk".
+- **WhatsApp** (jika customer mengisi nomor), **Data peserta**, dan **Buat halaman member** langsung dari kartunya.
+- Filter: status, pencarian nama/kode/kode agen, dan "Mulai hari ini" untuk jadwal ke depan.
 
-Tab **`Addon`**: GMC, video drone, dan tambahan lain beserta harganya.
+## Peserta
 
-Harga di tabel, kalkulator, dan form booking selalu sama karena membaca dari tab yang sama.
+Data dari form registrasi (usia, berat, pengalaman), dikelompokkan per kode booking.
+Peserta di bawah usia minimal atau di atas batas berat diberi **tanda merah** (batasnya diatur di Pengaturan).
 
-## Mengubah FAQ
+## Member (dokumentasi + sertifikat)
 
-Tab **`FAQ`**: satu baris per pertanyaan. `urutan` menentukan posisi.
-Kolom bahasa Inggris boleh dikosongkan.
+Halaman `gallopmadinah.id/member/KODE` berisi foto, video, folder Drive, QR, dan Sertifikat First Gallop.
+1. Dari tab Booking tekan **Buat halaman member** (kode, nama, tanggal, dan nama peserta otomatis terisi),
+   atau tab Member → **Tambah member** (pakai kode booking agar tidak bisa ditebak).
+2. **Upload foto** langsung dari HP (otomatis dikecilkan), atau tempel link Google Drive.
+3. Isi link video (YouTube/Drive) dan link folder Drive berisi semua file.
+4. **Simpan**, lalu tombol salin link → kirim ke grup customer.
 
-## Logo partner
+## Agen (partner travel)
 
-Tab **`Partner`**
-1. Upload logo (PNG transparan paling bagus) ke Google Drive.
-2. Klik kanan → Bagikan → **Siapa saja yang memiliki link** → Salin link.
-3. Tempel di kolom `logo_url`.
-4. `ukuran`: `normal`; pakai `large` kalau logonya terlihat kecil, `tall` untuk logo bertumpuk.
+Tab Agen → **Tambah agen**: kode (mis. `LINTAS`), nama travel, harga agen, kontak.
+- Kirim portal `gallopmadinah.id/partner/LINTAS` ke travel tersebut (berisi harga agen, link booking, QR, materi promosi).
+- Booking lewat link travel tercatat dengan kode partnernya. Daftar agen menampilkan **jumlah booking dan orang bulan ini**.
+- Nonaktifkan agen untuk menutup portalnya.
 
-## Testimoni
+## Harga
 
-Tab **`Testimoni`**: nama, asal, bintang (1–5), isi, tampil (`ya`/`tidak`).
-Section testimoni muncul di website setelah ada **minimal 3** testimoni dengan `tampil = ya`.
-Gunakan testimoni asli dan minta izin customer.
+- **Paket**: harga per orang, minimal orang, isi paket (`horse, helmet, boots, coach, rest, transport, videographer`).
+- **Harga Grup**: harga Premium per orang sesuai jumlah orang. "Sampai" kosong = tanpa batas, harga kosong = "Hubungi kami".
+- **Add-on**: GMC, video drone, dll.
 
-Tab **`Pengaturan`**: link Google Maps (`google_maps_url`) dan link tulis ulasan (`google_review_url`).
+Tabel harga, kalkulator, dan form booking selalu memakai harga yang sama.
 
-## Jadwal booking
+## FAQ, Testimoni, Partner
 
-- Tab **`Jadwal`**: jam yang bisa dipilih customer, misalnya `07:00`, `16:30`. Kosongkan `aktif` atau isi `tidak` untuk menyembunyikan.
-- `Pengaturan` → `hari_booking_maks`: berapa hari ke depan tanggal bisa dipilih (bawaan 90).
+- **FAQ**: hanya bahasa Indonesia yang wajib; kolom Inggris/Melayu/Arab boleh kosong.
+- **Testimoni**: tampil di halaman depan setelah ada **minimal 3** yang dipublikasikan. Gunakan ulasan asli dengan izin customer.
+- **Partner**: upload logo (PNG transparan paling bagus), pilih ukuran tampil, atur urutan.
 
-## Booking yang masuk
+## Pengaturan
 
-Setiap customer menekan **"Kirim booking via WhatsApp"**:
-1. WhatsApp admin menerima pesan berisi kode booking (contoh `GM-7K2QX`), paket, tanggal, jam, jumlah orang, tambahan, total, nama, dan hotel.
-2. Jika Sheet sudah tersambung, baris baru muncul di tab **`Booking`** dengan status `baru`.
+- **Jam ride** yang bisa dipilih customer (kosong = Pagi/Sore) dan batas hari booking ke depan.
+- **Usia minimal** dan **berat maksimal** peserta (kosong = tanpa peringatan).
+- Link **Google Maps** dan **tulis ulasan** untuk section testimoni.
+- **Aturan keselamatan** yang wajib disetujui peserta. **Ganti dengan teks resmi owner.**
 
-Admin mengonfirmasi lewat WhatsApp, lalu boleh mengubah kolom `status` (mis. `terkonfirmasi`, `selesai`, `batal`).
-Kode booking yang sama dipakai di WhatsApp dan di Sheet, jadi mudah dicocokkan.
+## Bahasa
 
-## Data peserta & aturan keselamatan
+Pengunjung bisa memilih **ID / EN / MS / AR**. Teks website untuk Melayu dan Arab sudah diterjemahkan; sebaiknya
+dicek penutur asli sebelum promosi besar. Sertifikat tersedia dalam bahasa Indonesia, Inggris, dan Melayu.
 
-Setelah booking, customer diarahkan ke form **Data Peserta** (`gallopmadinah.id/registrasi`).
-Link ini juga bisa dikirim manual ke customer.
+## Menambah admin
 
-- Hasilnya masuk ke tab **`Registrasi`**: nama, usia, berat, pengalaman, dan persetujuan aturan, lengkap dengan kode booking.
-- Coach bisa menyaring per kode booking atau tanggal untuk melihat siapa yang pemula.
-- Tab **`Aturan`**: teks aturan keselamatan yang harus disetujui. **Isi dengan teks yang disetujui owner.**
-- `Pengaturan` → `usia_min` dan `berat_maks`: jika diisi, form menampilkan peringatan untuk peserta di luar batas
-  (customer tetap bisa mengirim; keputusan tetap di coach).
-
-## Membercard: membuat halaman dokumentasi untuk satu grup
-
-Setiap grup bisa punya halaman sendiri: `gallopmadinah.id/member/KODE` berisi foto pilihan, video, link folder Drive,
-QR code, dan **Sertifikat First Gallop** yang bisa diunduh setiap peserta.
-Contoh tampilannya: `gallopmadinah.id/member/DEMO`.
-
-Langkah setelah sesi berkuda:
-1. Buat folder di Google Drive untuk grup tersebut, upload semua foto & video.
-2. Folder → Bagikan → **Siapa saja yang memiliki link** (file di dalamnya ikut terbuka).
-3. Pilih 6–12 foto terbaik. Untuk tiap foto: klik kanan → Bagikan → Salin link.
-4. Di tab **`Member`**, isi satu baris:
-   - `kode`: kode booking grup itu (contoh `GM-7K2QX`). Jangan pakai kode yang mudah ditebak seperti nama grup.
-   - `nama_grup`, `tanggal` (`2026-12-20`), `kuda`, `coach`.
-   - `peserta`: semua nama dipisah koma (muncul sebagai pilihan nama di sertifikat).
-   - `foto`: link foto pilihan, dipisah koma.
-   - `video_url`: link YouTube atau link file video di Drive (boleh kosong).
-   - `drive_folder`: link folder dari langkah 2.
-5. Buka `gallopmadinah.id/member/KODE` untuk mengecek, lalu kirim link itu ke grup WhatsApp customer.
-   Di halaman itu juga ada tombol **Unduh QR** untuk ditunjukkan atau dicetak di lokasi.
-
-Kalau foto tidak muncul, hampir selalu karena file belum dibagikan "Siapa saja yang memiliki link".
-
-## Portal partner travel
-
-Setiap travel mitra punya halaman sendiri: `gallopmadinah.id/partner/KODE`, berisi link booking khusus + QR,
-harga agen, pesan promosi siap kirim, dan foto/poster yang bisa diunduh. Contoh: `gallopmadinah.id/partner/DEMO`.
-
-1. Tambah satu baris di tab **`Agen`**: `kode` (mis. `LINTAS`), `nama_travel`, harga agen Open Trip & Premium, kontak.
-2. Kirim link `gallopmadinah.id/partner/LINTAS` ke travel tersebut (link ini **khusus partner**, berisi harga agen).
-3. Travel membagikan **link booking**-nya (`gallopmadinah.id/booking?agen=LINTAS`) ke jamaah.
-4. Setiap booking dari link itu masuk ke tab `Booking` dengan `kode_agen = LINTAS`, dan pesan WhatsApp-nya
-   menyebut "Kode partner: LINTAS". Terapkan harga agen saat konfirmasi.
-5. Lihat jumlah booking per travel di tab **`Rekap`** (rumus contoh ada di README Apps Script).
-
-## Bahasa: Indonesia, Inggris, Melayu, Arab
-
-Pengunjung bisa memilih **ID / EN / MS / AR** di pojok kanan atas. Versi Arab otomatis dibaca dari kanan ke kiri.
-- Teks website untuk Melayu dan Arab sudah diterjemahkan, tetapi **sebaiknya dicek penutur asli** sebelum promosi besar.
-- FAQ dan aturan keselamatan di Sheet punya kolom `_ms` dan `_ar`. Boleh dikosongkan: Melayu menampilkan versi Indonesia,
-  Arab menampilkan versi Inggris.
-- Sertifikat First Gallop tersedia dalam bahasa Indonesia, Inggris, dan Melayu (pengunjung berbahasa Arab mendapat versi Inggris).
-
-## Perubahan belum muncul?
-
-1. Tunggu 5 menit, lalu muat ulang halaman.
-2. Masih belum? Buka Sheet → **Extensions → Apps Script** → pilih fungsi `clearCache` → **Run**.
-3. Pastikan judul kolom (baris 1) tidak berubah.
+Lihat `docs/setup-supabase.md` langkah 4.

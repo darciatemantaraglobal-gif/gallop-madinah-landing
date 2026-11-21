@@ -236,7 +236,7 @@ const PartnerView = ({ agent }: { agent: Agent }) => {
   );
 };
 
-// /partner/:kode — travel agent portal. Data comes from the Sheet ("Agen" tab).
+// /partner/:kode — travel agent portal. Data comes from the database via get_agent().
 const PartnerPage = () => {
   const { t } = useLanguage();
   const code = (useParams().kode ?? "").toUpperCase();

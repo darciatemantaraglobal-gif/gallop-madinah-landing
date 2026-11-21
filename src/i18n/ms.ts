@@ -146,7 +146,7 @@ export const ms: Record<string, string> = {
   "calc.wa.ask":
     "Salam Gallop Madinah, saya ingin harga kumpulan untuk pakej {pkg}, {people}. Mohon maklumat harga dan jadual. Terima kasih 🙏",
   "member.subtitle": "Ahli Gallop",
-  "member.demo": "Ini halaman contoh. Data ahli sebenar diisi oleh admin melalui Google Sheet.",
+  "member.demo": "Ini halaman contoh. Data ahli sebenar diisi oleh admin melalui panel admin.",
   "member.card": "Kad Ahli",
   "member.code": "Kod",
   "member.riders": "Peserta",
@@ -174,7 +174,7 @@ export const ms: Record<string, string> = {
   "member.help": "Hubungi admin",
   "member.help.wa": "Salam Gallop Madinah, saya tidak dapat membuka halaman ahli dengan kod {code}.",
   "partner.subtitle": "Portal Rakan",
-  "partner.demo": "Ini halaman contoh. Data rakan sebenar dan harga ejen diisi oleh admin melalui Google Sheet.",
+  "partner.demo": "Ini halaman contoh. Data rakan sebenar dan harga ejen diisi oleh admin melalui panel admin.",
   "partner.desc":
     "Kongsi pautan tempahan di bawah kepada jemaah anda. Setiap tempahan melalui pautan ini direkodkan atas nama agensi anda.",
   "partner.link.title": "Pautan tempahan khas anda",
@@ -233,7 +233,8 @@ export const ms: Record<string, string> = {
   "reg.submit": "Hantar data peserta",
   "reg.done.title": "Data peserta dihantar",
   "reg.done.desc": "Terima kasih. Jumpa di Gallop Madinah!",
-  "reg.done.wa": "Jika WhatsApp belum terbuka, tekan butang di bawah untuk menghantar data kepada admin.",
+  "reg.done.wa": "Data belum dapat disimpan secara automatik. Tekan butang di bawah untuk menghantarnya kepada admin melalui WhatsApp.",
+  "reg.done.wa.title": "Satu langkah lagi",
   "reg.back": "Kembali ke laman utama",
   "reg.wa": "Salam Gallop Madinah, ini data peserta",
   "reg.wa.for": "untuk tempahan",

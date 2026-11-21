@@ -11,7 +11,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useSiteData } from "@/lib/siteData";
 import { formatSar, quote } from "@/lib/pricing";
 import { isPhoneLike, isoDate, longDate, makeBookingCode, readBookingParams } from "@/lib/booking";
-import { sendToSheet } from "@/lib/sheetApi";
+import { saveBooking } from "@/lib/backend";
 import { track } from "@/lib/analytics";
 import { waLink } from "@/lib/whatsapp";
 
@@ -28,7 +28,7 @@ const StepNo = ({ n }: { n: number }) => (
 );
 
 // Online booking: package, group, add-ons, date and time, contact details.
-// Sending logs the booking to the Sheet (when connected) and opens WhatsApp with every detail.
+// Sending stores the booking for /admin (when the database is connected) and opens WhatsApp with every detail.
 const BookingPage = () => {
   const { t, lang } = useLanguage();
   const { prices, booking } = useSiteData();
@@ -134,20 +134,21 @@ const BookingPage = () => {
     const win = window.open(waLink(waText), "_blank");
     if (win) win.opener = null;
 
-    sendToSheet({
-      action: "booking",
-      kode: code,
-      paket: pkg.name,
-      tanggal: date ? isoDate(date) : "",
-      jam: time,
-      jumlah: people,
-      addon: q.status === "ok" ? q.addons.map((a) => a.id) : addonIds,
-      total: q.status === "ok" ? q.total : "",
-      nama: name.trim(),
-      wa: phone.trim(),
+    // Store it for the admin panel in the background; WhatsApp already carries every detail.
+    void saveBooking({
+      code,
+      package: pkg.name,
+      ride_date: date ? isoDate(date) : "",
+      ride_time: time,
+      people,
+      addons: q.status === "ok" ? q.addons.map((a) => a.id) : addonIds,
+      total: q.status === "ok" ? q.total : null,
+      name: name.trim(),
+      phone: phone.trim(),
       hotel: needsHotel ? hotel.trim() : "",
-      catatan: notes.trim(),
-      kodeAgen: agentCode,
+      notes: notes.trim(),
+      agent_code: agentCode,
+      lang,
     });
     track("booking_submit", { paket: pkg.id, orang: people, total: q.status === "ok" ? q.total : 0, agen: agentCode || undefined });
 

@@ -1,9 +1,14 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { fetchMember, parseDay, resolveMember, videoFrom } from "@/lib/member";
 
 const DRIVE_ID = "1AbCdEfGhIjKlMnOpQrStUvWxYz012345";
 
-afterEach(() => vi.restoreAllMocks());
+/** Stand-in for supabase.rpc() returning `result`. */
+const rpcClient = (result: { data: unknown; error: unknown } | Error) =>
+  ({
+    rpc: () => (result instanceof Error ? Promise.reject(result) : Promise.resolve(result)),
+  }) as unknown as SupabaseClient;
 
 describe("videoFrom", () => {
   it.each([
@@ -31,51 +36,45 @@ describe("parseDay", () => {
 });
 
 describe("resolveMember", () => {
-  it("turns Drive ids into image links and keeps only a Drive folder link", () => {
+  it("checks every link in a database row", () => {
     const m = resolveMember({
-      kode: "abc123",
-      namaGrup: "Rombongan Lintas",
-      tanggal: "2026-12-20",
-      kuda: "Zahra",
+      code: "gm-7k2qx",
+      group_name: "Rombongan Lintas",
+      ride_date: "2026-12-20",
+      horse: "Zahra",
       coach: "Fahd",
-      peserta: ["Aisyah", " ", "Budi"],
-      foto: [DRIVE_ID, "http://insecure/x.jpg"],
-      videoUrl: "",
-      driveFolder: "https://evil.example/drive",
+      riders: ["Aisyah", " ", "Budi"],
+      photos: [DRIVE_ID, "https://xyz.supabase.co/storage/v1/object/public/media/members/a.jpg", "http://insecure/x.jpg"],
+      video_url: null,
+      drive_folder: "https://evil.example/drive",
     })!;
-    expect(m.code).toBe("ABC123");
+    expect(m.code).toBe("GM-7K2QX");
     expect(m.riders).toEqual(["Aisyah", "Budi"]);
-    expect(m.photos).toEqual([
-      {
-        thumb: `https://drive.google.com/thumbnail?id=${DRIVE_ID}&sz=w800`,
-        full: `https://drive.google.com/thumbnail?id=${DRIVE_ID}&sz=w2000`,
-      },
+    expect(m.photos.map((p) => p.thumb)).toEqual([
+      `https://drive.google.com/thumbnail?id=${DRIVE_ID}&sz=w800`,
+      "https://xyz.supabase.co/storage/v1/object/public/media/members/a.jpg",
     ]);
     expect(m.driveFolder).toBe("");
     expect(m.video).toBeNull();
+    expect(m.date?.getDate()).toBe(20);
+  });
+
+  it("copes with null columns", () => {
+    const m = resolveMember({ code: "GM-ABCDE", group_name: null, ride_date: null, riders: null, photos: null })!;
+    expect(m).toMatchObject({ groupName: "", date: null, riders: [], photos: [] });
   });
 });
 
 describe("fetchMember", () => {
-  const respond = (body: unknown) =>
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({ ok: true, json: async () => body } as Response);
-
-  it("rejects malformed codes without calling the Sheet", async () => {
-    const spy = vi.spyOn(globalThis, "fetch");
-    expect(await fetchMember("<x>", "https://example.test")).toEqual({ status: "not_found" });
-    expect(spy).not.toHaveBeenCalled();
+  it("rejects malformed codes and reports a missing database", async () => {
+    expect(await fetchMember("<x>", rpcClient({ data: null, error: null }))).toEqual({ status: "not_found" });
+    expect(await fetchMember("ABC123", null)).toEqual({ status: "unavailable" });
   });
 
-  it("reports when the Sheet is not connected", async () => {
-    expect(await fetchMember("ABC123", "")).toEqual({ status: "unavailable" });
-  });
-
-  it("maps found / not found / network errors", async () => {
-    respond({ found: true, data: { kode: "ABC123", namaGrup: "Grup" } });
-    expect((await fetchMember("ABC123", "https://example.test")).status).toBe("found");
-    respond({ found: false });
-    expect(await fetchMember("ABC123", "https://example.test")).toEqual({ status: "not_found" });
-    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("offline"));
-    expect(await fetchMember("ABC123", "https://example.test")).toEqual({ status: "unavailable" });
+  it("maps found / not found / errors", async () => {
+    expect((await fetchMember("ABC123", rpcClient({ data: { code: "ABC123" }, error: null }))).status).toBe("found");
+    expect(await fetchMember("ABC123", rpcClient({ data: null, error: null }))).toEqual({ status: "not_found" });
+    expect(await fetchMember("ABC123", rpcClient({ data: null, error: { message: "x" } }))).toEqual({ status: "unavailable" });
+    expect(await fetchMember("ABC123", rpcClient(new Error("offline")))).toEqual({ status: "unavailable" });
   });
 });

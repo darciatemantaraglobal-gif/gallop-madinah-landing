@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AlertTriangle, Check, CheckCircle2, MessageCircle, Plus, ShieldCheck, Trash2 } from "lucide-react";
+import { AlertTriangle, Check, CheckCircle2, Loader2, MessageCircle, Plus, ShieldCheck, Trash2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,7 +16,7 @@ import {
   type Experience,
   type Rider,
 } from "@/lib/registration";
-import { sendToSheet } from "@/lib/sheetApi";
+import { saveRegistrations } from "@/lib/backend";
 import { track } from "@/lib/analytics";
 import { waLink } from "@/lib/whatsapp";
 
@@ -26,7 +26,7 @@ const labelCls = "block text-muted-foreground font-body text-[11px] tracking-[0.
 const EXPERIENCES: Experience[] = ["none", "some", "regular"];
 
 // Rider registration: one card per rider (name, age, weight, experience) plus the safety
-// rules to agree to. Saved to the Sheet when connected, otherwise sent on WhatsApp.
+// rules to agree to. Saved to the database when connected, otherwise sent on WhatsApp.
 const RegistrationPage = () => {
   const { t, lang } = useLanguage();
   const { safety } = useSiteData();
@@ -41,6 +41,7 @@ const RegistrationPage = () => {
   const [agree, setAgree] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
   const [done, setDone] = useState<{ waText: string; viaWhatsApp: boolean } | null>(null);
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     const prev = document.title;
@@ -61,30 +62,28 @@ const RegistrationPage = () => {
     return [head, ...lines, "", t("reg.wa.agree")].join("\n");
   };
 
-  const submit = () => {
+  const submit = async () => {
     setShowErrors(true);
-    if (!ridersValid(riders) || !agree) {
+    if (!ridersValid(riders) || !agree || sending) {
       document.querySelector("[data-invalid='true']")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
     const waText = buildMessage();
-    const saved = sendToSheet({
-      action: "registrasi",
-      kodeBooking: code,
-      setuju: true,
-      peserta: riders.map((r) => ({
-        nama: r.name.trim(),
-        usia: Number(r.age),
-        berat: Number(r.weight),
-        pengalaman: expLabel(r.experience),
+    setSending(true);
+    const saved = await saveRegistrations(
+      riders.map((r) => ({
+        // Only a well-formed booking code is stored (the database rejects anything else).
+        booking_code: BOOKING_CODE_RE.test(code) ? code : "",
+        name: r.name.trim(),
+        age: Number(r.age),
+        weight: Number(r.weight),
+        experience: r.experience as Experience,
+        agreed: true as const,
       })),
-    });
-    // Without the Sheet connected, WhatsApp is the only way the details reach the team.
-    if (!saved) {
-      const win = window.open(waLink(waText), "_blank");
-      if (win) win.opener = null;
-    }
-    track("registrasi_submit", { peserta: riders.length });
+    );
+    setSending(false);
+    track("registrasi_submit", { peserta: riders.length, saved });
+    // If it couldn't be saved (no database, or offline), the thank-you screen offers WhatsApp instead.
     setDone({ waText, viaWhatsApp: !saved });
     window.scrollTo({ top: 0 });
   };
@@ -96,8 +95,10 @@ const RegistrationPage = () => {
         <main className="pt-28 md:pt-36 pb-20 md:pb-28">
           <div className="container mx-auto px-5 md:px-8 max-w-xl text-center">
             <CheckCircle2 className="w-14 h-14 text-gold mx-auto mb-5" strokeWidth={1.25} />
-            <h1 className="font-display text-2xl md:text-4xl text-foreground mb-3">{t("reg.done.title")}</h1>
-            <p className="text-muted-foreground font-body text-sm md:text-base mb-7">{t("reg.done.desc")}</p>
+            <h1 className="font-display text-2xl md:text-4xl text-foreground mb-3">
+              {done.viaWhatsApp ? t("reg.done.wa.title") : t("reg.done.title")}
+            </h1>
+            {!done.viaWhatsApp && <p className="text-muted-foreground font-body text-sm md:text-base mb-7">{t("reg.done.desc")}</p>}
             {done.viaWhatsApp && (
               <>
                 <p className="text-foreground font-body text-sm mb-3">{t("reg.done.wa")}</p>
@@ -295,8 +296,10 @@ const RegistrationPage = () => {
 
             <button
               type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 bg-gold text-primary-foreground px-5 py-4 font-body font-bold text-xs tracking-[0.15em] uppercase hover:bg-gold-highlight transition-colors"
+              disabled={sending}
+              className="w-full inline-flex items-center justify-center gap-2 bg-gold text-primary-foreground px-5 py-4 font-body font-bold text-xs tracking-[0.15em] uppercase hover:bg-gold-highlight disabled:opacity-60 transition-colors"
             >
+              {sending && <Loader2 className="w-4 h-4 animate-spin" />}
               {t("reg.submit")}
             </button>
           </form>

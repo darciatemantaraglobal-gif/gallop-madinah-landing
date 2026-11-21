@@ -21,6 +21,7 @@ const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
 const ProposalPage = lazy(() => import("./pages/ProposalPage"));
 const MemberPage = lazy(() => import("./pages/MemberPage"));
 const PartnerPage = lazy(() => import("./pages/PartnerPage"));
+const AdminPage = lazy(() => import("./pages/admin/AdminPage"));
 
 const Lazy = ({ children }: { children: ReactNode }) => (
   <Suspense fallback={<div className="min-h-screen bg-background" />}>{children}</Suspense>
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/penawaran" element={<Lazy><ProposalPage /></Lazy>} />
             <Route path="/member/:kode" element={<Lazy><MemberPage /></Lazy>} />
             <Route path="/partner/:kode" element={<Lazy><PartnerPage /></Lazy>} />
+            <Route path="/admin" element={<Lazy><AdminPage /></Lazy>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

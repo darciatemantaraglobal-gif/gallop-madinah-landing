@@ -12,8 +12,8 @@ import {
   type Safety,
 } from "@/data/content";
 
-// Shape of the data the site reads from the Google Sheet (via Apps Script, see /apps-script).
-// FALLBACK_DATA below is what the site shows when the Sheet is not configured or unreachable,
+// Shape of the data the site reads from the database (see src/lib/backend.ts).
+// FALLBACK_DATA below is what the site shows when the database is not configured or unreachable,
 // so it must always match what is live today.
 
 export const packageSchema = z.object({
@@ -117,7 +117,7 @@ export type ReviewLinks = z.infer<typeof reviewLinksSchema>;
 
 const bilingualSchema = z.object({
   id: z.string().trim().min(1),
-  /** Other languages may be left empty in the Sheet; see `pick` for the fallback order. */
+  /** Other languages may be left empty; see `pick` for the fallback order. */
   en: z.string().trim().default(""),
   ms: z.string().trim().default(""),
   ar: z.string().trim().default(""),
@@ -137,11 +137,9 @@ const bookingSchema = z.object({
   maxDaysAhead: z.number().int().min(1).max(365),
 });
 
-const safetySchema = z.object({
-  rules: z.array(bilingualSchema).min(1),
-  minAge: z.number().int().min(1).max(99).nullable(),
-  maxWeight: z.number().int().min(20).max(300).nullable(),
-});
+// Rules and limits are checked separately: an empty rules table must not drop the owner's limits.
+const minAgeSchema = z.number().int().min(1).max(99).nullable();
+const maxWeightSchema = z.number().int().min(20).max(300).nullable();
 
 export type SiteData = {
   prices: Prices;
@@ -153,7 +151,7 @@ export type SiteData = {
   safety: Safety;
 };
 
-// No testimonials are built in: the section stays hidden until real ones are added to the Sheet.
+// No testimonials are built in: the section stays hidden until real ones are added in /admin.
 export const FALLBACK_DATA: SiteData = {
   prices: FALLBACK_PRICES,
   testimonials: [],
@@ -175,7 +173,7 @@ function rowsOf<T>(raw: unknown, schema: z.ZodTypeAny, fallback: T[]): T[] {
 }
 
 /**
- * Turns whatever the Sheet API returned into SiteData, section by section:
+ * Turns whatever the database returned into SiteData, section by section:
  * a broken section falls back on its own, and a broken row in a list is simply skipped.
  */
 export function parseSiteData(raw: unknown): SiteData {
@@ -189,16 +187,23 @@ export function parseSiteData(raw: unknown): SiteData {
     return r.success ? r.data : "";
   };
   const reviews = { mapsUrl: link(rawReviews.mapsUrl), writeReviewUrl: link(rawReviews.writeReviewUrl) };
-  // Testimonials have no built-in copy: an empty list from the Sheet means "none yet".
+  // Testimonials have no built-in copy: an empty list means "none yet".
   const testimonials = Array.isArray(obj.testimonials) ? rowsOf<Testimonial>(obj.testimonials, testimonialSchema, []) : [];
 
-  // Partner logos from the Sheet must be https (Drive share links are converted to image links).
+  // Partner logos must be https or a path on this site (Drive share links are converted to image links).
   const partners = rowsOf<Partner>(obj.partners, partnerSchema, [])
     .map((p) => ({ ...p, logo: imageUrl(p.logo, 600) }))
     .filter((p) => p.logo);
 
   const booking = bookingSchema.safeParse(obj.booking);
-  const safety = safetySchema.safeParse(obj.safety);
+  const rawSafety = (obj.safety && typeof obj.safety === "object" ? obj.safety : {}) as Record<string, unknown>;
+  const minAge = minAgeSchema.safeParse(rawSafety.minAge);
+  const maxWeight = maxWeightSchema.safeParse(rawSafety.maxWeight);
+  const safety: Safety = {
+    rules: rowsOf<Bilingual>(rawSafety.rules, bilingualSchema, FALLBACK_SAFETY.rules),
+    minAge: minAge.success ? minAge.data : FALLBACK_SAFETY.minAge,
+    maxWeight: maxWeight.success ? maxWeight.data : FALLBACK_SAFETY.maxWeight,
+  };
 
   return {
     prices: prices.success ? prices.data : FALLBACK_DATA.prices,
@@ -207,7 +212,7 @@ export function parseSiteData(raw: unknown): SiteData {
     faq: rowsOf<FaqItem>(obj.faq, faqItemSchema, FALLBACK_FAQ),
     partners: partners.length ? partners : FALLBACK_PARTNERS,
     booking: booking.success ? (booking.data as BookingSettings) : FALLBACK_BOOKING,
-    safety: safety.success ? (safety.data as Safety) : FALLBACK_SAFETY,
+    safety,
   };
 }
 

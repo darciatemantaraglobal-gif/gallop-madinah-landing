@@ -248,8 +248,8 @@ export const translations: Record<string, { id: string; en: string }> = {
   // Membercard (/member/:kode)
   "member.subtitle": { id: "Member Gallop", en: "Gallop Member" },
   "member.demo": {
-    id: "Ini halaman contoh. Data member asli diisi admin lewat Google Sheet.",
-    en: "This is a sample page. Real member data is added by our team in the Google Sheet.",
+    id: "Ini halaman contoh. Data member asli diisi admin lewat panel admin.",
+    en: "This is a sample page. Real member pages are created by our team in the admin panel.",
   },
   "member.card": { id: "Membercard", en: "Membercard" },
   "member.code": { id: "Kode", en: "Code" },
@@ -296,8 +296,8 @@ export const translations: Record<string, { id: string; en: string }> = {
   // Travel partner portal (/partner/:kode)
   "partner.subtitle": { id: "Portal Partner", en: "Partner Portal" },
   "partner.demo": {
-    id: "Ini halaman contoh. Data partner asli dan harga agen diisi admin lewat Google Sheet.",
-    en: "This is a sample page. Real partner details and agent prices are set by our team in the Google Sheet.",
+    id: "Ini halaman contoh. Data partner asli dan harga agen diisi admin lewat panel admin.",
+    en: "This is a sample page. Real partner details and agent prices are set by our team in the admin panel.",
   },
   "partner.desc": {
     id: "Bagikan link booking di bawah ke jamaah Anda. Setiap booking lewat link ini tercatat atas nama travel Anda.",
@@ -404,9 +404,10 @@ export const translations: Record<string, { id: string; en: string }> = {
   "reg.done.title": { id: "Data peserta terkirim", en: "Rider details sent" },
   "reg.done.desc": { id: "Terima kasih. Sampai jumpa di Gallop Madinah!", en: "Thank you. See you at Gallop Madinah!" },
   "reg.done.wa": {
-    id: "Kalau WhatsApp belum terbuka, tekan tombol di bawah untuk mengirim data ke admin.",
-    en: "If WhatsApp didn't open, tap below to send the details to our team.",
+    id: "Data belum bisa tersimpan otomatis. Tekan tombol di bawah untuk mengirimnya ke admin lewat WhatsApp.",
+    en: "The details couldn't be saved automatically. Tap below to send them to our team on WhatsApp.",
   },
+  "reg.done.wa.title": { id: "Satu langkah lagi", en: "One more step" },
   "reg.back": { id: "Kembali ke beranda", en: "Back to home" },
   "reg.wa": { id: "Halo Gallop Madinah, ini data peserta", en: "Hello Gallop Madinah, here are the rider details" },
   "reg.wa.for": { id: "untuk booking", en: "for booking" },

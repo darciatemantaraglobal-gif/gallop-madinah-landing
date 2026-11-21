@@ -1,5 +1,5 @@
-// Built-in copies of the content the owner can later edit in the Google Sheet.
-// The site shows these whenever the Sheet is not connected or a section in it is broken.
+// Built-in copies of the content the owner edits in /admin.
+// The site shows these whenever the database is not connected or a section in it is empty/broken.
 
 import partnerValeoora from "@/assets/partner-valeoora.png";
 import partner1 from "@/assets/partner-1.png";
@@ -178,7 +178,7 @@ export const FALLBACK_BOOKING: BookingSettings = { times: [], maxDaysAhead: 90 }
 
 /**
  * Safety rules shown on the registration form.
- * DRAFT: general rules only; replace with the owner's approved wording (Sheet tab "Aturan").
+ * DRAFT: general rules only; replace with the owner's approved wording (Pengaturan tab in /admin).
  * Age/weight limits stay null (no warnings) until the owner sets them.
  */
 export type Safety = { rules: Bilingual[]; minAge: number | null; maxWeight: number | null };

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { driveFileId, imageUrl } from "@/lib/drive";
-import { SHEET_API_URL } from "@/lib/sheetApi";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { supabase, withTimeout } from "@/lib/supabase";
 import demo1 from "@/assets/gallery-13.jpg";
 import demo2 from "@/assets/gallery-21.jpg";
 import demo3 from "@/assets/gallery-22.jpg";
@@ -11,19 +12,22 @@ import demo6 from "@/assets/gallery-7.jpg";
 // A rider group's private page (/member/KODE): photos, video, Drive folder, certificate.
 
 export const MEMBER_CODE_RE = /^[A-Z0-9-]{3,20}$/;
-/** Shown to the owner as an example; never stored in the Sheet. */
+/** Shown to the owner as an example; never stored in the database. */
 export const DEMO_CODE = "DEMO";
 
+// What public.get_member() returns (one row of the members table).
+const text = z.string().nullish().transform((v) => v ?? "");
+const list = z.array(z.string()).nullish().transform((v) => v ?? []);
 const rawMemberSchema = z.object({
-  kode: z.string(),
-  namaGrup: z.string().default(""),
-  tanggal: z.string().default(""),
-  kuda: z.string().default(""),
-  coach: z.string().default(""),
-  peserta: z.array(z.string()).default([]),
-  foto: z.array(z.string()).default([]),
-  videoUrl: z.string().default(""),
-  driveFolder: z.string().default(""),
+  code: z.string(),
+  group_name: text,
+  ride_date: text,
+  horse: text,
+  coach: text,
+  riders: list,
+  photos: list,
+  video_url: text,
+  drive_folder: text,
 });
 
 export type Photo = { thumb: string; full: string };
@@ -66,44 +70,40 @@ export function videoFrom(url: string): Video | null {
   return { embed: null, link };
 }
 
-/** Raw Sheet row → Member, with every link checked. */
+/** Database row → Member, with every link checked. */
 export function resolveMember(raw: unknown): Member | null {
   const r = rawMemberSchema.safeParse(raw);
   if (!r.success) return null;
   const m = r.data;
-  const photos = m.foto
+  const photos = m.photos
     .map((f) => ({ thumb: imageUrl(f, 800), full: imageUrl(f, 2000) }))
     .filter((p) => p.thumb)
     .slice(0, 30);
   return {
-    code: m.kode.toUpperCase(),
-    groupName: m.namaGrup.trim(),
-    date: parseDay(m.tanggal),
-    horse: m.kuda.trim(),
+    code: m.code.toUpperCase(),
+    groupName: m.group_name.trim(),
+    date: parseDay(m.ride_date),
+    horse: m.horse.trim(),
     coach: m.coach.trim(),
-    riders: m.peserta.map((p) => p.trim()).filter(Boolean).slice(0, 60),
+    riders: m.riders.map((p) => p.trim()).filter(Boolean).slice(0, 60),
     photos,
-    video: videoFrom(m.videoUrl),
-    driveFolder: /drive\.google\.com/i.test(m.driveFolder) ? https(m.driveFolder) : "",
+    video: videoFrom(m.video_url),
+    driveFolder: /drive\.google\.com/i.test(m.drive_folder) ? https(m.drive_folder) : "",
   };
 }
 
-export async function fetchMember(code: string, url = SHEET_API_URL): Promise<MemberResult> {
+/** Looks up one member through public.get_member (visitors cannot list the members table). */
+export async function fetchMember(code: string, client: SupabaseClient | null = supabase): Promise<MemberResult> {
   if (!MEMBER_CODE_RE.test(code)) return { status: "not_found" };
-  if (!url) return { status: "unavailable" };
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
+  if (!client) return { status: "unavailable" };
   try {
-    const res = await fetch(`${url}?action=member&kode=${encodeURIComponent(code)}`, { signal: controller.signal });
-    if (!res.ok) return { status: "unavailable" };
-    const body = (await res.json()) as { found?: boolean; data?: unknown };
-    if (!body?.found) return { status: "not_found" };
-    const member = resolveMember(body.data);
+    const { data, error } = await withTimeout(client.rpc("get_member", { p_code: code }), 8000);
+    if (error) return { status: "unavailable" };
+    if (!data) return { status: "not_found" };
+    const member = resolveMember(data);
     return member ? { status: "found", member } : { status: "not_found" };
   } catch {
     return { status: "unavailable" };
-  } finally {
-    clearTimeout(timer);
   }
 }
 
