@@ -1,6 +1,7 @@
 import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { AlertTriangle, Loader2, X } from "lucide-react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AlertTriangle, Loader2, Trash2, X } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/lib/supabase";
@@ -24,6 +25,21 @@ const RegistrationsSection = ({ filter, onFilter }: { filter: string; onFilter: 
       if (error) throw error;
       return (data ?? []) as Row[];
     },
+  });
+
+  const qc = useQueryClient();
+  // Deletes exactly the rows shown (by id), never "everything with this code" beyond the list.
+  const remove = useMutation({
+    mutationFn: async (ids: Array<string | number>) => {
+      const { error } = await supabase!.from("registrations").delete().in("id", ids);
+      if (error) throw error;
+      return ids.length;
+    },
+    onSuccess: (n) => {
+      toast.success(n > 1 ? `${n} peserta dihapus` : "Peserta dihapus");
+      qc.invalidateQueries({ queryKey: ["admin", "registrations"] });
+    },
+    onError: (e) => toast.error(dbErrorMessage(e)),
   });
 
   const groups = useMemo(() => {
@@ -65,9 +81,24 @@ const RegistrationsSection = ({ filter, onFilter }: { filter: string; onFilter: 
         <ul className="space-y-3">
           {groups.map(([k, list]) => (
             <li key={k} className="rounded-lg border border-border bg-card">
-              <p className="px-4 py-2.5 border-b border-border font-body font-bold text-sm text-gold">
-                {k} <span className="text-muted-foreground font-normal">· {list.length} peserta</span>
-              </p>
+              <div className="px-4 py-2 border-b border-border flex items-center justify-between gap-3">
+                <p className="font-body font-bold text-sm text-gold">
+                  {k} <span className="text-muted-foreground font-normal">· {list.length} peserta</span>
+                </p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={remove.isPending}
+                  className="h-8 px-2 text-red-300 hover:text-red-200 hover:bg-red-500/10"
+                  onClick={() => {
+                    if (window.confirm(`Hapus semua ${list.length} peserta di ${k}? Data yang dihapus tidak bisa dikembalikan.`)) {
+                      remove.mutate(list.map((r) => r.id as string | number));
+                    }
+                  }}
+                >
+                  <Trash2 className="w-4 h-4" /> Hapus semua
+                </Button>
+              </div>
               <ul className="divide-y divide-border">
                 {list.map((r) => {
                   const young = safety.minAge !== null && Number(r.age) < safety.minAge;
@@ -83,6 +114,20 @@ const RegistrationsSection = ({ filter, onFilter }: { filter: string; onFilter: 
                           <AlertTriangle className="w-3.5 h-3.5" /> {young ? "di bawah usia minimal" : "di atas batas berat"}
                         </span>
                       )}
+                      <button
+                        type="button"
+                        disabled={remove.isPending}
+                        aria-label={`Hapus ${String(r.name)}`}
+                        title="Hapus peserta"
+                        className="ms-auto p-2 -me-2 rounded-md text-muted-foreground hover:text-red-300 hover:bg-red-500/10 disabled:opacity-50"
+                        onClick={() => {
+                          if (window.confirm(`Hapus peserta "${String(r.name)}"? Data yang dihapus tidak bisa dikembalikan.`)) {
+                            remove.mutate([r.id as string | number]);
+                          }
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </li>
                   );
                 })}
