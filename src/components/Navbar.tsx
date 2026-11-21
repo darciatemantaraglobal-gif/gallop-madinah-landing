@@ -1,4 +1,4 @@
-import { Phone, Menu, X } from "lucide-react";
+import { CalendarCheck, Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo-landscape.png";
@@ -79,15 +79,23 @@ const Navbar = () => {
             style={{ transitionDelay: mobileOpen ? "600ms" : "0ms" }}
           >
             <div className="w-10 h-[1px] bg-gold/30 mb-6" />
+            <Link
+              to="/booking"
+              onClick={() => setMobileOpen(false)}
+              className="inline-flex items-center gap-3 border border-gold/60 text-gold px-8 py-3 font-body text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              {t("nav.booking")}
+            </Link>
             <a
               href={WHATSAPP_LINK}
               onClick={() => trackWhatsApp("navbar_mobile")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 border border-gold/60 text-gold px-8 py-3 font-body text-xs tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+              className="mt-5 flex items-center gap-2 text-muted-foreground font-body text-sm hover:text-gold transition-colors"
             >
               <Phone className="w-4 h-4" />
-              {t("nav.booking")}
+              WhatsApp
             </a>
           </div>
         </div>
@@ -146,16 +154,13 @@ const Navbar = () => {
               ))}
             </div>
 
-            <a
-              href={WHATSAPP_LINK}
-              onClick={() => trackWhatsApp("navbar")}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/booking"
               className="hidden lg:inline-flex items-center gap-2 border border-gold/50 text-gold px-5 py-2.5 text-xs font-body tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <CalendarCheck className="w-3.5 h-3.5" />
               {t("nav.booking")}
-            </a>
+            </Link>
 
             {/* Mobile toggle */}
             <button

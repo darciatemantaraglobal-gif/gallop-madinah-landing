@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Phone, ChevronRight } from "lucide-react";
+import { CalendarCheck, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import gallopTitle from "@/assets/gallop-title-2.png";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
@@ -8,7 +9,6 @@ import heroM1 from "@/assets/hero-m1.jpg";
 import heroM2 from "@/assets/hero-m2.jpg";
 import heroM3 from "@/assets/hero-m3.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { waLink, trackWhatsApp } from "@/lib/whatsapp";
 
 // Real Gallop Madinah photos. Landscape shots for desktop, portrait shots for phones.
 const slides = [
@@ -22,7 +22,6 @@ const SLIDE_MS = 6500;
 const HeroSection = () => {
   const { t } = useLanguage();
   const [active, setActive] = useState(0);
-  const WHATSAPP_LINK = waLink(t("wa.general"));
 
   useEffect(() => {
     const id = window.setInterval(() => setActive((i) => (i + 1) % slides.length), SLIDE_MS);
@@ -90,16 +89,13 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 w-full sm:w-auto opacity-0 animate-fade-in-up [animation-delay:700ms]">
-          <a
-            href={WHATSAPP_LINK}
-            onClick={() => trackWhatsApp("hero")}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/booking"
             className="w-full sm:w-auto justify-center whitespace-nowrap inline-flex items-center gap-2.5 bg-gold text-primary-foreground px-8 lg:px-10 py-3.5 font-body font-bold text-xs md:text-sm tracking-[0.2em] uppercase hover:bg-gold-highlight transition-colors duration-300 shadow-gold"
           >
-            <Phone className="w-4 h-4" />
+            <CalendarCheck className="w-4 h-4" />
             {t("hero.booking")}
-          </a>
+          </Link>
           {/* Scrolls to the price list on this page instead of leaving it */}
           <a
             href="#pricelist"

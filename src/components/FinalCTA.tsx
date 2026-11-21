@@ -1,4 +1,5 @@
-import { Phone } from "lucide-react";
+import { CalendarCheck, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import ctaBg from "@/assets/cta-background.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { waLink, trackWhatsApp } from "@/lib/whatsapp";
@@ -20,15 +21,22 @@ const FinalCTA = () => {
         <p className="text-white/60 font-body text-sm md:text-lg tracking-wide max-w-xl mx-auto mb-8 md:mb-10 leading-relaxed italic">
           {t("cta.desc")}
         </p>
+        <Link
+          to="/booking"
+          className="inline-flex items-center gap-2 md:gap-3 border border-gold/60 text-gold px-8 md:px-10 py-3 md:py-3.5 font-body text-xs md:text-sm tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+        >
+          <CalendarCheck className="w-4 h-4" />
+          {t("cta.booking")}
+        </Link>
         <a
           href={WHATSAPP_LINK}
           onClick={() => trackWhatsApp("final_cta")}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 md:gap-3 border border-gold/60 text-gold px-8 md:px-10 py-3 md:py-3.5 font-body text-xs md:text-sm tracking-[0.2em] uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+          className="mt-5 flex items-center justify-center gap-2 text-white/60 font-body text-xs md:text-sm hover:text-gold transition-colors"
         >
-          <Phone className="w-4 h-4" />
-          {t("cta.booking")}
+          <Phone className="w-3.5 h-3.5" />
+          {t("wa.aria")}
         </a>
       </div>
     </section>
